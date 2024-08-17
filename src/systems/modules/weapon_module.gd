@@ -3,4 +3,4 @@ class_name WeaponModule
 
 @export_category("Weapon")
 @export var projectile: PackedScene
-@export var firerate: float
+@export var cooldown: float
