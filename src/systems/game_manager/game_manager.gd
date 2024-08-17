@@ -10,6 +10,7 @@ func _ready() -> void:
 func _process(delta: float):
 	if Input.is_action_just_pressed("pause"):
 		pauseMenu()
+		
 	
 func pauseMenu():
 	if paused:
@@ -17,6 +18,7 @@ func pauseMenu():
 		Engine.time_scale = 1
 	else:
 		pause_menu.show()
+		pause_menu.pause()
 		Engine.time_scale = 0
 		
 	paused = !paused
