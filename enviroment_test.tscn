@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3 uid="uid://drycdhhtau2jm"]
+
+[ext_resource type="Texture2D" uid="uid://b28ijpskmpvpw" path="res://src/textures/test-floor-2.png" id="1_1c4r1"]
+[ext_resource type="PackedScene" uid="uid://dbn00uf4x862p" path="res://src/3dobjects/simple_outer_wall.tscn" id="2_26mwo"]
+[ext_resource type="Texture2D" uid="uid://cmwbx6xc6d74r" path="res://icon.svg" id="3_i7jlp"]
+[ext_resource type="MeshLibrary" uid="uid://dkxwjxyo88f1t" path="res://src/tile_library/test_tile_library.tres" id="4_mnvth"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mauu7"]
+albedo_texture = ExtResource("1_1c4r1")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_hhfdq"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ffadc"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6k7d"]
+albedo_texture = ExtResource("3_i7jlp")
+uv1_scale = Vector3(4, 4, 4)
+uv1_offset = Vector3(0, 0.5, 0)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_qka3v"]
+size = Vector3(1, 0.25, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0unq2"]
+
+[node name="EnviromentTest" type="Node3D"]
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_mauu7")
+mesh = SubResource("BoxMesh_hhfdq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+material_override = SubResource("StandardMaterial3D_mauu7")
+mesh = SubResource("BoxMesh_hhfdq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_ffadc")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.994189, 1.28374e-09, 0.107652, -0.107652, 1.18556e-08, 0.994189, 0, -1, 1.19249e-08, 3, 6.67235, -4)
+light_energy = 20.0
+light_size = 1.0
+spot_range = 21.4473
+spot_angle = 69.8933
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.994189, 1.28374e-09, 0.107652, -0.107652, 1.18556e-08, 0.994189, 0, -1, 1.19249e-08, 3, 6.67235, 4)
+light_energy = 20.0
+light_size = 1.0
+spot_range = 21.4473
+spot_angle = 69.8933
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.994189, 1.28374e-09, 0.107652, -0.107652, 1.18556e-08, 0.994189, 0, -1, 1.19249e-08, -13.0102, 6.67235, 4)
+light_energy = 20.0
+light_size = 1.0
+spot_range = 21.4473
+spot_angle = 69.8933
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.994189, 1.28374e-09, 0.107652, -0.107652, 1.18556e-08, 0.994189, 0, -1, 1.19249e-08, -13, 6.67235, -4)
+light_energy = 20.0
+light_size = 1.0
+spot_range = 21.4473
+spot_angle = 69.8933
+
+[node name="OutsideWalls" type="Node3D" parent="."]
+
+[node name="StaticBody3D" parent="OutsideWalls" instance=ExtResource("2_26mwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.5)
+
+[node name="StaticBody3D6" parent="OutsideWalls" instance=ExtResource("2_26mwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, -5.5)
+
+[node name="StaticBody3D2" parent="OutsideWalls" instance=ExtResource("2_26mwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5.5)
+
+[node name="StaticBody3D5" parent="OutsideWalls" instance=ExtResource("2_26mwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 5.5)
+
+[node name="StaticBody3D3" parent="OutsideWalls" instance=ExtResource("2_26mwo")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.5, 1.5, 0)
+
+[node name="StaticBody3D4" parent="OutsideWalls" instance=ExtResource("2_26mwo")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.5, 1.5, 0)
+
+[node name="PlayerTest" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50898, 2.77381)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="PlayerTest"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTest/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.451692, 0)
+material_override = SubResource("StandardMaterial3D_m6k7d")
+mesh = SubResource("BoxMesh_qka3v")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTest/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.451692, 0)
+shape = SubResource("BoxShape3D_0unq2")
+
+[node name="Camera" type="Node3D" parent="PlayerTest"]
+
+[node name="Camera3D" type="Camera3D" parent="PlayerTest/Camera"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
+fov = 70.0
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="GridMap" type="GridMap" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh_library = ExtResource("4_mnvth")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(1, 65534, 1048576, 65534, 65534, 1048576, 65534, 65533, 1048576, 65535, 65533, 196608, 65535, 65532, 196608, 3, 65533, 1048576, 3, 65534, 1048576, 3, 65535, 1048576, 3, 0, 1048576, 2, 0, 1048576, 1, 0, 1048576, 0, 0, 1048576, 65535, 0, 1048576, 65534, 0, 1048576, 65530, 65535, 196608, 65529, 65535, 196608, 65528, 65535, 196608, 65527, 65535, 196608, 65526, 65535, 196608, 65525, 65535, 196608, 65524, 65535, 196608, 65524, 65534, 196608, 65524, 65533, 196608, 65523, 65533, 196608, 65523, 65532, 196608, 65524, 65532, 196608, 65525, 65532, 196608, 65526, 65532, 196608, 65528, 65531, 196608, 65529, 65531, 196608, 65530, 65531, 196608, 65531, 65531, 196608, 65524, 4, 196608, 65524, 3, 196608, 65529, 4, 196608, 65529, 3, 196608, 65528, 3, 196608)
+}

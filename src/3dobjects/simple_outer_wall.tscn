@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbn00uf4x862p"]
+
+[ext_resource type="Texture2D" uid="uid://b28ijpskmpvpw" path="res://src/textures/test-floor-2.png" id="1_itacv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5ep1"]
+albedo_texture = ExtResource("1_itacv")
+uv1_offset = Vector3(0, 0, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_eyeom"]
+size = Vector3(10, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sabxj"]
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_q5ep1")
+mesh = SubResource("BoxMesh_eyeom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_sabxj")
