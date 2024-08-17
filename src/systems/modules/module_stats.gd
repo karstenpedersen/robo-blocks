@@ -1,8 +1,7 @@
 extends Resource
-class_name Module
+class_name ModuleStats
 
-@export_category("Module")
-@export var scene: PackedScene
+@export_category("Stats")
 @export var health: int
 
 @export_category("Parent Stats")

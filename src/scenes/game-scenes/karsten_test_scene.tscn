@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwmoew3o64qdg"]
+
+[ext_resource type="PackedScene" uid="uid://boj3r1u3jawt4" path="res://src/entities/test_player.tscn" id="1_f53l0"]
+
+[node name="KarstenTestScene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.936152, 0.071041, -0.344345, 0, 0.979375, 0.202053, 0.351597, 0.189152, -0.916843, -4.1748, 2.5192, -8.00622)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.990232, 0.0131266, -0.138813, 0.139432, -0.0932235, 0.985834, 0, -0.995559, -0.0941431, 0, 6.39536, 0)
+
+[node name="TestPlayer" parent="." instance=ExtResource("1_f53l0")]

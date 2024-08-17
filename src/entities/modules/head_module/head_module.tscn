@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdpfri4wq00ik"]
+
+[ext_resource type="PackedScene" uid="uid://rbuqgpudjokf" path="res://src/entities/modules/base_module.tscn" id="1_ideck"]
+[ext_resource type="Texture2D" uid="uid://cmwbx6xc6d74r" path="res://icon.svg" id="2_l7gwc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nblkp"]
+albedo_texture = ExtResource("2_l7gwc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apy2n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0tbvc"]
+material = SubResource("StandardMaterial3D_apy2n")
+
+[node name="HeadModule" instance=ExtResource("1_ideck")]
+
+[node name="MeshInstance3D" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_nblkp")
+mesh = SubResource("BoxMesh_0tbvc")

@@ -1,5 +1,5 @@
-extends Module
-class_name WeaponModule
+extends Resource
+class_name WeaponModuleStats
 
 @export_category("Weapon")
 @export var projectile: PackedScene

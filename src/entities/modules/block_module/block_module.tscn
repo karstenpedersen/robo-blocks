@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://db6re3qixa3y0"]
+
+[ext_resource type="PackedScene" uid="uid://rbuqgpudjokf" path="res://src/entities/modules/base_module.tscn" id="1_bl4cu"]
+
+[node name="BlockModule" instance=ExtResource("1_bl4cu")]
