@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://drycdhhtau2jm"]
+[gd_scene load_steps=16 format=3 uid="uid://drycdhhtau2jm"]
 
 [ext_resource type="Texture2D" uid="uid://b28ijpskmpvpw" path="res://src/textures/test-floor-2.png" id="1_1c4r1"]
 [ext_resource type="PackedScene" uid="uid://dbn00uf4x862p" path="res://src/3dobjects/simple_outer_wall.tscn" id="2_26mwo"]
 [ext_resource type="Texture2D" uid="uid://cmwbx6xc6d74r" path="res://icon.svg" id="3_i7jlp"]
 [ext_resource type="MeshLibrary" uid="uid://dkxwjxyo88f1t" path="res://src/tile_library/test_tile_library.tres" id="4_mnvth"]
+[ext_resource type="Shader" path="res://shader_test.gdshader" id="4_v5oha"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mauu7"]
 albedo_texture = ExtResource("1_1c4r1")
@@ -26,6 +27,31 @@ uv1_triplanar = true
 size = Vector3(1, 0.25, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0unq2"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bpoe3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_abdsi"]
+render_priority = 0
+shader = ExtResource("4_v5oha")
+shader_parameter/tint_color = Color(1, 1, 1, 0.611765)
+shader_parameter/backlight_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/noise_strenght = 0.005
+shader_parameter/roughness = 0.4
+shader_parameter/normal_strenght = 0.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_bpoe3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_akio7"]
+material = SubResource("ShaderMaterial_abdsi")
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7c8cm"]
+render_priority = 0
+shader = ExtResource("4_v5oha")
+shader_parameter/tint_color = Color(0.988235, 0.686275, 0.705882, 0.203922)
+shader_parameter/backlight_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/noise_strenght = 0.005
+shader_parameter/roughness = 0.0
+shader_parameter/normal_strenght = 0.0
 
 [node name="EnviromentTest" type="Node3D"]
 
@@ -116,6 +142,12 @@ shape = SubResource("BoxShape3D_0unq2")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7, 0)
 fov = 70.0
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTest/Camera/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76837e-07, -1)
+visible = false
+mesh = SubResource("QuadMesh_akio7")
+surface_material_override/0 = SubResource("ShaderMaterial_7c8cm")
+
 [node name="Walls" type="Node3D" parent="."]
 
 [node name="GridMap" type="GridMap" parent="Walls"]
@@ -125,3 +157,4 @@ cell_size = Vector3(1, 1, 1)
 data = {
 "cells": PackedInt32Array(1, 65534, 1048576, 65534, 65534, 1048576, 65534, 65533, 1048576, 65535, 65533, 196608, 65535, 65532, 196608, 3, 65533, 1048576, 3, 65534, 1048576, 3, 65535, 1048576, 3, 0, 1048576, 2, 0, 1048576, 1, 0, 1048576, 0, 0, 1048576, 65535, 0, 1048576, 65534, 0, 1048576, 65530, 65535, 196608, 65529, 65535, 196608, 65528, 65535, 196608, 65527, 65535, 196608, 65526, 65535, 196608, 65525, 65535, 196608, 65524, 65535, 196608, 65524, 65534, 196608, 65524, 65533, 196608, 65523, 65533, 196608, 65523, 65532, 196608, 65524, 65532, 196608, 65525, 65532, 196608, 65526, 65532, 196608, 65528, 65531, 196608, 65529, 65531, 196608, 65530, 65531, 196608, 65531, 65531, 196608, 65524, 4, 196608, 65524, 3, 196608, 65529, 4, 196608, 65529, 3, 196608, 65528, 3, 196608)
 }
+metadata/_editor_floor_ = Vector3(0, 1, 0)
