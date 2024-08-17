@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cejqx5xhwcx8f"]
+
+[ext_resource type="Script" path="res://src/systems/game_manager/game_manager.gd" id="1_ytqte"]
+[ext_resource type="PackedScene" uid="uid://dmitwxkq82w1t" path="res://src/scenes/menus/pause_menu.tscn" id="2_bidm4"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_ytqte")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_bidm4")]
+offset_left = -73.0
+offset_top = -57.0
+offset_right = 27.0
+offset_bottom = 80.0
