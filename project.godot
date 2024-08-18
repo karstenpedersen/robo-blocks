@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 draggable=""
 module=""
 draggable_module=""
+snap_point=""
 
 [input]
 
@@ -42,6 +43,7 @@ rotate_right={
 [layer_names]
 
 3d_physics/layer_1="Collision"
+3d_physics/layer_2="Dragging"
 
 [rendering]
 

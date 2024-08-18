@@ -10,17 +10,22 @@ material = SubResource("StandardMaterial3D_4r3c5")
 radius = 0.125
 height = 0.25
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_a0he8"]
-radius = 0.2
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sck2f"]
+height = 3.0
+radius = 0.4
 
-[node name="SnapPoint" type="Area3D"]
+[node name="SnapPoint" type="Area3D" groups=["snap_point"]]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_d6isf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_p643i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_a0he8")
+shape = SubResource("CylinderShape3D_sck2f")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

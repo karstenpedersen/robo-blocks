@@ -27,13 +27,13 @@ shape = SubResource("ConcavePolygonShape3D_e3o4f")
 transform = Transform3D(0.990232, 0.0131266, -0.138813, 0.139432, -0.0932235, 0.985834, 0, -0.995559, -0.0941431, 0, 6.39536, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12, 0)
 
 [node name="DragManager" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_u365p")
 
 [node name="DraggableModule" parent="." instance=ExtResource("2_7w6ey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21548, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 1, 0.002)
 
 [node name="DraggableModule2" parent="." instance=ExtResource("2_7w6ey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00715, 1.13693, 6.40752)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.007, 1, 4.99057)

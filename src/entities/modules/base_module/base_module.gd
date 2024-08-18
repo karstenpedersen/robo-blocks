@@ -2,7 +2,7 @@ extends RigidBody3D
 class_name BaseModule
 
 signal destroyed
-signal added_neighbour_model(module)
+signal added_neighbour_module(module)
 signal removed_neighbour_module(module)
 
 @export var stats: ModuleStats
@@ -23,9 +23,9 @@ func add_neighbour_module(module: BaseModule, point: Node3D):
 	if index == -1:
 		connection_point = point
 	if index == -1 or module.index + 1 < index:
-		index = module.index + 1 
+		index = module.index + 1
 	neighbours.append(module)
-	added_neighbour_model.emit(module)
+	added_neighbour_module.emit(module)
 
 
 func remove_neighbour_module(module: BaseModule):
@@ -48,8 +48,7 @@ func destroy():
 
 func remove_from_neighbours():
 	for neighbour in neighbours:
-		neighbour.remove_neighbour(self)
-	
+		neighbour.remove_neighbour_module(self)
 
 
 func _on_health_component_eliminated() -> void:

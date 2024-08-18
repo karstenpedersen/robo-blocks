@@ -7,6 +7,7 @@ class_name DraggableModule
 
 var rotation_tween
 
+
 func _on_draggable_component_drag_started(node: DraggableComponent) -> void:
 	# Disable rigidbody behavior
 	lock_rotation = true
@@ -39,3 +40,11 @@ func _on_draggable_component_drag_rotated(node: DraggableComponent) -> void:
 
 func _on_draggable_component_drag_moved(node: DraggableComponent) -> void:
 	position = node.target_position
+
+
+func _on_draggable_component_mounted(module: BaseModule, point: SnapPoint) -> void:
+	add_neighbour_module(module, point)
+
+
+func _on_draggable_component_unmounted(module: Variant, point: Variant) -> void:
+	remove_neighbour_module(module)
