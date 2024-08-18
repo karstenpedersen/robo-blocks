@@ -2,24 +2,24 @@
 
 [ext_resource type="Texture2D" uid="uid://bkevafou425j0" path="res://src/textures/destructable-block.png" id="1_jkw0t"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cqrj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3y1m"]
 albedo_texture = ExtResource("1_jkw0t")
 uv1_offset = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_mex47"]
+material = SubResource("StandardMaterial3D_n3y1m")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fmamr"]
 
 [node name="SimpleWall" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-material_override = SubResource("StandardMaterial3D_8cqrj")
-material_overlay = SubResource("StandardMaterial3D_8cqrj")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_mex47")
+skeleton = NodePath("StaticBody3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_fmamr")

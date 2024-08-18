@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dnr203td5dwu2"]
 
-[ext_resource type="PackedScene" uid="uid://5gxt0y868y85" path="res://src/3dobjects/simple_wall.tscn" id="1_enkuh"]
+[ext_resource type="PackedScene" uid="uid://5gxt0y868y85" path="res://src/entities/simple_wall.tscn" id="1_enkuh"]
 
 [node name="Tiles" type="Node3D"]
 

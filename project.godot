@@ -11,19 +11,20 @@ config_version=5
 [application]
 
 config/name="gmtk2024"
-run/main_scene="res://enviroment_test.tscn"
+run/main_scene="res://src/scenes/game-scenes/enviroment_test.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ScreenShake="*res://src/systems/singletons/screen_shake.gd"
+Globals="*res://src/systems/singletons/globals.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
-[autoload]
-
-ScreenShake="*res://src/systems/singletons/screen_shake.gd"
-Globals="*res://src/systems/singletons/globals.gd"
 
 [input]
 
