@@ -1,31 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://boj3r1u3jawt4"]
+[gd_scene load_steps=2 format=3 uid="uid://boj3r1u3jawt4"]
 
-[ext_resource type="PackedScene" uid="uid://db6re3qixa3y0" path="res://src/entities/modules/block_module/block_module.tscn" id="1_163x3"]
 [ext_resource type="Script" path="res://src/entities/modules/module_handler.gd" id="1_hmpe2"]
-[ext_resource type="PackedScene" uid="uid://0rcvlvpqtf8u" path="res://src/entities/modules/missile_module/missile_module.tscn" id="1_sc2qd"]
-[ext_resource type="Script" path="res://src/systems/modules/module_slot.gd" id="2_21dta"]
-[ext_resource type="PackedScene" uid="uid://cdpfri4wq00ik" path="res://src/entities/modules/head_module/head_module.tscn" id="2_bgw38"]
-
-[sub_resource type="Resource" id="Resource_r40ss"]
-script = ExtResource("2_21dta")
-module_scene = ExtResource("2_bgw38")
-offset = Vector2(0, 0)
-rotation = 0
-
-[sub_resource type="Resource" id="Resource_2u8go"]
-script = ExtResource("2_21dta")
-module_scene = ExtResource("1_sc2qd")
-offset = Vector2(1, 0)
-rotation = 0
-
-[sub_resource type="Resource" id="Resource_v8e1x"]
-script = ExtResource("2_21dta")
-module_scene = ExtResource("1_163x3")
-offset = Vector2(-1, 0)
-rotation = 0
 
 [node name="TestPlayer" type="Node3D"]
 
 [node name="Modules" type="Node3D" parent="."]
 script = ExtResource("1_hmpe2")
-module_slots = Array[ExtResource("2_21dta")]([SubResource("Resource_r40ss"), SubResource("Resource_2u8go"), SubResource("Resource_v8e1x")])

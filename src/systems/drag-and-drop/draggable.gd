@@ -8,8 +8,6 @@ signal module_connected(node)
 signal module_disconnected(node)
 signal destroyed(node)
 
-@onready var snap_points: Node3D = $SnapPoints
-@onready var show_snap_area: Area3D = $ShowSnapArea
 
 var dragging = false
 var drag_offset = Vector3()

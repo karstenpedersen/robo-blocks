@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bwmoew3o64qdg"]
 
-[ext_resource type="PackedScene" uid="uid://b02p50rtw5iii" path="res://src/systems/drag-and-drop/draggable.tscn" id="1_hrgwe"]
+[ext_resource type="PackedScene" uid="uid://brae6ovj5r6in" path="res://src/entities/modules/draggable_module/draggable_module.tscn" id="2_7w6ey"]
 [ext_resource type="Script" path="res://src/systems/drag-and-drop/drag_manager.gd" id="2_u365p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5ggp"]
@@ -26,14 +26,14 @@ shape = SubResource("ConcavePolygonShape3D_e3o4f")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.990232, 0.0131266, -0.138813, 0.139432, -0.0932235, 0.985834, 0, -0.995559, -0.0941431, 0, 6.39536, 0)
 
-[node name="Draggable2" parent="." instance=ExtResource("1_hrgwe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911172, 5)
-
-[node name="Draggable" parent="." instance=ExtResource("1_hrgwe")]
-transform = Transform3D(-0.672186, 0, -0.740382, 0, 1, 0, 0.740382, 0, -0.672186, 0, 0.898044, -1.58217)
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
 
 [node name="DragManager" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_u365p")
+
+[node name="DraggableModule" parent="." instance=ExtResource("2_7w6ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21548, 0)
+
+[node name="DraggableModule2" parent="." instance=ExtResource("2_7w6ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00715, 1.13693, 6.40752)

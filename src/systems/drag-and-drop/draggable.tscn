@@ -1,15 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b02p50rtw5iii"]
+[gd_scene load_steps=4 format=3 uid="uid://b02p50rtw5iii"]
 
 [ext_resource type="Script" path="res://src/systems/drag-and-drop/draggable.gd" id="1_8y53f"]
-[ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="2_8kk1k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir1xr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qga8n"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_o1iua"]
-height = 1.0
-radius = 3.0
 
 [node name="Draggable" type="RigidBody3D" groups=["draggable"]]
 script = ExtResource("1_8y53f")
@@ -19,25 +14,3 @@ shape = SubResource("BoxShape3D_ir1xr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_qga8n")
-
-[node name="SnapPoints" type="Node3D" parent="."]
-
-[node name="SnapPoint4" parent="SnapPoints" instance=ExtResource("2_8kk1k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
-
-[node name="SnapPoint3" parent="SnapPoints" instance=ExtResource("2_8kk1k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-
-[node name="SnapPoint2" parent="SnapPoints" instance=ExtResource("2_8kk1k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-
-[node name="SnapPoint" parent="SnapPoints" instance=ExtResource("2_8kk1k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-
-[node name="ShowSnapArea" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShowSnapArea"]
-shape = SubResource("CylinderShape3D_o1iua")
-
-[connection signal="body_entered" from="ShowSnapArea" to="." method="_on_show_snap_area_body_entered"]
-[connection signal="body_exited" from="ShowSnapArea" to="." method="_on_show_snap_area_body_exited"]

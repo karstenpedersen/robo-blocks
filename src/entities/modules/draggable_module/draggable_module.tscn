@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://brae6ovj5r6in"]
+
+[ext_resource type="PackedScene" uid="uid://rbuqgpudjokf" path="res://src/entities/modules/base_module/base_module.tscn" id="1_vq4rx"]
+[ext_resource type="Script" path="res://src/entities/modules/draggable_module/draggable_module.gd" id="2_gver6"]
+[ext_resource type="Script" path="res://src/components/draggable_component.gd" id="2_iyptw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j4rum"]
+
+[node name="DraggableModule" groups=["draggable_module"] instance=ExtResource("1_vq4rx")]
+script = ExtResource("2_gver6")
+rotation_speed = 0.125
+
+[node name="DraggableComponent" type="Area3D" parent="Components" index="1" node_paths=PackedStringArray("parent") groups=["draggable"]]
+script = ExtResource("2_iyptw")
+parent = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/DraggableComponent" index="0"]
+shape = SubResource("BoxShape3D_j4rum")
+
+[connection signal="drag_ended" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_ended"]
+[connection signal="drag_moved" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_moved"]
+[connection signal="drag_rotated" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_rotated"]
+[connection signal="drag_started" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_started"]

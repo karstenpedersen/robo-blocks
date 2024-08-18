@@ -3,7 +3,7 @@ extends Node3D
 const RAY_LENGTH = 1000
 
 var dragging = false
-var current: Draggable = null
+var current: DraggableComponent = null
 var draggable_ray_result = null
 
 
@@ -17,7 +17,7 @@ func _physics_process(delta):
 	while remaining_length > 0:
 		var end = origin + direction * remaining_length
 		var query = PhysicsRayQueryParameters3D.create(origin, end)
-		# query.collide_with_areas = true
+		query.collide_with_areas = true
 		
 		var result = space_state.intersect_ray(query)
 		if !result:

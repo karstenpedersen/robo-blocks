@@ -1,18 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://rbuqgpudjokf"]
+[gd_scene load_steps=7 format=3 uid="uid://rbuqgpudjokf"]
 
 [ext_resource type="Script" path="res://src/entities/modules/base_module/base_module.gd" id="1_iavab"]
+[ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="2_dgh0n"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="2_yfns1"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8k1gj"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_p48wg"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_an4dr"]
+[sub_resource type="BoxMesh" id="BoxMesh_j2tuk"]
 
-[node name="BaseModule" type="Node3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0rqrd"]
+height = 1.0
+radius = 3.0
+
+[node name="BaseModule" type="RigidBody3D" groups=["module"]]
 script = ExtResource("1_iavab")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Components" type="Node3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_8k1gj")
+[node name="HealthComponent" type="Node" parent="Components"]
+script = ExtResource("2_yfns1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_an4dr")
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_p48wg")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("BoxMesh_j2tuk")
+skeleton = NodePath("../..")
+
+[node name="SnapPoints" type="Node3D" parent="."]
+
+[node name="SnapPoint4" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint3" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint2" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+parent = NodePath("../..")
+
+[node name="SnapPoint" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+parent = NodePath("../..")
+
+[node name="ShowSnapArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShowSnapArea"]
+shape = SubResource("CylinderShape3D_0rqrd")
+
+[connection signal="eliminated" from="Components/HealthComponent" to="." method="_on_health_component_eliminated"]
