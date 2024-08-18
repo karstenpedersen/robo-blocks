@@ -22,7 +22,7 @@ var offset = Vector3.ZERO
 
 @export_category("Smoothing")
 @export var smoothing_enabled = true
-@export_range(0, 1.0) var lock_strength = 0.2
+@export_range(0.0, 1.0) var locking_strength = 0.05
 #@export_range(1, 10) var smoothing_distance = 10
 
 
@@ -59,7 +59,7 @@ func _process(delta):
 	
 	# Smoothing
 	if smoothing_enabled:
-		new_position = lerp(position, new_position, lock_strength)
+		new_position = lerp(position, new_position, locking_strength)
 	
 	# Screen shake
 	offset = ScreenShake.get_shake_offset()
