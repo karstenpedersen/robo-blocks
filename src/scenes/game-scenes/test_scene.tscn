@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl0lvptxkki0e"]
+
+[ext_resource type="PackedScene" uid="uid://cejqx5xhwcx8f" path="res://src/systems/game_manager/game_manager.tscn" id="1_o7vc5"]
+[ext_resource type="Texture2D" uid="uid://cmwbx6xc6d74r" path="res://icon.svg" id="2_bvahf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lti5i"]
+albedo_texture = ExtResource("2_bvahf")
+
+[sub_resource type="BoxMesh" id="BoxMesh_c4chm"]
+
+[node name="Test Scene" type="Node3D"]
+
+[node name="GameManager" parent="." instance=ExtResource("1_o7vc5")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_lti5i")
+mesh = SubResource("BoxMesh_c4chm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.2231)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3124, 0, 2.76055)
