@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c872uoni7s0py"]
+[gd_scene load_steps=11 format=3 uid="uid://c872uoni7s0py"]
 
 [ext_resource type="PackedScene" uid="uid://guulovq8pyf1" path="res://src/entities/player/player.tscn" id="1_7jdfq"]
+[ext_resource type="Script" path="res://src/systems/camera/camera.gd" id="2_j6fom"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0o02g"]
 size = Vector3(60, 2, 60)
@@ -43,12 +44,6 @@ mesh = SubResource("BoxMesh_vep8r")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, 0)
 
-[node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
-
 [node name="RightWall" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RightWall"]
@@ -88,3 +83,8 @@ mesh = SubResource("BoxMesh_ckm75")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BottomWall"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 19)
 shape = SubResource("ConcavePolygonShape3D_bs6xi")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
+script = ExtResource("2_j6fom")
+target = NodePath("../Player")
