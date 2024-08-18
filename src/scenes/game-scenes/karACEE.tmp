@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwmoew3o64qdg"]
+[gd_scene load_steps=6 format=3 uid="uid://bwmoew3o64qdg"]
 
 [ext_resource type="PackedScene" uid="uid://brae6ovj5r6in" path="res://src/entities/modules/draggable_module/draggable_module.tscn" id="2_7w6ey"]
 [ext_resource type="Script" path="res://src/systems/drag-and-drop/drag_manager.gd" id="2_u365p"]
-[ext_resource type="PackedScene" uid="uid://cjk61uln7tdkc" path="res://src/entities/modules/head_module/head_module.tscn" id="3_jp0qt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5ggp"]
 albedo_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
@@ -35,12 +34,12 @@ script = ExtResource("2_u365p")
 
 [node name="DraggableModule" parent="." instance=ExtResource("2_7w6ey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 1, 0.002)
+rotation_speed = null
 
 [node name="DraggableModule3" parent="." instance=ExtResource("2_7w6ey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8131, 2, 4.22485)
+rotation_speed = null
 
 [node name="DraggableModule2" parent="." instance=ExtResource("2_7w6ey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.007, 1, 4.99057)
-
-[node name="HeadModule" parent="." instance=ExtResource("3_jp0qt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.09128, 0.6, 0)
+rotation_speed = null

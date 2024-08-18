@@ -43,8 +43,8 @@ func _on_draggable_component_drag_moved(node: DraggableComponent) -> void:
 
 
 func _on_draggable_component_mounted(module: BaseModule, point: SnapPoint) -> void:
-	add_neighbour_module(module, point)
+	create_module_connection(module, point)
 
 
-func _on_draggable_component_unmounted(module: Variant, point: Variant) -> void:
-	remove_neighbour_module(module)
+func _on_draggable_component_unmounted() -> void:
+	remove_from_neighbours()

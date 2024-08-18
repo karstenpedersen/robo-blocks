@@ -11,33 +11,50 @@ signal removed_neighbour_module(module)
 @onready var health_component: HealthComponent = $Components/HealthComponent
 
 @onready var snap_points: Node3D = $SnapPoints
-@onready var show_snap_area: Area3D = $ShowSnapArea
 
 var index: int = -1
-var neighbours: Array[BaseModule]
+var neighbours: Array[Dictionary]
 var parent: BaseModule
-var connection_point: Node3D
+var connection_point: Node3D:
+	get:
+		if len(neighbours) == 0:
+			return null
+		return neighbours[0]["point"]
 
 
-func add_neighbour_module(module: BaseModule, point: Node3D):
+func create_module_connection(module: BaseModule, point: SnapPoint):
+	add_neighbour_module(module, point)
+	module.add_neighbour_module(self, point)
+
+
+func add_neighbour_module(module: BaseModule, point: SnapPoint):
 	if index == -1:
 		connection_point = point
 	if index == -1 or module.index + 1 < index:
 		index = module.index + 1
-	neighbours.append(module)
+	neighbours.append({
+		"module": module,
+		"point": point
+	})
 	added_neighbour_module.emit(module)
+	print(self, ", index: ", index, ", #neighbours: ", len(neighbours), ", ", neighbours)
 
 
 func remove_neighbour_module(module: BaseModule):
-	neighbours.erase(module)
+	for neighbour in neighbours:
+		if neighbour["module"] == module:
+			neighbours.erase(neighbour)
 	removed_neighbour_module.emit(module)
 	
+	# Check if there are any neighbours with smaller indecies
+	if len(neighbours) == 0:
+		return
 	var found_smaller_index = false
 	for neighbour in neighbours:
-		if neighbour.index < index:
+		if neighbour["module"].index < index:
 			found_smaller_index = true
-	if !found_smaller_index:
-		destroy()
+	if !found_smaller_index and index != 0:
+		remove_from_neighbours()
 
 
 func destroy():
@@ -48,7 +65,9 @@ func destroy():
 
 func remove_from_neighbours():
 	for neighbour in neighbours:
-		neighbour.remove_neighbour_module(self)
+		neighbour["module"].remove_neighbour_module(self)
+	neighbours.clear()
+	index = -1
 
 
 func _on_health_component_eliminated() -> void:
