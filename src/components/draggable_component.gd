@@ -44,7 +44,6 @@ func drag_end():
 
 
 func drag_move(pos: Vector3):
-	# print(len(snap_points), ", ", snap_points)
 	if snap_point:
 		if pos.distance_to(target_position) <= snap_distance:
 			target_position = snap_point.global_position

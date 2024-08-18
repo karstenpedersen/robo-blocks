@@ -4,6 +4,7 @@ class_name HitboxComponent
 signal hit_hurtbox(hurtbox: HurtboxComponent)
 
 @export var damage: int = 1
+@export var knockback_force: float = 1
 
 var start_position: Vector3
 

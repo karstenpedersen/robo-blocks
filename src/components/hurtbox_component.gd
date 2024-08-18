@@ -3,6 +3,7 @@ class_name HurtboxComponent
 
 signal hurtbox_entered(hitbox: HitboxComponent)
 
+@export var actor: Node3D
 @export var disable_invincible_collisions = true
 
 var is_invincible = false :

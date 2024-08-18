@@ -1,4 +1,4 @@
-extends Area3D
+extends Node3D
 
 signal collided(node: Node3D)
 signal destroyed(pos: Vector3)

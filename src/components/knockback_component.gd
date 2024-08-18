@@ -2,7 +2,7 @@ extends Node
 class_name KnockbackComponent
 
 @export var actor: RigidBody3D
-@export var knockback_force: float = 100
+@export var knockback_force: float = 2
 
 
 func apply_knockback(knockback: Vector3):

@@ -24,12 +24,6 @@ var connection_point: Node3D:
 		return neighbours[0]["point"]
 
 
-func _ready() -> void:
-	hurtbox_component.hurtbox_entered.connect(func(hitbox: HitboxComponent):
-		health_component.hurt(hitbox.damage)
-		knockback_component.apply_knockback((global_position - hitbox.start_position).normalized() * 5)
-	)
-
 func _physics_process(delta: float) -> void:
 	if connection_point and index != 0:
 		position = connection_point.global_position
@@ -102,3 +96,9 @@ func enable_rigidbody():
 
 func _on_health_component_eliminated() -> void:
 	destroy()
+
+
+func _on_hurtbox_component_hurtbox_entered(hitbox: HitboxComponent) -> void:
+	health_component.hurt(hitbox.damage)
+	knockback_component.apply_knockback((global_position \
+			- hitbox.start_position).normalized() * hitbox.knockback_force)

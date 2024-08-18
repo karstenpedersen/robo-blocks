@@ -3,8 +3,11 @@ class_name SpawnerComponent
 
 signal spawned(node: Node3D)
 
-@export var object: PackedScene
+@export var scene: PackedScene
 
 
 func spawn():
-	spawned.emit()
+	var instance = scene.instantiate()
+	instance.global_transform = global_transform
+	owner.owner.add_sibling(instance)
+	spawned.emit(instance)

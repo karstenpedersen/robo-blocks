@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://rbuqgpudjokf"]
+[gd_scene load_steps=8 format=3 uid="uid://rbuqgpudjokf"]
 
 [ext_resource type="Script" path="res://src/entities/modules/base_module/base_module.gd" id="1_iavab"]
-[ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="2_dgh0n"]
 [ext_resource type="Script" path="res://src/components/health_component.gd" id="2_yfns1"]
 [ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="3_5krxg"]
 [ext_resource type="Script" path="res://src/components/knockback_component.gd" id="4_sexcm"]
@@ -20,10 +19,11 @@ script = ExtResource("1_iavab")
 [node name="HealthComponent" type="Node" parent="Components"]
 script = ExtResource("2_yfns1")
 
-[node name="HurtboxComponent" type="Area3D" parent="Components"]
+[node name="HurtboxComponent" type="Area3D" parent="Components" node_paths=PackedStringArray("actor")]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 0
 script = ExtResource("3_5krxg")
+actor = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Components/HurtboxComponent"]
 shape = SubResource("BoxShape3D_xkpqt")
@@ -43,20 +43,5 @@ skeleton = NodePath("../..")
 
 [node name="SnapPoints" type="Node3D" parent="."]
 
-[node name="SnapPoint4" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
-parent = NodePath("../..")
-
-[node name="SnapPoint3" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-parent = NodePath("../..")
-
-[node name="SnapPoint2" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-parent = NodePath("../..")
-
-[node name="SnapPoint" parent="SnapPoints" node_paths=PackedStringArray("parent") instance=ExtResource("2_dgh0n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-parent = NodePath("../..")
-
 [connection signal="eliminated" from="Components/HealthComponent" to="." method="_on_health_component_eliminated"]
+[connection signal="hurtbox_entered" from="Components/HurtboxComponent" to="." method="_on_hurtbox_component_hurtbox_entered"]
