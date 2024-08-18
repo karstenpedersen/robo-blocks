@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://rbuqgpudjokf"]
 
-[ext_resource type="Script" path="res://src/entities/modules/base_module.gd" id="1_iavab"]
+[ext_resource type="Script" path="res://src/entities/modules/base_module/base_module.gd" id="1_iavab"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8k1gj"]
 

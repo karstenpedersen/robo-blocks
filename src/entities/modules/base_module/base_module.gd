@@ -7,6 +7,7 @@ signal destroyed
 
 var index: int = 0
 var neighbours: Array[BaseModule]
+var parent: BaseModule
 
 
 func destroy():
@@ -15,7 +16,7 @@ func destroy():
 	destroyed.emit()
 
 
-func check_neighbours(caller: BaseModule):
+func remove_neighbour(caller: BaseModule):
 	neighbours.erase(caller)
 	
 	var found_smaller_index = false
@@ -28,4 +29,4 @@ func check_neighbours(caller: BaseModule):
 
 func notify_neighbours():
 	for neighbour in neighbours:
-		neighbour.check_neighbours(self)
+		neighbour.remove_neighbour(self)

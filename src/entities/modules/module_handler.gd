@@ -1,6 +1,7 @@
 extends Node3D
 
-@export var module_slots: Array[ModuleSlot]
+@export var modules: Array[PackedScene] = []
+@export var module_slots: Array[ModuleSlot] = []
 
 
 func _ready() -> void:
