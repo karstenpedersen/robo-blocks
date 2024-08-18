@@ -22,6 +22,11 @@ var connection_point: Node3D:
 		return neighbours[0]["point"]
 
 
+func _physics_process(delta: float) -> void:
+	if connection_point and index != 0:
+		position = connection_point.global_position
+
+
 func create_module_connection(module: BaseModule, point: SnapPoint):
 	# TODO: How to do this in correct order if multiple connections are made
 	add_neighbour_module(module, point)
@@ -31,6 +36,7 @@ func create_module_connection(module: BaseModule, point: SnapPoint):
 func add_neighbour_module(module: BaseModule, point: SnapPoint):
 	if index == -1:
 		connection_point = point
+		disable_rigidbody()
 	if index == -1 or module.index + 1 < index:
 		index = module.index + 1
 	neighbours.append({
@@ -39,7 +45,6 @@ func add_neighbour_module(module: BaseModule, point: SnapPoint):
 	})
 	added_neighbour_module.emit(module)
 	print(self, ", index: ", index, ", #neighbours: ", len(neighbours), ", ", neighbours)
-
 
 func remove_neighbour_module(module: BaseModule):
 	for neighbour in neighbours:
@@ -69,6 +74,22 @@ func remove_from_neighbours():
 		neighbour["module"].remove_neighbour_module(self)
 	neighbours.clear()
 	index = -1
+	enable_rigidbody()
+
+
+func disable_rigidbody():
+	print("DISABLE")
+	lock_rotation = true
+	freeze = true
+	set_collision_layer_value(1, false)
+	set_collision_mask_value(1, false)
+
+
+func enable_rigidbody():
+	lock_rotation = false
+	freeze = false
+	set_collision_layer_value(1, true)
+	set_collision_mask_value(1, true)
 
 
 func _on_health_component_eliminated() -> void:

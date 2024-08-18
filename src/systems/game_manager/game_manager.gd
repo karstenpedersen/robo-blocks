@@ -8,14 +8,13 @@ var dead = false
 func _ready() -> void:
 	pause_menu.hide()
 	end_menu.hide()
+	
+	Globals.player_died.connect(endMenu)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
 	if Input.is_action_just_pressed("pause"):
 		pauseMenu()
-	
-	if Input.is_action_just_pressed("death"):
-		endMenu()
 
 func pauseMenu():
 	if !paused and dead == false:
@@ -36,7 +35,4 @@ func alive():
 func endMenu():
 	dead = true
 	end_menu.show()
-	end_menu._ready()
-	
-	
-	
+	end_menu.get_focus()

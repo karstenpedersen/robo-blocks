@@ -1,6 +1,9 @@
 extends Node
 
 var camera: Camera3D
+
+signal player_died # sad
+
 #var is_paused = false
 #var pause_list = []
 

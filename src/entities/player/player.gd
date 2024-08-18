@@ -14,7 +14,7 @@ func player_movement(input, delta):
 		velocity = velocity.move_toward(Vector3(0,0,0), delta * FRICTION)
 
 func _physics_process(delta):
-	var input = Input.get_vector("move_left","move_right","move_up","move_down")
+	var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	input = Vector3(input.x, 0, input.y)
 	player_movement(input, delta)
 	move_and_slide()

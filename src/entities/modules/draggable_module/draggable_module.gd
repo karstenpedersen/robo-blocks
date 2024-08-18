@@ -9,11 +9,7 @@ var rotation_tween
 
 
 func _on_draggable_component_drag_started(node: DraggableComponent) -> void:
-	# Disable rigidbody behavior
-	lock_rotation = true
-	freeze = true
-	set_collision_layer_value(1, false)
-	set_collision_mask_value(1, false)
+	disable_rigidbody()
 	
 	# Reset rotation
 	rotation_tween = get_tree().create_tween().bind_node(self)
@@ -22,11 +18,7 @@ func _on_draggable_component_drag_started(node: DraggableComponent) -> void:
 
 
 func _on_draggable_component_drag_ended(node: Variant) -> void:
-	# Enable rigidbody behavior
-	lock_rotation = false
-	freeze = false
-	set_collision_layer_value(1, true)
-	set_collision_mask_value(1, true)
+	enable_rigidbody()
 	
 	# Kill tween
 	if rotation_tween:
