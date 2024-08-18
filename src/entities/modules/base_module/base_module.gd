@@ -23,6 +23,7 @@ var connection_point: Node3D:
 
 
 func create_module_connection(module: BaseModule, point: SnapPoint):
+	# TODO: How to do this in correct order if multiple connections are made
 	add_neighbour_module(module, point)
 	module.add_neighbour_module(self, point)
 
@@ -53,7 +54,7 @@ func remove_neighbour_module(module: BaseModule):
 	for neighbour in neighbours:
 		if neighbour["module"].index < index:
 			found_smaller_index = true
-	if !found_smaller_index and index != 0:
+	if !found_smaller_index and index != 0: # Skip parent
 		remove_from_neighbours()
 
 

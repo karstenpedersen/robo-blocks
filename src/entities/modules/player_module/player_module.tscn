@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://yn5a65abxctt"]
+
+[ext_resource type="PackedScene" uid="uid://cjk61uln7tdkc" path="res://src/entities/modules/head_module/head_module.tscn" id="1_wxp1y"]
+[ext_resource type="Script" path="res://src/entities/modules/player_module/player_module.gd" id="2_ccv3i"]
+
+[node name="PlayerModule" instance=ExtResource("1_wxp1y")]
+script = ExtResource("2_ccv3i")
+
+[connection signal="destroyed" from="." to="." method="_on_destroyed"]
