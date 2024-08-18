@@ -1,52 +1,40 @@
 extends CharacterBody3D
 
 @export var speed = 10
-@export var accel = 70
-const FRICTION = 70
+@export var accel = 20
+@export var friction = 10
 
-var target_velocity = Vector3.ZERO
+var velocity_1d = 0.0
+
+@export var rotation_speed = 4
+
+
+func get_input():
+	var input = Vector2.ZERO
+	input.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	input.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	return input
 
 
 func player_movement(input, delta):
-	if input: 
-		velocity = velocity.move_toward(input * speed, delta * accel)
+	# NOTE: We don't want the input to be normalized
+	# as that will slow us down while turning
+	if input.y != 0:
+		# Forward and backwards movement
+		velocity_1d = lerp(velocity_1d, input.y * speed, delta * accel)
+		#velocity = velocity.move_toward(direction * speed, delta * accel)
 	else: 
-		velocity = velocity.move_toward(Vector3(0,0,0), delta * FRICTION)
+		#velocity = velocity.move_toward(Vector3.ZERO, delta * friction)
+		velocity_1d = lerp(velocity_1d, 0.0, delta * friction)
+		
+	var direction = transform.basis.z.normalized()
+	velocity = direction * velocity_1d
+	#rotation.y = lerp(rotation.y, rotation.y - input.x, delta * rotation_speed)
+	rotation.y = rotation.y - input.x * delta * rotation_speed
+
 
 func _physics_process(delta):
-	var input = Input.get_vector("move_left","move_right","move_up","move_down")
-	input = Vector3(input.x, 0, input.y)
+	#var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var input = get_input()
 	player_movement(input, delta)
 	move_and_slide()
-	
-
-	look_at_cursor()
-
-func look_at_cursor():
-	if Globals.camera == null:
-		return
-
-
-	var target_plane = Plane(Vector3(0, 1, 0), position.y)
-	var mouse_pos = get_viewport().get_mouse_position()
-	var ray_length = 1000
-	var from = Globals.camera.project_ray_origin(mouse_pos)
-	var to = from + Globals.camera.project_ray_normal(mouse_pos) * ray_length
-	var cursor_position_plane = target_plane.intersects_ray(from, to)
-	
-	if cursor_position_plane:
-		look_at(cursor_position_plane, Vector3.UP, 0)
-
-#func _physics_process(delta: float) -> void:
-	#var direction = Vector3.ZERO
-	#
-#
-	#
-	#if direction != Vector3.ZERO:
-		#direction = direction.normalized()
-	#
-	#target_velocity.x = direction.x * speed
-	#target_velocity.z = direction.z * speed
-	#
-	#velocity = target_velocity
-	#move_and_slide()
