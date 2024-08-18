@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cejqx5xhwcx8f"]
+[gd_scene load_steps=4 format=3 uid="uid://cejqx5xhwcx8f"]
 
 [ext_resource type="Script" path="res://src/systems/game_manager/game_manager.gd" id="1_ytqte"]
 [ext_resource type="PackedScene" uid="uid://dmitwxkq82w1t" path="res://src/scenes/menus/pause_menu.tscn" id="2_bidm4"]
+[ext_resource type="PackedScene" uid="uid://sj2fd1lbor3u" path="res://src/scenes/menus/end_menu.tscn" id="3_l2dn4"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_ytqte")
@@ -11,3 +12,9 @@ offset_left = -73.0
 offset_top = -57.0
 offset_right = 27.0
 offset_bottom = 80.0
+
+[node name="EndMenu" parent="." instance=ExtResource("3_l2dn4")]
+offset_left = -25.0
+offset_top = -31.0
+offset_right = -25.0
+offset_bottom = -31.0

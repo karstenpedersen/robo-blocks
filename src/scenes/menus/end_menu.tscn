@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://sj2fd1lbor3u"]
+
+[ext_resource type="Script" path="res://src/scenes/menus/end_menu.gd" id="1_12a70"]
+
+[node name="EndMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_12a70")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -250.0
+offset_top = -105.0
+offset_right = 1420.0
+offset_bottom = 832.0
+color = Color(0, 0, 0, 0.541176)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -50.5
+offset_right = 77.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="NewRun" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+text = "New Run"
+
+[node name="QuittoMainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Main Menu	"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../NewRun")
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_quit_to_main_menu_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
