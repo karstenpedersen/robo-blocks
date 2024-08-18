@@ -39,23 +39,16 @@ func _process(delta):
 	
 	
 	match camera_mode:
-		CameraMode.FOLLOW_TARGET_AND_CURSOR:
-			#var cursor_position = get_global_mouse_position()
-			#var viewport_size = get_viewport_rect().size
+		CameraMode.FOLLOW_TARGET_AND_CURSOR:			
 			var viewport_size = get_viewport().size
+			var target_plane = Plane(Vector3(0, 1, 0))
 			var mouse_pos = get_viewport().get_mouse_position()
-			var ray_length = 100
+			var ray_length = 1000
 			var from = project_ray_origin(mouse_pos)
 			var to = from + project_ray_normal(mouse_pos) * ray_length
-			var space = get_world_3d().direct_space_state
-			var ray_query = PhysicsRayQueryParameters3D.new()
-			ray_query.from = from
-			ray_query.to = to
-			ray_query.collide_with_areas = true
-			var raycast_result = space.intersect_ray(ray_query)
-			if not raycast_result.is_empty():
-				var cursor_position = raycast_result.position
-				
+			var cursor_position = target_plane.intersects_ray(from, to)
+			
+			if cursor_position:
 				var clamped = Vector2(
 					clamp(cursor_position.x, position.x - viewport_size.x, position.x + viewport_size.x),
 					clamp(cursor_position.z, position.z - viewport_size.y, position.z + viewport_size.y)
