@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccbicerjwfv22"]
-
-[ext_resource type="Script" path="res://src/components/action_component/action_component.gd" id="1_256du"]
-
-[node name="ActionComponent" type="Node"]
-script = ExtResource("1_256du")
-
-[node name="Timer" type="Timer" parent="."]

@@ -1,2 +1,0 @@
-extends BaseModule
-class_name MissileModule

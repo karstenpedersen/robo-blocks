@@ -9,6 +9,8 @@ signal removed_neighbour_module(module)
 
 # Components
 @onready var health_component: HealthComponent = $Components/HealthComponent
+@onready var hurtbox_component: HurtboxComponent = $Components/HurtboxComponent
+@onready var knockback_component: KnockbackComponent = $Components/KnockbackComponent
 
 @onready var snap_points: Node3D = $SnapPoints
 
@@ -21,6 +23,12 @@ var connection_point: Node3D:
 			return null
 		return neighbours[0]["point"]
 
+
+func _ready() -> void:
+	hurtbox_component.hurtbox_entered.connect(func(hitbox: HitboxComponent):
+		health_component.hurt(hitbox.damage)
+		knockback_component.apply_knockback((global_position - hitbox.start_position).normalized() * 5)
+	)
 
 func _physics_process(delta: float) -> void:
 	if connection_point and index != 0:

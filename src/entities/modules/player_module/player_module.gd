@@ -17,8 +17,3 @@ func _physics_process(delta: float) -> void:
 
 func _on_destroyed() -> void:
 	Globals.player_died.emit()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("death"):
-		health_component.hurt(4)

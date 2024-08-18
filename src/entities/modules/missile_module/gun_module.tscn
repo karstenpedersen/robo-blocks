@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://11bxq6vansxh"]
+
+[ext_resource type="PackedScene" uid="uid://brae6ovj5r6in" path="res://src/entities/modules/draggable_module/draggable_module.tscn" id="1_838dj"]
+[ext_resource type="Script" path="res://src/components/timer_component.gd" id="2_sc3w7"]
+
+[node name="DraggableModule" instance=ExtResource("1_838dj")]
+
+[node name="ProjectileSpawnerComponent" type="Timer" parent="Components" index="4"]
+script = ExtResource("2_sc3w7")
