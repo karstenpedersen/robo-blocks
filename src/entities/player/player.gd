@@ -18,6 +18,24 @@ func _physics_process(delta):
 	input = Vector3(input.x, 0, input.y)
 	player_movement(input, delta)
 	move_and_slide()
+	
+
+	look_at_cursor()
+
+func look_at_cursor():
+	if Globals.camera == null:
+		return
+
+
+	var target_plane = Plane(Vector3(0, 1, 0), position.y)
+	var mouse_pos = get_viewport().get_mouse_position()
+	var ray_length = 1000
+	var from = Globals.camera.project_ray_origin(mouse_pos)
+	var to = from + Globals.camera.project_ray_normal(mouse_pos) * ray_length
+	var cursor_position_plane = target_plane.intersects_ray(from, to)
+	
+	if cursor_position_plane:
+		look_at(cursor_position_plane, Vector3.UP, 0)
 
 #func _physics_process(delta: float) -> void:
 	#var direction = Vector3.ZERO
