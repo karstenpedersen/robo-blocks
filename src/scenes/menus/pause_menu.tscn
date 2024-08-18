@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmitwxkq82w1t"]
+[gd_scene load_steps=3 format=3 uid="uid://dmitwxkq82w1t"]
 
 [ext_resource type="Script" path="res://src/scenes/menus/pause_menu.gd" id="1_n7fhy"]
+[ext_resource type="Script" path="res://src/scenes/menus/current_score.gd" id="2_ag7ko"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -62,9 +63,22 @@ layout_mode = 2
 focus_neighbor_bottom = NodePath("../Resume")
 text = "Quit"
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(10, 36)
+
+[node name="CurrentScore" type="RichTextLabel" parent="StaticBody2D"]
+offset_left = -43.0
+offset_top = -116.0
+offset_right = 168.0
+offset_bottom = -15.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "CURRENT SCORE: 9999"
+script = ExtResource("2_ag7ko")
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/RestartRun" to="." method="_on_restart_run_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_restart_run_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_quit_to_main_menu_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_restart_run_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

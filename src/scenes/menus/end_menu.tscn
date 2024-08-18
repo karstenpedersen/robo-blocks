@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://sj2fd1lbor3u"]
+[gd_scene load_steps=4 format=3 uid="uid://sj2fd1lbor3u"]
 
 [ext_resource type="Script" path="res://src/scenes/menus/end_menu.gd" id="1_12a70"]
+[ext_resource type="Script" path="res://src/scenes/menus/score.gd" id="2_3u3y2"]
+[ext_resource type="Script" path="res://src/scenes/menus/highscore.gd" id="3_62q2t"]
 
 [node name="EndMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_12a70")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -250.0
 offset_top = -105.0
 offset_right = 1420.0
@@ -48,6 +51,24 @@ text = "Quit to Main Menu	"
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../NewRun")
 text = "Quit"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Score" type="RichTextLabel" parent="StaticBody2D"]
+offset_left = 513.0
+offset_top = 209.0
+offset_right = 704.0
+offset_bottom = 249.0
+text = "Score: 9999"
+script = ExtResource("2_3u3y2")
+
+[node name="Highscore" type="RichTextLabel" parent="StaticBody2D"]
+offset_left = 478.0
+offset_top = 193.0
+offset_right = 707.0
+offset_bottom = 237.0
+text = "HighScore: 9999"
+script = ExtResource("3_62q2t")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_quit_to_main_menu_pressed"]
