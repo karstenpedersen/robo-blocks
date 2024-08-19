@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 ScreenShake="*res://src/systems/singletons/screen_shake.gd"
 Globals="*res://src/systems/singletons/globals.gd"
 
+[global_group]
+
+player=""
+enemies=""
+
 [input]
 
 move_left={
