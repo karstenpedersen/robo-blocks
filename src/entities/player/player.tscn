@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://guulovq8pyf1"]
+[gd_scene load_steps=8 format=3 uid="uid://guulovq8pyf1"]
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_vco4d"]
 
@@ -6,14 +6,37 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_tc3pr"]
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irvr1"]
+albedo_color = Color(0.622671, 0.208123, 0.368853, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_keaos"]
+material = SubResource("StandardMaterial3D_irvr1")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xlxsy"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qkjvg"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[node name="Player" type="RigidBody3D" groups=["player"]]
 script = ExtResource("1_vco4d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_7soa1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_tc3pr")
 skeleton = NodePath("")
+
+[node name="TestModule" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("BoxMesh_keaos")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_xlxsy")
+
+[node name="ForwardCannon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.671844)
+mesh = SubResource("CylinderMesh_qkjvg")
