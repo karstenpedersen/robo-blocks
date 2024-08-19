@@ -1,7 +1,7 @@
 extends Node
 class_name HealthComponent
 
-@export_range(1, 999) var max_health: int = 3
+@export_range(1, 999) var max_health: int = 5
 
 var health: int = max_health
 

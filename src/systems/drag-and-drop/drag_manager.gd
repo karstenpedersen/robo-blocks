@@ -1,6 +1,6 @@
 extends Node3D
 
-const RAY_LENGTH = 1000
+const RAY_LENGTH = 2500
 
 var dragging = false
 var current: DraggableComponent = null
@@ -50,26 +50,27 @@ func _input(event):
 		current.drag_rotate(-90)
 		return
 	
+	if event.is_action_pressed("drag"):
+		print("Press action: ", event.is_action_pressed("drag"), \
+				", current: ", current, \
+				", ray_result: ", ray_result)
+	
 	if current and event.is_action_released("drag"):
 		current.drag_end()
 		dragging = false
 		current = null
+		print("RELEASE")
 		return
 	
-	if current or !event.is_action_pressed("drag"):
-		return
-	
-	if !ray_result:
-		return
-	
-	var collider = ray_result.collider
-	if collider is not Node:
-		return
-	
-	dragging = true
-	current = ray_result.collider
-	current.drag_start(ray_result["position"])
-	current.tree_exiting.connect(_on_current_tree_exiting)
+	if !current and ray_result and event.is_action_pressed("drag"):
+		var collider = ray_result.collider
+		if collider is not Node:
+			return
+		
+		dragging = true
+		current = ray_result.collider
+		current.drag_start(ray_result["position"])
+		current.tree_exiting.connect(_on_current_tree_exiting)
 
 
 func _on_current_tree_exiting():

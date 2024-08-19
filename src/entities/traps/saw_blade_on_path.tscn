@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqwuljxh28n6"]
+
+[ext_resource type="Script" path="res://src/components/path_follow_component.gd" id="1_3x6q3"]
+[ext_resource type="PackedScene" uid="uid://bvoeybh5exk56" path="res://src/entities/traps/saw_blade.tscn" id="1_4uupu"]
+[ext_resource type="Script" path="res://src/components/polygon_line_component.gd" id="3_7cdko"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfyak"]
+albedo_color = Color(0.60933, 0.60933, 0.60933, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26ceo"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="SawBladeOnPath" type="Path3D" node_paths=PackedStringArray("path_follow")]
+script = ExtResource("1_3x6q3")
+path_follow = NodePath("PathFollowComponent")
+
+[node name="PathFollowComponent" type="PathFollow3D" parent="."]
+transform = Transform3D(-0.386512, 0.617582, -0.684982, 0, 0.742702, 0.669623, 0.922284, 0.258817, -0.287063, 3.38154, 1.1249, -1.39593)
+
+[node name="SawBlade" parent="PathFollowComponent" instance=ExtResource("1_4uupu")]
+
+[node name="InnerPolygon" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array()
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_lfyak")
+script = ExtResource("3_7cdko")
+
+[node name="BorderPolygon" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11, 0)
+polygon = PackedVector2Array()
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_26ceo")
+script = ExtResource("3_7cdko")
+line_radius = 0.2

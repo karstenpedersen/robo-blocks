@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwmoew3o64qdg"]
+[gd_scene load_steps=13 format=3 uid="uid://bwmoew3o64qdg"]
 
 [ext_resource type="PackedScene" uid="uid://cejqx5xhwcx8f" path="res://src/systems/game_manager/game_manager.tscn" id="1_2afqu"]
 [ext_resource type="Script" path="res://src/systems/drag-and-drop/drag_manager.gd" id="2_u365p"]
 [ext_resource type="PackedScene" uid="uid://yn5a65abxctt" path="res://src/entities/modules/player_module/player_module.tscn" id="3_2guro"]
 [ext_resource type="PackedScene" uid="uid://11bxq6vansxh" path="res://src/entities/modules/gun_module/gun_module.tscn" id="4_rlggj"]
 [ext_resource type="PackedScene" uid="uid://wjmeakyobu3n" path="res://src/entities/modules/block_module/block_module.tscn" id="5_x7a40"]
-[ext_resource type="PackedScene" uid="uid://bvoeybh5exk56" path="res://src/entities/traps/saw_blade.tscn" id="6_yvkt6"]
+[ext_resource type="PackedScene" uid="uid://dqwuljxh28n6" path="res://src/entities/traps/saw_blade_on_path.tscn" id="6_vpu27"]
+[ext_resource type="PackedScene" uid="uid://dnff2n1atxjti" path="res://src/entities/traps/explosive_barrel.tscn" id="7_x2egc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5ggp"]
-albedo_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
+albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vbpwl"]
 material = SubResource("StandardMaterial3D_h5ggp")
@@ -17,7 +18,22 @@ size = Vector2(50, 50)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e3o4f"]
 data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
 
+[sub_resource type="Curve3D" id="Curve3D_yg1u1"]
+_data = {
+"points": PackedVector3Array(0.565971, 0, 2.89274, -0.565971, 0, -2.89274, 0.374297, 0, -3.52401, -2.10667, 0, -1.60359, 2.10667, 0, 1.60359, 13.0143, 0, -4.37296, 3.23862, 0, -0.8804, -3.23862, 0, 0.8804, 14.1148, 0, 1.7584, 1.88657, 0, -0.188657, -1.88657, 0, 0.188657, 7.88914, 0, -0.159618, 2.57832, 0, 0.345871, -2.57832, 0, -0.345871, 2.76396, 0, 2.48158, 0, 0, 0, 0, 0, 0, 0.374297, 0, -3.52401),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_dgr0a"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, -3, 0, 0, 0, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
 [node name="KarstenTestScene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0317907, 0, 0)
 
 [node name="GameManager" parent="." instance=ExtResource("1_2afqu")]
 
@@ -34,12 +50,13 @@ transform = Transform3D(0.990232, 0.0131266, -0.138813, 0.139432, -0.0932235, 0.
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12, 0)
+size = 22.739
 
 [node name="DragManager" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_u365p")
 
 [node name="PlayerModule" parent="." instance=ExtResource("3_2guro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89632, 1.14321, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82113, 1.20751, -0.0427389)
 
 [node name="GunModule" parent="." instance=ExtResource("4_rlggj")]
 transform = Transform3D(0.416789, 0, -0.909003, 0, 1, 0, 0.909003, 0, 0.416789, -0.00617909, 1, 3.99098)
@@ -53,16 +70,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06009, 1, 7.24598)
 [node name="BlockModule2" parent="." instance=ExtResource("5_x7a40")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5324, 1, 4.81725)
 
-[node name="SawBlade" parent="." instance=ExtResource("6_yvkt6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.82881, 0, 0)
+[node name="SawBladeOnPath" parent="." instance=ExtResource("6_vpu27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315994, 0, 0)
+curve = SubResource("Curve3D_yg1u1")
 
-[node name="Node3D" type="Node3D" parent="SawBlade"]
+[node name="SawBladeOnPath2" parent="." instance=ExtResource("6_vpu27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4282, 0, -8.87085)
+curve = SubResource("Curve3D_dgr0a")
 
-[node name="Node3D2" type="Node3D" parent="SawBlade"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+[node name="ExplosiveBarrel" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.96821, 1.0227, -3)
 
-[node name="Node3D3" type="Node3D" parent="SawBlade"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+[node name="ExplosiveBarrel2" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.96821, 1.0227, -4.87554)
 
-[node name="Node3D4" type="Node3D" parent="SawBlade"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+[node name="ExplosiveBarrel3" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41436, 1.0227, -4.87554)
+
+[node name="ExplosiveBarrel4" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41436, 1.0227, -3.41308)
+
+[node name="ExplosiveBarrel5" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82544, 1.0227, -4.65472)
+
+[node name="ExplosiveBarrel6" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29916, 1.0227, -0.854039)
+
+[node name="ExplosiveBarrel7" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4153, 1.0227, -0.854039)
+
+[node name="ExplosiveBarrel8" parent="." instance=ExtResource("7_x2egc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.18123, 1.0227, -0.854039)

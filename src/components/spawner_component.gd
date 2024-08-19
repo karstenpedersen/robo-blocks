@@ -7,6 +7,8 @@ signal spawned(node: Node3D)
 
 
 func spawn():
+	if !scene:
+		return
 	var instance = scene.instantiate()
 	instance.global_transform = global_transform
 	owner.owner.add_sibling(instance)
