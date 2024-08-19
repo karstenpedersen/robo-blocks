@@ -80,7 +80,7 @@ func _on_wander_timer_timeout() -> void:
 
 func set_mode(m: EnemyMode):
 	if m == EnemyMode.IDLE:
-		$IdleTimer.start(randf_range(0, 1))
+		$IdleTimer.start(randf_range(0.5, 2))
 	elif m == EnemyMode.WANDER:
-		$WanderTimer.start(randf_range(0, 1))
+		$WanderTimer.start(randf_range(0.5, 2))
 	mode = m
