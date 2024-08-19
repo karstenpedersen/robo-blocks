@@ -18,11 +18,6 @@ sky_material = SubResource("ProceduralSkyMaterial_edgr2")
 [sub_resource type="Environment" id="Environment_1w8f6"]
 background_mode = 2
 sky = SubResource("Sky_67u6t")
-tonemap_mode = 1
-ssao_enabled = true
-ssao_radius = 10.64
-ssao_intensity = 5.76
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mauu7"]
 albedo_texture = ExtResource("1_qhg7g")
@@ -157,6 +152,7 @@ visible = false
 follow_viewport_enabled = true
 
 [node name="TextureRect2" type="TextureRect" parent="Camera/Camera3D/CanvasLayer2"]
+visible = false
 material = SubResource("ShaderMaterial_akw34")
 offset_right = 1920.0
 offset_bottom = 1080.0
