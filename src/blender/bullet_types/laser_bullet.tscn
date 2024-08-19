@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=4 uid="uid://c1a6xlrndf8n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pirsi"]
+resource_name = "Bullet"
+cull_mode = 2
+albedo_color = Color(0.906332, 0, 0.0264861, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yiwld"]
+_surfaces = [{
+"aabb": AABB(-0.423417, -0.189909, -0.189909, 0.846834, 0.379819, 0.379819),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAFAAMAAgAEAAUABAAHAAUABAAGAAcABgAJAAcABgAIAAkACAALAAkACAAKAAsACgANAAsACgAMAA0ABQABAAMAAQANAA8ADQAJAAsACQAFAAcABQANAAEADQAFAAkADAAPAA0ADAAOAA8ADgABAA8ADgAAAAEADgACAAAAAgAGAAQABgAKAAgACgAOAAwADgAGAAIABgAOAAoA"),
+"lods": [0.150991, PackedByteArray("AAAFAAEAAAAEAAUABAAGAAUABgAJAAUABgAKAAkACgANAAkABQANAAEADQAFAAkACgABAA0ACgAAAAEACgAEAAAACgAGAAQA"), 0.249755, PackedByteArray("AAAFAAEAAAAGAAUABgANAAUABQANAAEABgABAA0ABgAAAAEA")],
+"name": "Bullet",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD/fwAAAAD///9/AAAAAAAAfSV9JQAA//99JX0lAAAAAAAA/38AAP//AAD/fwAAAAB9JYHaAAD//30lgdoAAAAA/3///wAA////f///AAAAAIHagdoAAP//gdqB2gAAAAD+//9/AAD//////38AAAAAgdp9JQAA//+B2n0lAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_saphc"]
+resource_name = "gmtk 2024 assets v2_Cylinder_016"
+_surfaces = [{
+"aabb": AABB(-0.423417, -0.189909, -0.189909, 0.846834, 0.379819, 0.379819),
+"attribute_data": PackedByteArray("/7+OggAA/3////9/AAAAAP//AAD/P46CcOuNlP/f/3//3/9//98AAP/fAABxa42Ub/3/v/+//3//v/9//78AAP+/AABwff+/cOtw6/+f/3//n/9//58AAP+fAABxa3Dr/79v/f9//3//f/9//38AAP9/AAD/P2/9jZRw6/9f/3//X/9//18AAP9fAACOFHDrjoL/v/8//3//P/9//z8AAP8/AACPAv+/jZSNlP8f/3//H/9//x8AAP8fAACOFI2UAAD/f////38AAAAA/78AAP+f/3//n/9//5//f/+f/3//PwAA/z8AAAAAAAD/v/9//7//f/+/AAD/n/9//5//f/9/AAD/fwAA/1//f/9f/3//PwAA"),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("AgAJAAQAAgAHAAkACAAPAAoACAANAA8ADgAWABAADgAUABYAEwAcABUAEwAaABwAGQAiABsAGQAgACIAHwAoACEAHwAmACgAEQAFAAsABQApAC8AKQAdACMAHQARABcAEQApAAUAKQARAB0AJQAtACcAJQArAC0ALAADAC4ALAABAAMAKgAGAAAABgASAAwAEgAeABgAHgAqACQAKgASAAYAEgAqAB4A"),
+"lods": [0.150991, PackedByteArray("AgAPAAQAAgA7AA8APAA+AD0APgBAAD0APwBCAEAAQgBEAEEAEQApAAUAKQARAB0AQwA6ACcAQwABADoAHgAMAAAAHgASAAwA"), 0.249755, PackedByteArray("MQAPAAQAMQA0AA8ANQA4ADMAEQApAAUANgADADkANwAwADIA")],
+"material": SubResource("StandardMaterial3D_pirsi"),
+"name": "Bullet",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 69,
+"vertex_data": PackedByteArray("AAD/fwAAqioAAP9/AAC49AAA/38AALj0////fwAAuPT///9/AAC49P///38AAFTVAAB9JX0lqioAAH0lfSW49AAAfSV9JRnf//99JX0luPT//30lfSUZ3///fSV9JVTVAAAAAP9/qioAAAAA/38Z3wAAAAD/f8jM//8AAP9/Gd///wAA/3/IzP//AAD/f1TVAAB9JYHaqioAAH0lgdqMwQAAfSWB2sjM//99JYHajMH//30lgdrIzP//fSWB2lTVAAD/f///qioAAP9///+MwQAA/3///4zB////f///jMH///9///+Mwf///3///1TVAACB2oHaqioAAIHagdrIzAAAgdqB2ozB//+B2oHayMz//4HagdqMwf//gdqB2lTVAAD+//9/qioAAP7//38Z3wAA/v//f8jM//////9/Gd///////3/IzP//////f1TVAACB2n0lqioAAIHafSUZ3wAAgdp9Jbj0//+B2n0lGd///4HafSW49P//gdp9JVTVAAD/fwAAOdUAAP9/AACw7P///38AAFLV//8AAP9/9sYAAH0lgdrD2QAAfSWB2v3BAAB9JYHa/+oAAH0lgdpqyP//////fzXA//////9/3Ob///9/AACW5QAAAAD/fzznAAAAAP9/yMz//wAA/3+4ywAAfSWB2qPJAAB9JYHaMsD///9////bwP///3///xbGAACB2oHaVsIAAIHagdqk3v//////f1zKVFWqqjW6NbrJRclFNbo1uslFyUWpqlVVVFWqqslFyUUGUAZQyUXJRQZQBlCpqlVVVVWqqgZQBlBkW2RbBlAGUGRbZFupqlVVVFWqqshtyG1kW2RbyG3IbWRbZFupqlVVVFWqqjaSNpLIbchtNpI2kshtyG2pqlVVVFWqqpqkmqQ2kjaSmqSapDaSNpKpqlRVVVWqqviv+K+apJqk+K/4r5qkmqSpqlVVVFWqqviv+K81ujW6+K/4rzW6NbqpqlRVvdeToR822lK915OhC1ZrTL1ZG3HWaxtusdQVTDGhRHC+z3X42KoKs3/RyKZ5VcJMBlAGUMFQlk+cXXdwrHj6a9Jx4ZIxnjmQepWpqsqkh6QcrhWx")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_yiwld")
+
+[node name="LaserBullet" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_saphc")
+skeleton = NodePath("")
