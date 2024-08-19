@@ -14,7 +14,7 @@ material = SubResource("StandardMaterial3D_irvr1")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xlxsy"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="RigidBody3D"]
 script = ExtResource("1_vco4d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
