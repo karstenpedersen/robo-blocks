@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://s0s866chpcdx"
+path="res://.godot/imported/industrial for gmtk 2024 without effects.mp3-774d509475b1bb1cde9d4277ed9ba986.mp3str"
+
+[deps]
+
+source_file="res://src/music/industrial for gmtk 2024 without effects.mp3"
+dest_files=["res://.godot/imported/industrial for gmtk 2024 without effects.mp3-774d509475b1bb1cde9d4277ed9ba986.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

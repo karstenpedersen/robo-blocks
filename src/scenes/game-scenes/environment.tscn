@@ -1,0 +1,62 @@
+[gd_scene load_steps=15 format=3 uid="uid://bt1emfoe2bhj3"]
+
+[ext_resource type="PackedScene" uid="uid://bctshu3f8bncr" path="res://src/blender/environment/floor_1.tscn" id="1_382er"]
+[ext_resource type="PackedScene" uid="uid://bbra5u1j5tm6w" path="res://src/blender/environment/floor_2.tscn" id="2_4vgit"]
+[ext_resource type="PackedScene" uid="uid://dsbld1jepqebj" path="res://src/blender/environment/floor_3.tscn" id="3_8434t"]
+[ext_resource type="PackedScene" uid="uid://c1pfsr2yn3up6" path="res://src/blender/environment/floor_4.tscn" id="4_skbyj"]
+[ext_resource type="PackedScene" uid="uid://dxovfrnwgnuss" path="res://src/blender/environment/floor_5.tscn" id="5_5n7kw"]
+[ext_resource type="PackedScene" uid="uid://cu2tu8ayuxwfx" path="res://src/blender/environment/floor_6.tscn" id="6_a0xlk"]
+[ext_resource type="PackedScene" uid="uid://dyn40db03nquk" path="res://src/blender/environment/floor_7.tscn" id="7_hunuk"]
+[ext_resource type="PackedScene" uid="uid://bmmt3au1umdmu" path="res://src/blender/environment/floor_8.tscn" id="8_2o85q"]
+[ext_resource type="PackedScene" uid="uid://c6avrdfkf1kl3" path="res://src/blender/environment/wall.tscn" id="9_nivbn"]
+[ext_resource type="PackedScene" uid="uid://bw50fdkja25tv" path="res://src/blender/environment/wall_tall.tscn" id="10_221ru"]
+[ext_resource type="PackedScene" uid="uid://b6rnsvfumyob" path="res://src/blender/environment/wooden_crate.tscn" id="11_s88t3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbif1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dlels"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3r03s"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor1" parent="." instance=ExtResource("1_382er")]
+
+[node name="Floor2" parent="." instance=ExtResource("2_4vgit")]
+
+[node name="Floor3" parent="." instance=ExtResource("3_8434t")]
+
+[node name="Floor4" parent="." instance=ExtResource("4_skbyj")]
+
+[node name="Floor5" parent="." instance=ExtResource("5_5n7kw")]
+
+[node name="Floor6" parent="." instance=ExtResource("6_a0xlk")]
+
+[node name="Floor7" parent="." instance=ExtResource("7_hunuk")]
+
+[node name="Floor8" parent="." instance=ExtResource("8_2o85q")]
+
+[node name="Wall" parent="." instance=ExtResource("9_nivbn")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_jbif1")
+
+[node name="WallTall" parent="." instance=ExtResource("10_221ru")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallTall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallTall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_dlels")
+
+[node name="WoodenCrate" parent="." instance=ExtResource("11_s88t3")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WoodenCrate"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WoodenCrate/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_3r03s")
