@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://yn5a65abxctt"]
+[gd_scene load_steps=5 format=3 uid="uid://yn5a65abxctt"]
 
 [ext_resource type="PackedScene" uid="uid://cjk61uln7tdkc" path="res://src/entities/modules/head_module/head_module.tscn" id="1_wxp1y"]
 [ext_resource type="Script" path="res://src/entities/modules/player_module/player_module.gd" id="2_ccv3i"]
 [ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="3_d8cww"]
+[ext_resource type="PackedScene" uid="uid://bha0ksjfqlb7c" path="res://src/blender/block_parts/player_block.tscn" id="3_qrwor"]
 
-[node name="PlayerModule" instance=ExtResource("1_wxp1y")]
+[node name="PlayerModule" groups=["player"] instance=ExtResource("1_wxp1y")]
 script = ExtResource("2_ccv3i")
+rotation_speed = 3
+acceleration = 6000
 
 [node name="HurtboxComponent" parent="Components" index="1"]
 collision_mask = 4
+
+[node name="PlayerBlock" parent="Visuals" index="0" instance=ExtResource("3_qrwor")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="SnapPoint4" parent="SnapPoints" index="0" node_paths=PackedStringArray("parent") instance=ExtResource("3_d8cww")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

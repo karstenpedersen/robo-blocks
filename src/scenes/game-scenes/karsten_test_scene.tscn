@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwmoew3o64qdg"]
+[gd_scene load_steps=15 format=3 uid="uid://bwmoew3o64qdg"]
 
 [ext_resource type="PackedScene" uid="uid://cejqx5xhwcx8f" path="res://src/systems/game_manager/game_manager.tscn" id="1_2afqu"]
+[ext_resource type="Script" path="res://src/systems/camera/camera.gd" id="2_lo23x"]
 [ext_resource type="Script" path="res://src/systems/drag-and-drop/drag_manager.gd" id="2_u365p"]
 [ext_resource type="PackedScene" uid="uid://yn5a65abxctt" path="res://src/entities/modules/player_module/player_module.tscn" id="3_2guro"]
-[ext_resource type="PackedScene" uid="uid://11bxq6vansxh" path="res://src/entities/modules/gun_module/gun_module.tscn" id="4_rlggj"]
+[ext_resource type="PackedScene" uid="uid://11bxq6vansxh" path="res://src/entities/modules/cannon_module/cannon_module.tscn" id="4_rlggj"]
 [ext_resource type="PackedScene" uid="uid://wjmeakyobu3n" path="res://src/entities/modules/block_module/block_module.tscn" id="5_x7a40"]
-[ext_resource type="PackedScene" uid="uid://dqwuljxh28n6" path="res://src/entities/traps/saw_blade_on_path.tscn" id="6_vpu27"]
-[ext_resource type="PackedScene" uid="uid://dnff2n1atxjti" path="res://src/entities/traps/explosive_barrel.tscn" id="7_x2egc"]
+[ext_resource type="PackedScene" uid="uid://dqwuljxh28n6" path="res://src/entities/environment/saw_blade_on_path.tscn" id="6_vpu27"]
+[ext_resource type="PackedScene" uid="uid://dnff2n1atxjti" path="res://src/entities/environment/explosive_barrel.tscn" id="7_x2egc"]
+[ext_resource type="PackedScene" uid="uid://jywh0ejqn3ie" path="res://src/entities/modules/mine_module/mine_module.tscn" id="8_rekur"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5ggp"]
 albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
@@ -35,7 +37,8 @@ point_count = 5
 [node name="KarstenTestScene" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0317907, 0, 0)
 
-[node name="GameManager" parent="." instance=ExtResource("1_2afqu")]
+[node name="GameManager" parent="." node_paths=PackedStringArray("scene_node") instance=ExtResource("1_2afqu")]
+scene_node = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -48,15 +51,20 @@ shape = SubResource("ConcavePolygonShape3D_e3o4f")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.990232, 0.0131266, -0.138813, 0.139432, -0.0932235, 0.985834, 0, -0.995559, -0.0941431, 0, 6.39536, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12, 0)
 size = 22.739
+script = ExtResource("2_lo23x")
+camera_mode = 1
+target = NodePath("../PlayerModule")
 
 [node name="DragManager" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_u365p")
 
 [node name="PlayerModule" parent="." instance=ExtResource("3_2guro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82113, 1.20751, -0.0427389)
+speed = 4
+rotation_speed = 2
 
 [node name="GunModule" parent="." instance=ExtResource("4_rlggj")]
 transform = Transform3D(0.416789, 0, -0.909003, 0, 1, 0, 0.909003, 0, 0.416789, -0.00617909, 1, 3.99098)
@@ -101,3 +109,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4153, 1.0227, -0.854039)
 
 [node name="ExplosiveBarrel8" parent="." instance=ExtResource("7_x2egc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.18123, 1.0227, -0.854039)
+
+[node name="MineModule" parent="." instance=ExtResource("8_rekur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.64111, 1.22376, -3.14851)

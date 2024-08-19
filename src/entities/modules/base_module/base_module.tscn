@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://rbuqgpudjokf"]
+[gd_scene load_steps=7 format=3 uid="uid://rbuqgpudjokf"]
 
 [ext_resource type="Script" path="res://src/entities/modules/base_module/base_module.gd" id="1_iavab"]
 [ext_resource type="Script" path="res://src/components/health_component.gd" id="2_yfns1"]
@@ -8,8 +8,6 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_xkpqt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p48wg"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_j2tuk"]
 
 [node name="BaseModule" type="RigidBody3D" groups=["module"]]
 script = ExtResource("1_iavab")
@@ -37,10 +35,6 @@ transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
 shape = SubResource("BoxShape3D_p48wg")
 
 [node name="Visuals" type="Node3D" parent="."]
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Visuals"]
-mesh = SubResource("BoxMesh_j2tuk")
-skeleton = NodePath("../..")
 
 [node name="SnapPoints" type="Node3D" parent="."]
 

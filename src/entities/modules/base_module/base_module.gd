@@ -26,9 +26,11 @@ var connection_point: Node3D:
 		return neighbours[0]["point"]
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if parent and connection_point and index != 0:
-		position = connection_point.global_position
+		global_transform = connection_point.global_transform
+		#position = connection_point.global_position
+		#rotation = connection_point.global_rotation
 
 
 func create_module_connection(module: BaseModule, point: SnapPoint):

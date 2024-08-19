@@ -38,7 +38,6 @@ anchor_right = 6.34
 anchor_bottom = 2.81022
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -98,6 +97,6 @@ script = ExtResource("2_ag7ko")
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/RestartRun" to="." method="_on_restart_run_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_restart_run_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_quit_to_main_menu_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_restart_run_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,5 +1,7 @@
 extends Node
 
+@export var scene_node: Node3D
+
 @onready var pause_menu = $PauseMenu
 @onready var end_menu = $EndMenu
 var paused = false
@@ -10,6 +12,9 @@ func _ready() -> void:
 	end_menu.hide()
 	
 	Globals.player_died.connect(endMenu)
+	
+	if scene_node:
+		Globals.scene_node = scene_node
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):

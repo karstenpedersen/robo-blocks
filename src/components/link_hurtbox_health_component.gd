@@ -9,7 +9,10 @@ class_name LinkHurtboxHealthComponent
 
 func _ready() -> void:
 	hurtbox_component.hurtbox_entered.connect(func(hitbox: HitboxComponent):
-		health_component.hurt(hitbox.damage)
+		if health_component:
+			health_component.hurt(hitbox.damage)
+		if !knockback_component:
+			return
 		knockback_component.apply_knockback((actor.global_position \
 				- hitbox.start_position).normalized() * hitbox.knockback_force)
 	)

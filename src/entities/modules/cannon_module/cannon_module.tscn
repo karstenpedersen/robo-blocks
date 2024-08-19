@@ -7,13 +7,9 @@
 [ext_resource type="Script" path="res://src/components/spawner_timer_component.gd" id="3_xwkyb"]
 [ext_resource type="PackedScene" uid="uid://0qe7jtkjvfu1" path="res://src/entities/projectiles/projectile.tscn" id="4_vasbp"]
 [ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="5_5asm8"]
+[ext_resource type="PackedScene" uid="uid://qnckd1chc6fm" path="res://src/blender/block_parts/cannon_block.tscn" id="7_h4ymo"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_y6doc"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 1.0
-
-[node name="GunModule" instance=ExtResource("1_838dj")]
+[node name="CannonModule" instance=ExtResource("1_838dj")]
 
 [node name="HurtboxComponent" parent="Components" index="2"]
 collision_mask = 4
@@ -25,24 +21,23 @@ timers = [NodePath("../TimerComponent")]
 
 [node name="TimerComponent" type="Timer" parent="Components" index="5"]
 script = ExtResource("2_sc3w7")
-cooldowns = Array[float]([0.2])
 
 [node name="SpawnerTimerComponent" type="Node" parent="Components" index="6" node_paths=PackedStringArray("timer_component", "spawner_components")]
 script = ExtResource("3_xwkyb")
 timer_component = NodePath("../TimerComponent")
-spawner_components = [NodePath("../../Visuals/Barrel/SpawnerComponent")]
+spawner_components = [NodePath("../../Visuals/SpawnerComponent")]
 
 [node name="Collision" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Barrel" type="MeshInstance3D" parent="Visuals" index="1"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
-mesh = SubResource("CylinderMesh_y6doc")
-
-[node name="SpawnerComponent" type="Node3D" parent="Visuals/Barrel" index="0"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 2.18557e-08)
+[node name="SpawnerComponent" type="Node3D" parent="Visuals" index="0" node_paths=PackedStringArray("actor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.729427)
 script = ExtResource("3_qg62a")
+actor = NodePath("../..")
 scene = ExtResource("4_vasbp")
+
+[node name="CannonBlock" parent="Visuals" index="1" instance=ExtResource("7_h4ymo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="SnapPoint4" parent="SnapPoints" index="0" node_paths=PackedStringArray("parent") instance=ExtResource("5_5asm8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

@@ -5,6 +5,7 @@ signal hit_hurtbox(hurtbox: HurtboxComponent)
 
 @export var damage: int = 1
 @export var knockback_force: float = 1
+@export var destroy_on_hit = false
 
 var start_position: Vector3
 
@@ -22,3 +23,6 @@ func _on_hurtbox_entered(hurtbox):
 	
 	hit_hurtbox.emit(hurtbox)
 	hurtbox.hurtbox_entered.emit(self)
+	
+	if destroy_on_hit:
+		queue_free()

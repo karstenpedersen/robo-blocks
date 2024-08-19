@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://dqwuljxh28n6"]
 
 [ext_resource type="Script" path="res://src/components/path_follow_component.gd" id="1_3x6q3"]
-[ext_resource type="PackedScene" uid="uid://bvoeybh5exk56" path="res://src/entities/traps/saw_blade.tscn" id="1_4uupu"]
+[ext_resource type="PackedScene" uid="uid://bvoeybh5exk56" path="res://src/entities/environment/saw_blade.tscn" id="1_4uupu"]
 [ext_resource type="Script" path="res://src/components/polygon_line_component.gd" id="3_7cdko"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfyak"]
-albedo_color = Color(0.60933, 0.60933, 0.60933, 1)
+albedo_color = Color(0.0338533, 0.0338533, 0.0338533, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26ceo"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.28485, 0.28485, 0.28485, 1)
 
 [node name="SawBladeOnPath" type="Path3D" node_paths=PackedStringArray("path_follow")]
 script = ExtResource("1_3x6q3")
