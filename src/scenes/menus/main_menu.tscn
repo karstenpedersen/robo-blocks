@@ -1,16 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://c44f5raj45lg2"]
+[gd_scene load_steps=4 format=3 uid="uid://c44f5raj45lg2"]
 
 [ext_resource type="Script" path="res://src/scenes/menus/main_menu.gd" id="1_o8yjw"]
+[ext_resource type="Theme" uid="uid://bkik345fd6hmf" path="res://src/assets/themes/Basicbutton.tres" id="2_3uhll"]
+[ext_resource type="FontFile" uid="uid://h7fhpixtefq0" path="res://src/assets/fonts/NewAmsterdam-Regular.ttf" id="2_jtlfq"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -1.0
-offset_right = 4.0
-offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(566, 132)
@@ -22,23 +20,32 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 46.0
-offset_top = -157.0
-offset_right = 136.0
-offset_bottom = -56.0
+offset_top = -195.0
+offset_right = 227.0
+offset_bottom = -40.0
 grow_vertical = 0
 
 [node name="Startbutton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Quitbutton")
+theme = ExtResource("2_3uhll")
+theme_override_fonts/font = ExtResource("2_jtlfq")
+theme_override_font_sizes/font_size = 48
 text = "Start"
 
 [node name="Optionsbutton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_3uhll")
+theme_override_fonts/font = ExtResource("2_jtlfq")
+theme_override_font_sizes/font_size = 32
 text = "Options"
 
 [node name="Quitbutton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Startbutton")
+theme = ExtResource("2_3uhll")
+theme_override_fonts/font = ExtResource("2_jtlfq")
+theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/Startbutton" to="." method="_on_startbutton_pressed"]

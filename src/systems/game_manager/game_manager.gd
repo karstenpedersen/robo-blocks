@@ -15,6 +15,9 @@ func _ready() -> void:
 func _process(delta: float):
 	if Input.is_action_just_pressed("pause"):
 		pauseMenu()
+		
+	if Input.is_action_just_pressed("increase_points"):
+		Scores.current_score += 100
 
 func pauseMenu():
 	if !paused and dead == false:
@@ -34,5 +37,7 @@ func alive():
 
 func endMenu():
 	dead = true
+	if Scores.current_score >= Scores.highscore:
+		Scores.highscore = Scores.current_score
 	end_menu.show()
 	end_menu.get_focus()

@@ -1,0 +1,159 @@
+[gd_scene load_steps=19 format=3 uid="uid://drycdhhtau2jm"]
+
+[ext_resource type="Texture2D" uid="uid://b28ijpskmpvpw" path="res://src/textures/test-floor-2.png" id="1_qhg7g"]
+[ext_resource type="PackedScene" uid="uid://dbn00uf4x862p" path="res://src/entities/simple_outer_wall.tscn" id="2_ol26y"]
+[ext_resource type="MeshLibrary" uid="uid://bs1xu1o4rsr8r" path="res://src/tile_library/test_tile_library.tres" id="3_08a8x"]
+[ext_resource type="PackedScene" uid="uid://guulovq8pyf1" path="res://src/entities/player/player.tscn" id="4_hfar3"]
+[ext_resource type="Script" path="res://src/systems/camera/camera.gd" id="5_87jri"]
+[ext_resource type="Shader" path="res://src/shaders/canvas_shader_test.gdshader" id="6_juag5"]
+[ext_resource type="Shader" path="res://src/shaders/glass_broken.gdshader" id="7_vwfig"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_edgr2"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_67u6t"]
+sky_material = SubResource("ProceduralSkyMaterial_edgr2")
+
+[sub_resource type="Environment" id="Environment_1w8f6"]
+background_mode = 2
+sky = SubResource("Sky_67u6t")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mauu7"]
+albedo_texture = ExtResource("1_qhg7g")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_hhfdq"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_41foj"]
+data = PackedVector3Array(-5, 0.5, 5, 5, 0.5, 5, -5, -0.5, 5, 5, 0.5, 5, 5, -0.5, 5, -5, -0.5, 5, 5, 0.5, -5, -5, 0.5, -5, 5, -0.5, -5, -5, 0.5, -5, -5, -0.5, -5, 5, -0.5, -5, 5, 0.5, 5, 5, 0.5, -5, 5, -0.5, 5, 5, 0.5, -5, 5, -0.5, -5, 5, -0.5, 5, -5, 0.5, -5, -5, 0.5, 5, -5, -0.5, -5, -5, 0.5, 5, -5, -0.5, 5, -5, -0.5, -5, 5, 0.5, 5, -5, 0.5, 5, 5, 0.5, -5, -5, 0.5, 5, -5, 0.5, -5, 5, 0.5, -5, -5, -0.5, 5, 5, -0.5, 5, -5, -0.5, -5, 5, -0.5, 5, 5, -0.5, -5, -5, -0.5, -5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ffadc"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7t0k"]
+shader = ExtResource("6_juag5")
+shader_parameter/aspect = 0.54
+shader_parameter/radius = 1.07
+shader_parameter/alpha = 1.0
+shader_parameter/crop = 0.943
+shader_parameter/crop_color = Color(0, 0, 0, 1)
+shader_parameter/crop_feathering = 0.1
+shader_parameter/channel_offset = 3.25988e-09
+shader_parameter/noise_strength = 20.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jgrxn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akw34"]
+shader = ExtResource("7_vwfig")
+shader_parameter/crack_depth = 2.236
+shader_parameter/crack_scale = 4.0
+shader_parameter/crack_zebra_scale = 2.67
+shader_parameter/crack_zebra_amp = 1.3
+shader_parameter/crack_profile = 1.0
+shader_parameter/crack_slope = 45.8
+shader_parameter/crack_width = 0.001
+shader_parameter/refraction_offset = Vector2(25, 25)
+shader_parameter/reflection_offset = Vector2(1, 1)
+shader_parameter/reflection_color = Color(0.588, 0.588, 0.588, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1qfgd"]
+
+[node name="EnviromentTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1w8f6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -0.468038, 0.883708, 0, -0.883708, -0.468038, 6.72177, 4.68226, 0)
+shadow_enabled = true
+shadow_opacity = 0.7
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_mauu7")
+mesh = SubResource("BoxMesh_hhfdq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+material_override = SubResource("StandardMaterial3D_mauu7")
+mesh = SubResource("BoxMesh_hhfdq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_41foj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_ffadc")
+
+[node name="OutsideWalls" type="Node3D" parent="."]
+
+[node name="StaticBody3D" parent="OutsideWalls" instance=ExtResource("2_ol26y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.5)
+
+[node name="StaticBody3D6" parent="OutsideWalls" instance=ExtResource("2_ol26y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, -5.5)
+
+[node name="StaticBody3D2" parent="OutsideWalls" instance=ExtResource("2_ol26y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5.5)
+
+[node name="StaticBody3D5" parent="OutsideWalls" instance=ExtResource("2_ol26y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 5.5)
+
+[node name="StaticBody3D3" parent="OutsideWalls" instance=ExtResource("2_ol26y")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.5, 1.5, 0)
+
+[node name="StaticBody3D4" parent="OutsideWalls" instance=ExtResource("2_ol26y")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.5, 1.5, 0)
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="GridMap" type="GridMap" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh_library = ExtResource("3_08a8x")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(3, 65533, 1048576, 3, 65534, 1048576, 3, 65535, 1048576, 3, 0, 1048576, 2, 0, 1048576, 1, 0, 1048576, 65524, 65534, 196608, 65524, 65533, 196608, 65524, 65532, 655360, 65525, 65532, 655360, 65526, 65532, 196608, 65528, 65531, 196608, 65530, 65531, 196608, 65531, 65531, 196608, 65524, 4, 196608, 65524, 3, 196608, 65529, 4, 196608, 65529, 3, 196608, 65528, 3, 196608, 65527, 65531, 131072, 65527, 65532, 131072, 65528, 65532, 131072, 65535, 65531, 131072, 65534, 65531, 131072, 65534, 65532, 131072, 65534, 65533, 131072, 65524, 65531, 655360, 65525, 65534, 655360, 65526, 65534, 655360, 65527, 65534, 655360, 65527, 65533, 655360, 65526, 65533, 655360, 8, 65532, 1048576, 8, 65533, 1048576, 8, 65534, 1048576, 11, 65532, 1048576, 11, 65533, 1048576, 11, 65534, 1048576, 6, 1, 1048576, 7, 2, 1048576, 8, 3, 1048576, 9, 3, 1048576, 10, 3, 1048576, 11, 3, 1048576, 12, 2, 1048576, 13, 1, 1048576)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("4_hfar3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246977, 0.5, 3.58767)
+speed = 5
+
+[node name="Camera" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Camera" node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.028496, 7, -0.0491133)
+fov = 70.0
+script = ExtResource("5_87jri")
+camera_mode = 1
+target = NodePath("../../Player")
+camera_height = 15
+locking_strength = 0.2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera/Camera3D"]
+follow_viewport_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="Camera/Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_f7t0k")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("ViewportTexture_jgrxn")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Camera/Camera3D"]
+layer = 2
+visible = false
+follow_viewport_enabled = true
+
+[node name="TextureRect2" type="TextureRect" parent="Camera/Camera3D/CanvasLayer2"]
+visible = false
+material = SubResource("ShaderMaterial_akw34")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("ViewportTexture_1qfgd")
