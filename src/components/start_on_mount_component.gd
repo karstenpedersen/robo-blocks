@@ -1,18 +1,18 @@
 extends Node
 class_name StartOnMountComponent
 
+@export var actor: BaseModule
 @export var timers: Array[Timer]
-@export var draggable_component: DraggableComponent
-# TODO: Make this listen to events from BaseModule
+
 
 func _ready() -> void:
 	for timer in timers:
-		draggable_component.mounted.connect(func ():
+		actor.mounted.connect(func(module: BaseModule, parent: HeadModule):
 			if timer.paused:
 				timer.paused = false
 			else:
 				timer.start()
 		)
-		draggable_component.unmounted.connect(func ():
+		actor.unmounted.connect(func(module: BaseModule, parent: HeadModule):
 			timer.paused = true
 		)

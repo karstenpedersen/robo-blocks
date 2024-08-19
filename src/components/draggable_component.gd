@@ -6,7 +6,6 @@ signal drag_ended(node)
 signal drag_moved(node)
 signal drag_rotated(node)
 signal mounted(module, point)
-signal unmounted()
 
 @export var parent: Node3D
 @export var snap_distance: float = 1
@@ -32,7 +31,6 @@ func drag_start(pos: Vector3):
 	target_rotation = get_reset_rotation()
 	dragging = true
 	drag_started.emit(self)
-	unmounted.emit()
 
 
 func drag_end():

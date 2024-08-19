@@ -1,8 +1,6 @@
 extends HeadModule
 class_name PlayerModule
 
-var speed: float = 1250
-
 
 func _ready() -> void:
 	super()
@@ -16,5 +14,4 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_destroyed() -> void:
-	print("Destroyed")
 	Globals.player_died.emit()

@@ -3,7 +3,6 @@ class_name MoveStraightComponent
 
 @export var actor: Node3D
 @export var speed: float = 10
-@export var gravity: Vector3 = Vector3.FORWARD
 
 
 func _physics_process(delta):

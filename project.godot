@@ -89,6 +89,7 @@ rotate_right={
 3d_physics/layer_1="Collision"
 3d_physics/layer_2="Dragging"
 3d_physics/layer_3="Hurtbox"
+3d_physics/layer_4="ModuleCollision"
 
 [rendering]
 

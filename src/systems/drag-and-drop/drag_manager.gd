@@ -50,13 +50,13 @@ func _input(event):
 		current.drag_rotate(-90)
 		return
 	
-	if !event.is_action_pressed("drag"):
-		return
-	
-	if current:
+	if current and event.is_action_released("drag"):
 		current.drag_end()
 		dragging = false
 		current = null
+		return
+	
+	if current or !event.is_action_pressed("drag"):
 		return
 	
 	if !ray_result:
@@ -69,3 +69,12 @@ func _input(event):
 	dragging = true
 	current = ray_result.collider
 	current.drag_start(ray_result["position"])
+	current.tree_exiting.connect(_on_current_tree_exiting)
+
+
+func _on_current_tree_exiting():
+	if current:
+		current.tree_exiting.disconnect(_on_current_tree_exiting)
+		current.drag_end()
+		current = null
+	dragging = false

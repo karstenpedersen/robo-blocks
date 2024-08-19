@@ -9,6 +9,7 @@ albedo_texture = ExtResource("3_j2vlb")
 
 [node name="HeadModule" instance=ExtResource("1_ideck")]
 script = ExtResource("2_q6fys")
+speed = 1000
 
 [node name="MeshInstance3D2" parent="Visuals" index="0"]
 material_override = SubResource("StandardMaterial3D_p5uuw")

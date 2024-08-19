@@ -40,18 +40,23 @@ script = ExtResource("2_u365p")
 
 [node name="PlayerModule" parent="." instance=ExtResource("3_2guro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89632, 1.14321, 0)
+speed = 1000
 
 [node name="GunModule" parent="." instance=ExtResource("4_rlggj")]
 transform = Transform3D(0.416789, 0, -0.909003, 0, 1, 0, 0.909003, 0, 0.416789, -0.00617909, 1, 3.99098)
+collision_layer = 8
 
 [node name="GunModule2" parent="." instance=ExtResource("4_rlggj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14867, 1, -5.84383)
+collision_layer = 8
 
 [node name="BlockModule" parent="." instance=ExtResource("5_x7a40")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06009, 1, 7.24598)
+collision_layer = 8
 
 [node name="BlockModule2" parent="." instance=ExtResource("5_x7a40")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5324, 1, 4.81725)
+collision_layer = 8
 
 [node name="SawBlade" parent="." instance=ExtResource("6_yvkt6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.82881, 0, 0)

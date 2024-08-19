@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvoeybh5exk56"]
+
+[ext_resource type="Script" path="res://src/entities/traps/saw_blade.gd" id="1_s53lh"]
+[ext_resource type="Script" path="res://src/components/hitbox_component.gd" id="2_xtcel"]
+[ext_resource type="Script" path="res://src/components/follow_path_component.gd" id="3_oxvcv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uymgy"]
+height = 0.5
+radius = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4786k"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.25
+
+[node name="SawBlade" type="Node3D"]
+script = ExtResource("1_s53lh")
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="HitboxComponent" type="Area3D" parent="Components"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_xtcel")
+knockback_force = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/HitboxComponent"]
+shape = SubResource("CylinderShape3D_uymgy")
+
+[node name="FollowPathComponent" type="Path3D" parent="Components" node_paths=PackedStringArray("actor")]
+script = ExtResource("3_oxvcv")
+actor = NodePath("../..")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("CylinderMesh_4786k")

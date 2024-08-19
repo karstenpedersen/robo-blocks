@@ -11,7 +11,12 @@ var rotation_tween
 func _on_draggable_component_drag_started(node: DraggableComponent) -> void:
 	disable_rigidbody()
 	
+	if is_mounted():
+		unmount()
+	
 	# Reset rotation
+	if rotation_degrees == node.target_rotation:
+		return
 	rotation_tween = get_tree().create_tween().bind_node(self)
 	var rot = node.target_rotation
 	rotation_tween.tween_property(self, "rotation_degrees", rot, rotation_speed)
@@ -36,7 +41,3 @@ func _on_draggable_component_drag_moved(node: DraggableComponent) -> void:
 
 func _on_draggable_component_mounted(module: BaseModule, point: SnapPoint) -> void:
 	create_module_connection(module, point)
-
-
-func _on_draggable_component_unmounted() -> void:
-	remove_from_neighbours()

@@ -1,9 +1,11 @@
 extends RigidBody3D
 class_name BaseModule
 
-signal destroyed
-signal added_neighbour_module(module)
-signal removed_neighbour_module(module)
+signal destroyed(module: BaseModule)
+signal added_neighbour_module(module: BaseModule)
+signal removed_neighbour_module(module: BaseModule)
+signal mounted(module: BaseModule, parent: HeadModule)
+signal unmounted(module: BaseModule, parent: HeadModule)
 
 @export var stats: ModuleStats
 
@@ -16,7 +18,7 @@ signal removed_neighbour_module(module)
 
 var index: int = -1
 var neighbours: Array[Dictionary]
-var parent: BaseModule
+var parent: HeadModule
 var connection_point: Node3D:
 	get:
 		if len(neighbours) == 0:
@@ -25,30 +27,36 @@ var connection_point: Node3D:
 
 
 func _physics_process(delta: float) -> void:
-	if connection_point and index != 0:
+	if parent and connection_point and index != 0:
 		position = connection_point.global_position
 
 
 func create_module_connection(module: BaseModule, point: SnapPoint):
-	# TODO: How to do this in correct order if multiple connections are made
-	add_neighbour_module(module, point)
-	module.add_neighbour_module(self, point)
+	_add_neighbour_module(module, point)
+	module._add_neighbour_module(self, point)
 
 
-func add_neighbour_module(module: BaseModule, point: SnapPoint):
+func destroy_module_connection(module: BaseModule):
+	_remove_neighbour_module(module)
+	module._remove_neighbour_module(self)
+
+
+func _add_neighbour_module(module: BaseModule, point: SnapPoint):
 	if index == -1:
-		connection_point = point
-		disable_rigidbody()
-	if index == -1 or module.index + 1 < index:
+		mount(module)
+	elif module.index + 1 < index:
 		index = module.index + 1
+	
+	# Add neighbour dict
 	neighbours.append({
 		"module": module,
 		"point": point
 	})
 	added_neighbour_module.emit(module)
-	print(self, ", index: ", index, ", #neighbours: ", len(neighbours), ", ", neighbours)
 
-func remove_neighbour_module(module: BaseModule):
+
+func _remove_neighbour_module(module: BaseModule):
+	# Remove neighbour module
 	for neighbour in neighbours:
 		if neighbour["module"] == module:
 			neighbours.erase(neighbour)
@@ -62,25 +70,32 @@ func remove_neighbour_module(module: BaseModule):
 		if neighbour["module"].index < index:
 			found_smaller_index = true
 	if !found_smaller_index and index != 0: # Skip parent
-		remove_from_neighbours()
+		unmount()
 
 
 func destroy():
-	remove_from_neighbours()
+	unmount()
 	queue_free()
 	destroyed.emit()
 
 
-func remove_from_neighbours():
-	for neighbour in neighbours:
-		neighbour["module"].remove_neighbour_module(self)
-	neighbours.clear()
-	index = -1
-	enable_rigidbody()
+func freeze_rigidbody():
+	freeze_mode = FREEZE_MODE_KINEMATIC
+	lock_rotation = true
+	# freeze = true
+	#set_collision_layer_value(1, false)
+	#set_collision_mask_value(1, false)
+
+
+func unfreeze_rigidbody():
+	freeze_mode = FREEZE_MODE_STATIC
+	lock_rotation = false
+	freeze = false
+	set_collision_layer_value(1, true)
+	set_collision_mask_value(1, true)
 
 
 func disable_rigidbody():
-	print("DISABLE")
 	lock_rotation = true
 	freeze = true
 	set_collision_layer_value(1, false)
@@ -92,6 +107,32 @@ func enable_rigidbody():
 	freeze = false
 	set_collision_layer_value(1, true)
 	set_collision_mask_value(1, true)
+
+
+func is_mounted() -> bool:
+	return index != -1
+
+
+func is_unmounted() -> bool:
+	return index == -1
+
+
+func mount(module: BaseModule):
+	freeze_rigidbody()
+	parent = module.parent
+	mounted.emit(self, module.parent)
+	index = module.index + 1
+
+
+func unmount():
+	unfreeze_rigidbody()
+	index = -1
+	for neighbour in neighbours:
+		neighbour["module"]._remove_neighbour_module(self)
+		# destroy_module_connection(neighbour["module"])
+	neighbours.clear()
+	unmounted.emit(self, parent)
+	parent = null
 
 
 func _on_health_component_eliminated() -> void:

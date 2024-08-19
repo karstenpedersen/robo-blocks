@@ -24,4 +24,3 @@ shape = SubResource("SphereShape3D_n7cql")
 [connection signal="drag_rotated" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_rotated"]
 [connection signal="drag_started" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_started"]
 [connection signal="mounted" from="Components/DraggableComponent" to="." method="_on_draggable_component_mounted"]
-[connection signal="unmounted" from="Components/DraggableComponent" to="." method="_on_draggable_component_unmounted"]
