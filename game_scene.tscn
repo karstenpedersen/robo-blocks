@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://po1iywbu0wj6"]
+[gd_scene load_steps=34 format=3 uid="uid://po1iywbu0wj6"]
 
 [ext_resource type="Script" path="res://src/systems/drag-and-drop/drag_manager.gd" id="1_46k61"]
 [ext_resource type="PackedScene" uid="uid://cejqx5xhwcx8f" path="res://src/systems/game_manager/game_manager.tscn" id="1_baag6"]
 [ext_resource type="MeshLibrary" uid="uid://cprbfxhugtldq" path="res://src/tile_library/floor_tiles.tres" id="1_g2njx"]
+[ext_resource type="AudioStream" uid="uid://s0s866chpcdx" path="res://src/music/industrial for gmtk 2024 without effects.mp3" id="2_dswdm"]
 [ext_resource type="MeshLibrary" uid="uid://dqa4kjatvoyww" path="res://src/tile_library/wall_tiles.tres" id="2_iyr1k"]
 [ext_resource type="Script" path="res://src/systems/camera/camera.gd" id="4_u654m"]
 [ext_resource type="Shader" path="res://src/shaders/canvas_shader_test.gdshader" id="5_u6yfm"]
@@ -144,6 +145,13 @@ texture = SubResource("ViewportTexture_1qfgd")
 [node name="DragManager" type="Node3D" parent="Camera/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.028496, -0.049113, -7)
 script = ExtResource("1_46k61")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Camera/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.028496, -0.049113, -7)
+stream = ExtResource("2_dswdm")
+volume_db = 4.324
+autoplay = true
+parameters/looping = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1w8f6")
