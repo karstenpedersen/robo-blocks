@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://jj2pb0s8gy2j"]
+[gd_scene load_steps=10 format=3 uid="uid://jj2pb0s8gy2j"]
 
 [ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="1_p7xql"]
 [ext_resource type="Script" path="res://src/components/health_component.gd" id="2_ljysd"]
 [ext_resource type="Script" path="res://src/components/free_when_eliminated.gd" id="3_0eifm"]
 [ext_resource type="Texture2D" uid="uid://cmwbx6xc6d74r" path="res://icon.svg" id="4_m0er8"]
+[ext_resource type="PackedScene" uid="uid://b6rnsvfumyob" path="res://src/blender/environment/wooden_crate.tscn" id="5_7olj1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cx6um"]
 
@@ -42,5 +43,9 @@ health_component = NodePath("../HealthComponent")
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+visible = false
 material_override = SubResource("StandardMaterial3D_syre4")
 mesh = SubResource("BoxMesh_iulgm")
+
+[node name="WoodenCrate" parent="Visuals" instance=ExtResource("5_7olj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
