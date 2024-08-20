@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://kp16lkxhrw00"]
+
+[ext_resource type="Script" path="res://src/entities/projectiles/explosion.gd" id="1_c5hwk"]
+[ext_resource type="Script" path="res://src/components/hitbox_component.gd" id="1_t11j6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4wtpr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_574s4"]
+albedo_color = Color(1, 0.12549, 0.137255, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4v8co"]
+material = SubResource("StandardMaterial3D_574s4")
+
+[node name="Explosion" type="Node3D" node_paths=PackedStringArray("scaleables")]
+script = ExtResource("1_c5hwk")
+scale_amount = 10
+scaleables = [NodePath("Components/HitboxComponent/HitboxCollision"), NodePath("Visuals/MeshSphere")]
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="HitboxComponent" type="Area3D" parent="Components"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_t11j6")
+damage = 3
+knockback_force = 8.0
+
+[node name="HitboxCollision" type="CollisionShape3D" parent="Components/HitboxComponent"]
+shape = SubResource("SphereShape3D_4wtpr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshSphere" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("SphereMesh_4v8co")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

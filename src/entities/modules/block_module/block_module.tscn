@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://wjmeakyobu3n"]
+
+[ext_resource type="PackedScene" uid="uid://brae6ovj5r6in" path="res://src/entities/modules/draggable_module/draggable_module.tscn" id="1_tmpfa"]
+[ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="2_4t6vd"]
+[ext_resource type="PackedScene" uid="uid://clodtu8fyjjs7" path="res://src/blender/block_parts/generic_block.tscn" id="2_wwav5"]
+
+[node name="BlockModule" instance=ExtResource("1_tmpfa")]
+
+[node name="HurtboxComponent" parent="Components" index="2"]
+collision_mask = 4
+
+[node name="GenericBlock" parent="Visuals" index="0" instance=ExtResource("2_wwav5")]
+
+[node name="SnapPoint" parent="SnapPoints" index="0" node_paths=PackedStringArray("parent") instance=ExtResource("2_4t6vd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+parent = NodePath("../..")
+
+[node name="SnapPoint2" parent="SnapPoints" index="1" node_paths=PackedStringArray("parent") instance=ExtResource("2_4t6vd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint3" parent="SnapPoints" index="2" node_paths=PackedStringArray("parent") instance=ExtResource("2_4t6vd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint4" parent="SnapPoints" index="3" node_paths=PackedStringArray("parent") instance=ExtResource("2_4t6vd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+parent = NodePath("../..")

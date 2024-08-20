@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmitwxkq82w1t"]
+[gd_scene load_steps=5 format=3 uid="uid://dmitwxkq82w1t"]
 
 [ext_resource type="Script" path="res://src/scenes/menus/pause_menu.gd" id="1_n7fhy"]
+[ext_resource type="Theme" uid="uid://bkik345fd6hmf" path="res://src/assets/themes/Basicbutton.tres" id="2_5s7ck"]
+[ext_resource type="FontFile" uid="uid://h7fhpixtefq0" path="res://src/assets/fonts/NewAmsterdam-Regular.ttf" id="2_222ty"]
 [ext_resource type="Script" path="res://src/scenes/menus/current_score.gd" id="2_ag7ko"]
 
 [node name="PauseMenu" type="Control"]
@@ -25,18 +27,17 @@ offset_left = -811.0
 offset_top = -406.0
 offset_right = 859.0
 offset_bottom = 531.0
-color = Color(0, 0, 0, 0.541176)
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.552941)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -5.25
+anchor_left = -5.17
 anchor_top = -1.89781
-anchor_right = 6.26
+anchor_right = 6.34
 anchor_bottom = 2.81022
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -44,35 +45,52 @@ layout_mode = 2
 [node name="Resume" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Quit")
+theme = ExtResource("2_5s7ck")
+theme_override_fonts/font = ExtResource("2_222ty")
+theme_override_font_sizes/font_size = 48
 text = "Resume"
 
 [node name="Options" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_5s7ck")
+theme_override_fonts/font = ExtResource("2_222ty")
+theme_override_font_sizes/font_size = 32
 text = "Options"
 
 [node name="RestartRun" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_5s7ck")
+theme_override_fonts/font = ExtResource("2_222ty")
+theme_override_font_sizes/font_size = 32
 text = "Restart Run"
 
 [node name="QuittoMainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_5s7ck")
+theme_override_fonts/font = ExtResource("2_222ty")
+theme_override_font_sizes/font_size = 32
 text = "Quit to Main Menu"
 
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Resume")
+theme = ExtResource("2_5s7ck")
+theme_override_fonts/font = ExtResource("2_222ty")
+theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(10, 36)
 
 [node name="CurrentScore" type="RichTextLabel" parent="StaticBody2D"]
-offset_left = -43.0
-offset_top = -116.0
-offset_right = 168.0
-offset_bottom = -15.0
+offset_left = -235.0
+offset_top = -248.0
+offset_right = 481.0
+offset_bottom = -120.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_fonts/normal_font = ExtResource("2_222ty")
+theme_override_font_sizes/normal_font_size = 96
 text = "CURRENT SCORE: 9999"
 script = ExtResource("2_ag7ko")
 

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvoeybh5exk56"]
+
+[ext_resource type="PackedScene" uid="uid://342lb7b2s84t" path="res://src/entities/projectiles/saw_blade_hitbox.tscn" id="1_7f3ra"]
+[ext_resource type="Script" path="res://src/components/spawner_component.gd" id="2_mhq47"]
+[ext_resource type="Script" path="res://src/components/spawner_timer_component.gd" id="3_c2jho"]
+[ext_resource type="Script" path="res://src/components/timer_component.gd" id="4_xsh43"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4786k"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.25
+
+[node name="SawBlade" type="Node3D"]
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="SpawnerComponent" type="Node3D" parent="Components" node_paths=PackedStringArray("actor")]
+script = ExtResource("2_mhq47")
+actor = NodePath("../..")
+scene = ExtResource("1_7f3ra")
+
+[node name="SpawnerTimerComponent" type="Node" parent="Components" node_paths=PackedStringArray("timer_component", "spawner_components")]
+script = ExtResource("3_c2jho")
+timer_component = NodePath("../TimerComponent")
+spawner_components = [NodePath("../SpawnerComponent")]
+
+[node name="TimerComponent" type="Timer" parent="Components"]
+wait_time = 0.5
+autostart = true
+script = ExtResource("4_xsh43")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("CylinderMesh_4786k")

@@ -1,0 +1,29 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bkik345fd6hmf"]
+
+[ext_resource type="StyleBox" uid="uid://btxywotnkix7q" path="res://src/assets/themes/BB_style_box_flat.tres" id="1_4a5e7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b50ih"]
+bg_color = Color(0.226728, 0.407229, 0.970769, 1)
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.00392157, 0.0862745, 0.219608, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_right = 8
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pojuq"]
+bg_color = Color(0.0147804, 0.0541757, 0.35141, 1)
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.00392157, 0.0862745, 0.219608, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_right = 8
+shadow_size = 1
+anti_aliasing = false
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxFlat_b50ih")
+Button/styles/hover = SubResource("StyleBoxFlat_b50ih")
+Button/styles/normal = ExtResource("1_4a5e7")
+Button/styles/pressed = SubResource("StyleBoxFlat_pojuq")

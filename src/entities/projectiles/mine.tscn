@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://l2kycxhmx367"]
+
+[ext_resource type="PackedScene" uid="uid://duqsk5iolosnq" path="res://src/blender/bullet_types/mine_bullet.tscn" id="1_65xyd"]
+[ext_resource type="Script" path="res://src/entities/projectiles/mine.gd" id="1_74abh"]
+[ext_resource type="Script" path="res://src/components/detect_group_component.gd" id="1_qiwaq"]
+[ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="3_x06xd"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="4_6wc7i"]
+[ext_resource type="Script" path="res://src/components/spawner_component.gd" id="4_kebtm"]
+[ext_resource type="Script" path="res://src/components/link_hurtbox_health_component.gd" id="5_m5yon"]
+[ext_resource type="PackedScene" uid="uid://kp16lkxhrw00" path="res://src/entities/projectiles/explosion.tscn" id="5_t10ye"]
+[ext_resource type="Script" path="res://src/components/flash_component.gd" id="6_ad8ym"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nlian"]
+radius = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eg4au"]
+radius = 0.3
+
+[node name="Mine" type="Node3D"]
+script = ExtResource("1_74abh")
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="DetectGroupComponent" type="Area3D" parent="Components"]
+script = ExtResource("1_qiwaq")
+group = &"module"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/DetectGroupComponent"]
+shape = SubResource("SphereShape3D_nlian")
+
+[node name="HurtboxComponent" type="Area3D" parent="Components"]
+script = ExtResource("3_x06xd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/HurtboxComponent"]
+shape = SubResource("SphereShape3D_eg4au")
+
+[node name="HealthComponent" type="Node" parent="Components"]
+script = ExtResource("4_6wc7i")
+max_health = 2
+
+[node name="LinkHurtboxHealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "health_component", "hurtbox_component")]
+script = ExtResource("5_m5yon")
+actor = NodePath("../..")
+health_component = NodePath("../HealthComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+
+[node name="FlashComponent" type="Timer" parent="Components" node_paths=PackedStringArray("node")]
+wait_time = 0.25
+autostart = true
+script = ExtResource("6_ad8ym")
+node = NodePath("../../Visuals")
+number_of_times = 8
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MineBullet" parent="Visuals" instance=ExtResource("1_65xyd")]
+
+[node name="SpawnerComponent" type="Node3D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("4_kebtm")
+actor = NodePath("..")
+scene = ExtResource("5_t10ye")
+
+[node name="ActivationTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="GracePeriodTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="group_entered" from="Components/DetectGroupComponent" to="." method="_on_detect_group_component_group_entered"]
+[connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]
+[connection signal="timeout" from="GracePeriodTimer" to="." method="_on_grace_period_timer_timeout"]

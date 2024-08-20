@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://11bxq6vansxh"]
+
+[ext_resource type="PackedScene" uid="uid://brae6ovj5r6in" path="res://src/entities/modules/draggable_module/draggable_module.tscn" id="1_838dj"]
+[ext_resource type="Script" path="res://src/components/timer_component.gd" id="2_sc3w7"]
+[ext_resource type="Script" path="res://src/components/start_on_mount_component.gd" id="2_uiyr8"]
+[ext_resource type="Script" path="res://src/components/spawner_component.gd" id="3_qg62a"]
+[ext_resource type="Script" path="res://src/components/spawner_timer_component.gd" id="3_xwkyb"]
+[ext_resource type="PackedScene" uid="uid://0qe7jtkjvfu1" path="res://src/entities/projectiles/projectile.tscn" id="4_vasbp"]
+[ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="5_5asm8"]
+[ext_resource type="PackedScene" uid="uid://qnckd1chc6fm" path="res://src/blender/block_parts/cannon_block.tscn" id="7_h4ymo"]
+
+[node name="CannonModule" instance=ExtResource("1_838dj")]
+
+[node name="HurtboxComponent" parent="Components" index="2"]
+collision_mask = 4
+
+[node name="StartOnMountComponent" type="Node" parent="Components" index="4" node_paths=PackedStringArray("actor", "timers")]
+script = ExtResource("2_uiyr8")
+actor = NodePath("../..")
+timers = [NodePath("../TimerComponent")]
+
+[node name="TimerComponent" type="Timer" parent="Components" index="5"]
+script = ExtResource("2_sc3w7")
+
+[node name="SpawnerTimerComponent" type="Node" parent="Components" index="6" node_paths=PackedStringArray("timer_component", "spawner_components")]
+script = ExtResource("3_xwkyb")
+timer_component = NodePath("../TimerComponent")
+spawner_components = [NodePath("../../Visuals/SpawnerComponent")]
+
+[node name="SpawnerComponent" type="Node3D" parent="Visuals" index="0" node_paths=PackedStringArray("actor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.729427)
+script = ExtResource("3_qg62a")
+actor = NodePath("../..")
+scene = ExtResource("4_vasbp")
+
+[node name="CannonBlock" parent="Visuals" index="1" instance=ExtResource("7_h4ymo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="SnapPoint4" parent="SnapPoints" index="0" node_paths=PackedStringArray("parent") instance=ExtResource("5_5asm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint3" parent="SnapPoints" index="1" node_paths=PackedStringArray("parent") instance=ExtResource("5_5asm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint" parent="SnapPoints" index="2" node_paths=PackedStringArray("parent") instance=ExtResource("5_5asm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+parent = NodePath("../..")
+
+[node name="SnapPoint2" parent="SnapPoints" index="3" node_paths=PackedStringArray("parent") instance=ExtResource("5_5asm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+parent = NodePath("../..")
+snappable = false

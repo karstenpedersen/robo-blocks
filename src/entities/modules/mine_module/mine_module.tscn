@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://jywh0ejqn3ie"]
+
+[ext_resource type="PackedScene" uid="uid://brae6ovj5r6in" path="res://src/entities/modules/draggable_module/draggable_module.tscn" id="1_ln4cr"]
+[ext_resource type="Script" path="res://src/components/mine_spawn_component.gd" id="4_v0mxk"]
+[ext_resource type="Script" path="res://src/components/spawner_component.gd" id="5_ehmlg"]
+[ext_resource type="PackedScene" uid="uid://l2kycxhmx367" path="res://src/entities/projectiles/mine.tscn" id="6_iae7l"]
+[ext_resource type="PackedScene" uid="uid://c7ft2u3fh788" path="res://src/blender/block_parts/minelayer_block.tscn" id="7_vhyd2"]
+[ext_resource type="PackedScene" uid="uid://diifca8xuek5r" path="res://src/systems/drag-and-drop/snap_point.tscn" id="8_8l6d3"]
+
+[node name="MineModule" instance=ExtResource("1_ln4cr")]
+
+[node name="MineSpawnComponent" type="Node" parent="Components" index="4" node_paths=PackedStringArray("actor", "spawner_component")]
+script = ExtResource("4_v0mxk")
+actor = NodePath("../..")
+spawner_component = NodePath("../../Visuals/SpawnerComponent")
+min_moved_distance = 25.0
+
+[node name="Collision" parent="." index="1"]
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
+
+[node name="SpawnerComponent" type="Node3D" parent="Visuals" index="0" node_paths=PackedStringArray("actor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.489598, -1.07861)
+script = ExtResource("5_ehmlg")
+actor = NodePath("../..")
+scene = ExtResource("6_iae7l")
+
+[node name="MinelayerBlock" parent="Visuals" index="1" instance=ExtResource("7_vhyd2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="SnapPoint" parent="SnapPoints" index="0" node_paths=PackedStringArray("parent") instance=ExtResource("8_8l6d3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+parent = NodePath("../..")
+
+[node name="SnapPoint3" parent="SnapPoints" index="1" node_paths=PackedStringArray("parent") instance=ExtResource("8_8l6d3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint4" parent="SnapPoints" index="2" node_paths=PackedStringArray("parent") instance=ExtResource("8_8l6d3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+parent = NodePath("../..")
+
+[node name="SnapPoint2" parent="SnapPoints" index="3" node_paths=PackedStringArray("parent") instance=ExtResource("8_8l6d3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+parent = NodePath("../..")
+snappable = false
