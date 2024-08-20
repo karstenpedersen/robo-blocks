@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://drycdhhtau2jm"]
+[gd_scene load_steps=18 format=3 uid="uid://drycdhhtau2jm"]
 
 [ext_resource type="MeshLibrary" uid="uid://p3qvnxklelfv" path="res://src/tile_library/floor_tiles.tres" id="1_4i00k"]
+[ext_resource type="PackedScene" uid="uid://mjod0f0p03yv" path="res://src/entities/enemies/enemy.tscn" id="1_ijhxl"]
 [ext_resource type="MeshLibrary" uid="uid://co7sxsnfhjapg" path="res://src/tile_library/wall_tiles.tres" id="2_j0l11"]
 [ext_resource type="PackedScene" uid="uid://dnff2n1atxjti" path="res://src/entities/environment/explosive_barrel.tscn" id="3_rnnmc"]
 [ext_resource type="PackedScene" uid="uid://jj2pb0s8gy2j" path="res://src/entities/environment/crate.tscn" id="4_cn2ap"]
@@ -52,6 +53,10 @@ shader_parameter/reflection_color = Color(0.588, 0.588, 0.588, 0.5)
 [sub_resource type="ViewportTexture" id="ViewportTexture_1qfgd"]
 
 [node name="EnviromentTest" type="Node3D"]
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_ijhxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -7)
+target = NodePath("../Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1w8f6")
