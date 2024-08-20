@@ -16,6 +16,8 @@ func _ready() -> void:
 
 
 func _on_hurtbox_entered(hurtbox):
+	if hurtbox.is_in_group("wall"):
+		queue_free()
 	if not hurtbox is HurtboxComponent:
 		return
 	if hurtbox.is_invincible:

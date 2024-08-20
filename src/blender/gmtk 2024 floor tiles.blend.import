@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cljue0yl31cvi"
-valid=false
+path="res://.godot/imported/gmtk 2024 floor tiles.blend-949b88e9b71724a0c3511f7a87ea492d.scn"
 
 [deps]
 
 source_file="res://src/blender/gmtk 2024 floor tiles.blend"
+dest_files=["res://.godot/imported/gmtk 2024 floor tiles.blend-949b88e9b71724a0c3511f7a87ea492d.scn"]
 
 [params]
 

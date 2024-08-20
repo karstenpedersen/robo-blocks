@@ -36,6 +36,7 @@ draggable_module=""
 snap_point=""
 player=""
 enemies=""
+wall=""
 
 [input]
 

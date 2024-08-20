@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://clvve43ycgq8t"
-valid=false
+path="res://.godot/imported/gmtk 2024 environment 2.blend-41aa212e333dc245204633060342d930.scn"
 
 [deps]
 
 source_file="res://src/blender/gmtk 2024 environment 2.blend"
+dest_files=["res://.godot/imported/gmtk 2024 environment 2.blend-41aa212e333dc245204633060342d930.scn"]
 
 [params]
 
