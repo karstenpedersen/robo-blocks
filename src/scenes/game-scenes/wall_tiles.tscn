@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8lws70mlirmk"]
+
+[ext_resource type="PackedScene" uid="uid://c6avrdfkf1kl3" path="res://src/blender/environment/wall.tscn" id="1_patei"]
+[ext_resource type="PackedScene" uid="uid://bw50fdkja25tv" path="res://src/blender/environment/wall_tall.tscn" id="2_5nrw2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4y1ay"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ca6c"]
+size = Vector3(1, 2, 1)
+
+[node name="WallTiles" type="Node3D"]
+
+[node name="Wall" parent="." instance=ExtResource("1_patei")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_4y1ay")
+
+[node name="WallTall" parent="." instance=ExtResource("2_5nrw2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallTall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallTall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_3ca6c")

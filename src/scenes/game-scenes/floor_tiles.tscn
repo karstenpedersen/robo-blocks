@@ -1,0 +1,28 @@
+[gd_scene load_steps=9 format=3 uid="uid://3j5mg40t7e3s"]
+
+[ext_resource type="PackedScene" uid="uid://bctshu3f8bncr" path="res://src/blender/environment/floor_1.tscn" id="1_uyqu6"]
+[ext_resource type="PackedScene" uid="uid://bbra5u1j5tm6w" path="res://src/blender/environment/floor_2.tscn" id="2_igbwp"]
+[ext_resource type="PackedScene" uid="uid://dsbld1jepqebj" path="res://src/blender/environment/floor_3.tscn" id="3_o4t32"]
+[ext_resource type="PackedScene" uid="uid://c1pfsr2yn3up6" path="res://src/blender/environment/floor_4.tscn" id="4_ekbrt"]
+[ext_resource type="PackedScene" uid="uid://dxovfrnwgnuss" path="res://src/blender/environment/floor_5.tscn" id="5_ewnxv"]
+[ext_resource type="PackedScene" uid="uid://cu2tu8ayuxwfx" path="res://src/blender/environment/floor_6.tscn" id="6_gj00k"]
+[ext_resource type="PackedScene" uid="uid://dyn40db03nquk" path="res://src/blender/environment/floor_7.tscn" id="7_wpj5i"]
+[ext_resource type="PackedScene" uid="uid://bmmt3au1umdmu" path="res://src/blender/environment/floor_8.tscn" id="8_3eoil"]
+
+[node name="FloorTiles" type="Node3D"]
+
+[node name="Floor1" parent="." instance=ExtResource("1_uyqu6")]
+
+[node name="Floor2" parent="." instance=ExtResource("2_igbwp")]
+
+[node name="Floor3" parent="." instance=ExtResource("3_o4t32")]
+
+[node name="Floor4" parent="." instance=ExtResource("4_ekbrt")]
+
+[node name="Floor5" parent="." instance=ExtResource("5_ewnxv")]
+
+[node name="Floor6" parent="." instance=ExtResource("6_gj00k")]
+
+[node name="Floor7" parent="." instance=ExtResource("7_wpj5i")]
+
+[node name="Floor8" parent="." instance=ExtResource("8_3eoil")]

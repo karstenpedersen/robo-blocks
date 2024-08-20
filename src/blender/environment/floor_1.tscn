@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bctshu3f8bncr"]
 
-[ext_resource type="Texture2D" uid="uid://blg1hxwfgba34" path="res://src/blender/textures/gmtkconcreteslabs.png" id="1_lgnxy"]
+[ext_resource type="Texture2D" uid="uid://cck7kp8a67my" path="res://src/blender/textures/gmtkconcreteslabs.png" id="1_lgnxy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tssp"]
 resource_name = "FloorMaterial"

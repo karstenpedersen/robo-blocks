@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cck7kp8a67my"
-path.s3tc="res://.godot/imported/gmtkconcreteslabs.png-b6cb07fe615e2b952d3424d450e0a81b.s3tc.ctex"
+path="res://.godot/imported/gmtkconcreteslabs.png-b6cb07fe615e2b952d3424d450e0a81b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://src/blender/textures/gmtkconcreteslabs.png"
-dest_files=["res://.godot/imported/gmtkconcreteslabs.png-b6cb07fe615e2b952d3424d450e0a81b.s3tc.ctex"]
+dest_files=["res://.godot/imported/gmtkconcreteslabs.png-b6cb07fe615e2b952d3424d450e0a81b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
