@@ -6,11 +6,14 @@ enum EnemyMode {
 	FOLLOW_TARGET,
 }
 
-@export var accel = 4000
-@export var max_speed = 6
+@export var forward_accel = 4000
+@export var strafe_accel = 4000
+@export var max_speed = 4
 
-# Distance at which the enemy stops moving towards player
-@export var follow_distance = 8
+# Distance at which the enemy tries to keep the player
+@export var follow_distance = 5
+# Tolerance for follow distance
+@export var follow_distance_tolerance = 1
 
 # Difference in radians where enemy will follow player
 @export var follow_angle_threshold = 0.2
@@ -39,16 +42,24 @@ func movement(delta):
 		EnemyMode.IDLE:
 			pass
 		EnemyMode.WANDER:
-			apply_force(transform.basis.z.normalized() * accel * delta)
+			apply_force(transform.basis.z.normalized() * forward_accel * delta)
 		EnemyMode.FOLLOW_TARGET:
-			#var direction = position.direction_to(target.position)
-			#var target_angle = atan2(direction.x, direction.z)
-			#rotation.y = rotate_toward(rotation.y, target_angle, rotation_speed * delta)
-
 			var distance = position.distance_to(target.position)
 			var angle_diff = turret.get_angle_diff()
-			if distance > follow_distance and angle_diff < follow_angle_threshold:
-				apply_force(transform.basis.z.normalized() * accel * delta)
+			var distance_diff = abs(distance - follow_distance)
+			if angle_diff < follow_angle_threshold:
+				# Turret is pointing at player
+				if distance_diff > follow_distance_tolerance:
+					# Adjust distance to player
+					if distance > follow_distance:
+						# Follow player
+						apply_force(transform.basis.z.normalized() * forward_accel * delta)
+					elif distance < follow_distance:
+						# Move away from player
+						apply_force(-transform.basis.z.normalized() * forward_accel * delta)
+				else:
+					# Strafe around player
+					apply_force(transform.basis.x.normalized() * strafe_accel * delta)
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var velocity = state.get_linear_velocity()
