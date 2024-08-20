@@ -10,7 +10,7 @@ enum TurretMode {
 
 @export var actor: Node3D
 @export var target: Node3D
-@export var turn_speed = 2
+@export var turn_speed = 2.0
 
 var mode = TurretMode.IDLE
 
@@ -47,6 +47,7 @@ func _physics_process(delta: float) -> void:
 		TurretMode.SPIN_COUNTERCLOCKWISE:
 			actor.rotation.y += delta * turn_speed
 		TurretMode.TARGETING:
-			var direction = actor.position.direction_to(target.position)
-			var target_angle = atan2(direction.x, direction.z)
-			actor.rotation.y = rotate_toward(actor.rotation.y, target_angle, turn_speed * delta)
+			if target and actor:
+				var direction = actor.position.direction_to(target.position)
+				var target_angle = atan2(direction.x, direction.z)
+				actor.rotation.y = rotate_toward(actor.rotation.y, target_angle, turn_speed * delta)
