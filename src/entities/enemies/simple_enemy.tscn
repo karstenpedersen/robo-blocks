@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5cyhtuhwa32i"]
+[gd_scene load_steps=17 format=3 uid="uid://d28m5ofk43q4u"]
 
 [ext_resource type="Script" path="res://src/entities/enemies/enemy.gd" id="1_cpboj"]
 [ext_resource type="Script" path="res://src/components/detect_group_component.gd" id="2_uhtkr"]
@@ -74,6 +74,7 @@ knockback_component = NodePath("../KnockbackComponent")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("12_47d4v")
+max_health = 2
 
 [node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("13_wrwhb")
@@ -95,3 +96,4 @@ shape = SubResource("BoxShape3D_ckbup")
 [connection signal="group_exited" from="DetectPlayer" to="." method="_on_detect_player_group_exited"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
+[connection signal="eliminated" from="HealthComponent" to="." method="_on_health_component_eliminated"]

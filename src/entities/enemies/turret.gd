@@ -61,3 +61,7 @@ func set_mode(m: EnemyMode):
 		turret.set_mode_targeting()
 		#$TurretBlock.set_mode_targeting()
 	mode = m
+
+
+func _on_health_component_eliminated() -> void:
+	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bt1emfoe2bhj3"]
+[gd_scene load_steps=15 format=3 uid="uid://6a3uyxoexlfp"]
 
 [ext_resource type="PackedScene" uid="uid://bctshu3f8bncr" path="res://src/blender/environment/floor_1.tscn" id="1_382er"]
 [ext_resource type="PackedScene" uid="uid://bbra5u1j5tm6w" path="res://src/blender/environment/floor_2.tscn" id="2_4vgit"]

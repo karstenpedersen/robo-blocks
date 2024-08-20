@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://wcqseoq1m835"
-valid=false
+path="res://.godot/imported/gmtk 2024 nut and bolt.blend-122a81859a94911cacfe028e0968adfb.scn"
 
 [deps]
 
 source_file="res://src/blender/gmtk 2024 nut and bolt.blend"
+dest_files=["res://.godot/imported/gmtk 2024 nut and bolt.blend-122a81859a94911cacfe028e0968adfb.scn"]
 
 [params]
 

@@ -2,8 +2,9 @@ extends Path3D
 class_name PathComponent
 
 @export var speed: int = 5
-@export var path_follow: PathFollow3D
+
+@onready var path_follow_component: PathFollow3D = $PathFollowComponent
 
 
 func _process(delta: float) -> void:
-	path_follow.progress += speed * delta
+	path_follow_component.progress += speed * delta

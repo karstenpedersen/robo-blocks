@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bqy8sp2uhykvh"]
+[gd_scene load_steps=17 format=3 uid="uid://cyvnws3bpr0rn"]
 
 [ext_resource type="Script" path="res://src/entities/enemies/turret.gd" id="1_crhuq"]
 [ext_resource type="Script" path="res://src/components/detect_group_component.gd" id="2_rnxm7"]
@@ -9,13 +9,13 @@
 [ext_resource type="Script" path="res://src/components/spawner_timer_component.gd" id="9_i0185"]
 [ext_resource type="PackedScene" uid="uid://clodtu8fyjjs7" path="res://src/blender/block_parts/generic_block.tscn" id="9_qde5g"]
 [ext_resource type="Script" path="res://src/components/link_hurtbox_health_component.gd" id="10_txt6j"]
-[ext_resource type="PackedScene" uid="uid://dyvmkchhfeih6" path="res://src/entities/enemies/turret_weapon.tscn" id="10_xgsrf"]
+[ext_resource type="PackedScene" path="res://src/entities/enemies/turret_weapon.tscn" id="10_xgsrf"]
 [ext_resource type="Script" path="res://src/components/health_component.gd" id="11_smmj7"]
 [ext_resource type="Script" path="res://src/components/knockback_component.gd" id="12_gt0tl"]
 [ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="13_it0iq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3friv"]
-radius = 15.0
+radius = 7.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_enm8j"]
 
@@ -53,12 +53,14 @@ hurtbox_component = NodePath("../HurtboxComponent")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("11_smmj7")
+max_health = 2
 
 [node name="KnockbackComponent" type="Node" parent="."]
 script = ExtResource("12_gt0tl")
 
-[node name="HurtboxComponent" type="Area3D" parent="."]
+[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("13_it0iq")
+actor = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
 shape = SubResource("BoxShape3D_enm8j")
@@ -85,3 +87,4 @@ actor = NodePath("..")
 [connection signal="group_exited" from="DetectPlayer" to="." method="_on_detect_player_group_exited"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
+[connection signal="eliminated" from="HealthComponent" to="." method="_on_health_component_eliminated"]

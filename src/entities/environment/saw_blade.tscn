@@ -1,14 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvoeybh5exk56"]
+[gd_scene load_steps=7 format=3 uid="uid://bvoeybh5exk56"]
 
 [ext_resource type="PackedScene" uid="uid://342lb7b2s84t" path="res://src/entities/projectiles/saw_blade_hitbox.tscn" id="1_7f3ra"]
 [ext_resource type="Script" path="res://src/components/spawner_component.gd" id="2_mhq47"]
 [ext_resource type="Script" path="res://src/components/spawner_timer_component.gd" id="3_c2jho"]
 [ext_resource type="Script" path="res://src/components/timer_component.gd" id="4_xsh43"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_4786k"]
-top_radius = 1.0
-bottom_radius = 1.0
-height = 0.25
+[ext_resource type="PackedScene" uid="uid://bos7b0xxu2hpr" path="res://src/blender/environment/saw_blade.tscn" id="5_ythq4"]
+[ext_resource type="Script" path="res://src/components/rotate_component.gd" id="6_5v785"]
 
 [node name="SawBlade" type="Node3D"]
 
@@ -31,5 +28,7 @@ script = ExtResource("4_xsh43")
 
 [node name="Visuals" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
-mesh = SubResource("CylinderMesh_4786k")
+[node name="SawBlade" parent="Visuals" instance=ExtResource("5_ythq4")]
+transform = Transform3D(3.82603, 0, 0, 0, 3.82603, 0, 0, 0, 3.82603, 0, 0.255906, 0)
+script = ExtResource("6_5v785")
+speed = 5

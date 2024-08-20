@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://sj2fd1lbor3u"]
+[gd_scene load_steps=4 format=3 uid="uid://sj2fd1lbor3u"]
 
 [ext_resource type="Script" path="res://src/scenes/menus/end_menu.gd" id="1_12a70"]
-[ext_resource type="Script" path="res://src/scenes/menus/score.gd" id="2_3u3y2"]
 [ext_resource type="Theme" uid="uid://bkik345fd6hmf" path="res://src/assets/themes/Basicbutton.tres" id="2_gk47s"]
 [ext_resource type="FontFile" uid="uid://h7fhpixtefq0" path="res://src/assets/fonts/NewAmsterdam-Regular.ttf" id="2_gr8vm"]
-[ext_resource type="Script" path="res://src/scenes/menus/highscore.gd" id="3_62q2t"]
 
 [node name="EndMenu" type="Control"]
 layout_mode = 3
@@ -16,24 +14,19 @@ grow_vertical = 2
 script = ExtResource("1_12a70")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -250.0
-offset_top = -105.0
-offset_right = 1420.0
-offset_bottom = 832.0
-color = Color(0.968627, 0.0901961, 0.207843, 0.792157)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.347853, 0.00680935, 0.0448643, 0.603922)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -91.0
-offset_top = -69.0
-offset_right = 107.0
-offset_bottom = 85.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -48,13 +41,6 @@ theme_override_fonts/font = ExtResource("2_gr8vm")
 theme_override_font_sizes/font_size = 48
 text = "New Run"
 
-[node name="QuittoMainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_gk47s")
-theme_override_fonts/font = ExtResource("2_gr8vm")
-theme_override_font_sizes/font_size = 32
-text = "Quit to Main Menu	"
-
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../NewRun")
@@ -63,29 +49,5 @@ theme_override_fonts/font = ExtResource("2_gr8vm")
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="Score" type="RichTextLabel" parent="StaticBody2D"]
-offset_left = 519.0
-offset_top = 134.0
-offset_right = 779.0
-offset_bottom = 203.0
-theme_override_fonts/normal_font = ExtResource("2_gr8vm")
-theme_override_font_sizes/normal_font_size = 56
-text = "Score: 9999"
-script = ExtResource("2_3u3y2")
-
-[node name="Highscore" type="RichTextLabel" parent="StaticBody2D"]
-offset_left = 362.0
-offset_top = 39.0
-offset_right = 921.0
-offset_bottom = 164.0
-theme_override_fonts/normal_font = ExtResource("2_gr8vm")
-theme_override_font_sizes/bold_italics_font_size = 1
-theme_override_font_sizes/normal_font_size = 96
-text = "Highscore: 9999"
-script = ExtResource("3_62q2t")
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/QuittoMainMenu" to="." method="_on_quit_to_main_menu_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
