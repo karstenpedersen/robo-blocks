@@ -1,15 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjk61uln7tdkc"]
+[gd_scene load_steps=3 format=3 uid="uid://cjk61uln7tdkc"]
 
 [ext_resource type="PackedScene" uid="uid://rbuqgpudjokf" path="res://src/entities/modules/base_module/base_module.tscn" id="1_ideck"]
 [ext_resource type="Script" path="res://src/entities/modules/head_module/head_module.gd" id="2_q6fys"]
-[ext_resource type="Texture2D" uid="uid://cmwbx6xc6d74r" path="res://icon.svg" id="3_j2vlb"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5uuw"]
-albedo_texture = ExtResource("3_j2vlb")
-
-[node name="HeadModule" instance=ExtResource("1_ideck")]
+[node name="HeadModule" node_paths=PackedStringArray("modules") instance=ExtResource("1_ideck")]
 script = ExtResource("2_q6fys")
 speed = 1000
-
-[node name="MeshInstance3D2" parent="Visuals" index="0"]
-material_override = SubResource("StandardMaterial3D_p5uuw")
+rotation_speed = 2
+acceleration = 6000
+color_material = null
+modules = []

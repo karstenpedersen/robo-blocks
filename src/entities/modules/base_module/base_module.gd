@@ -27,6 +27,12 @@ var connection_point: Node3D:
 		return neighbours[0]["point"]
 var y_rotation_offset = 0
 
+var colliding_points: Array[SnapPoint]
+
+
+func _ready() -> void:
+	snap_points.hide()
+
 
 func create_module_connection(module: BaseModule, point: SnapPoint):
 	_add_neighbour_module(module, point)
@@ -118,7 +124,7 @@ func mount(module: BaseModule, point: SnapPoint):
 	disable_rigidbody()
 	parent = module.parent
 	parent.parent_add_module(self, point)
-	mounted.emit(self, module.parent)
+	mounted.emit(self, parent)
 	index = module.index + 1
 	for color_component in color_components:
 		color_component.set_color(parent.color_material)
@@ -145,3 +151,16 @@ func _on_hurtbox_component_hurtbox_entered(hitbox: HitboxComponent) -> void:
 	health_component.hurt(hitbox.damage)
 	knockback_component.apply_knockback((global_position \
 			- hitbox.start_position).normalized() * hitbox.knockback_force)
+
+
+func _on_snap_point_area_area_entered(area: Area3D) -> void:
+	print(self, ", snap point area, ", area, ", for module: ", self, ", groups: ", area.get_groups())
+	var is_point = area.is_in_group("snap_point")
+	if is_point and area.snappable:
+		print("ADD POINT: ", area)
+		colliding_points.append(area)
+
+
+func _on_snap_point_area_area_exited(area: Area3D) -> void:
+	if area.is_in_group("snap_point"):
+		colliding_points.erase(area)

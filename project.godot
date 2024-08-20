@@ -23,8 +23,10 @@ Scores="*res://src/systems/singletons/scores.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
 
 [global_group]
 
@@ -104,6 +106,7 @@ increase_points={
 3d_physics/layer_2="Dragging"
 3d_physics/layer_3="Hurtbox"
 3d_physics/layer_4="ModuleCollision"
+3d_physics/layer_9="SnapPoints"
 
 [rendering]
 

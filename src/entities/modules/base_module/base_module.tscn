@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rbuqgpudjokf"]
+[gd_scene load_steps=8 format=3 uid="uid://rbuqgpudjokf"]
 
 [ext_resource type="Script" path="res://src/entities/modules/base_module/base_module.gd" id="1_iavab"]
 [ext_resource type="Script" path="res://src/components/health_component.gd" id="2_yfns1"]
@@ -8,6 +8,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_xkpqt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p48wg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uyvnk"]
 
 [node name="BaseModule" type="RigidBody3D" groups=["module"]]
 script = ExtResource("1_iavab")
@@ -37,5 +39,14 @@ shape = SubResource("BoxShape3D_p48wg")
 
 [node name="SnapPoints" type="Node3D" parent="."]
 
+[node name="SnapPointArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPointArea"]
+shape = SubResource("BoxShape3D_uyvnk")
+
 [connection signal="eliminated" from="Components/HealthComponent" to="." method="_on_health_component_eliminated"]
 [connection signal="hurtbox_entered" from="Components/HurtboxComponent" to="." method="_on_hurtbox_component_hurtbox_entered"]
+[connection signal="area_entered" from="SnapPointArea" to="." method="_on_snap_point_area_area_entered"]
+[connection signal="area_exited" from="SnapPointArea" to="." method="_on_snap_point_area_area_exited"]
