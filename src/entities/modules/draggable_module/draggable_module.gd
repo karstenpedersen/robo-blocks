@@ -14,7 +14,6 @@ func _process(delta: float) -> void:
 		#rotation_degrees.y += y_rotation_offset
 		var y_rotation_offset = draggable_component.target_rotation.y - \
 				connection_point.rotation_degrees.y
-		print("Rotation offset: ", y_rotation_offset)
 		position = connection_point.global_position
 		rotation = connection_point.global_rotation
 		rotation_degrees.y += y_rotation_offset
