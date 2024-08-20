@@ -33,6 +33,9 @@ data = PackedVector3Array(-1, 1, 20, 1, 1, 20, -1, -1, 20, 1, 1, 20, 1, -1, 20, 
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_ncr6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+max_speed = 4
+follow_distance = 5
+follow_angle_threshold = 0.2
 target = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_7jdfq")]
