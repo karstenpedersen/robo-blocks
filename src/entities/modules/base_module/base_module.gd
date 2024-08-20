@@ -77,6 +77,8 @@ func _remove_neighbour_module(module: BaseModule):
 
 
 func destroy():
+	if parent and is_instance_valid(parent):
+		parent.parent_remove_module(self)
 	unmount()
 	queue_free()
 	destroyed.emit()

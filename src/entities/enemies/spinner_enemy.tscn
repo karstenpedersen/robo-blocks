@@ -118,6 +118,7 @@ knockback_component = NodePath("../KnockbackComponent")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("12_11xrx")
+max_health = 15
 
 [node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("13_n5bca")
