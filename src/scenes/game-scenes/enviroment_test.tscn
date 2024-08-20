@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://drycdhhtau2jm"]
+[gd_scene load_steps=17 format=3 uid="uid://drycdhhtau2jm"]
 
 [ext_resource type="MeshLibrary" uid="uid://p3qvnxklelfv" path="res://src/tile_library/floor_tiles.tres" id="1_4i00k"]
 [ext_resource type="MeshLibrary" uid="uid://co7sxsnfhjapg" path="res://src/tile_library/wall_tiles.tres" id="2_j0l11"]
-[ext_resource type="MeshLibrary" uid="uid://bs1xu1o4rsr8r" path="res://src/tile_library/test_tile_library.tres" id="3_08a8x"]
+[ext_resource type="PackedScene" uid="uid://dnff2n1atxjti" path="res://src/entities/environment/explosive_barrel.tscn" id="3_rnnmc"]
+[ext_resource type="PackedScene" uid="uid://jj2pb0s8gy2j" path="res://src/entities/environment/crate.tscn" id="4_cn2ap"]
 [ext_resource type="PackedScene" uid="uid://guulovq8pyf1" path="res://src/entities/player/player.tscn" id="4_hfar3"]
 [ext_resource type="Script" path="res://src/systems/camera/camera.gd" id="5_87jri"]
 [ext_resource type="Shader" path="res://src/shaders/canvas_shader_test.gdshader" id="6_juag5"]
@@ -19,14 +20,17 @@ sky_material = SubResource("ProceduralSkyMaterial_edgr2")
 background_mode = 2
 sky = SubResource("Sky_67u6t")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_v6ofk"]
+size = Vector3(1000, 1, 1000)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f7t0k"]
 shader = ExtResource("6_juag5")
-shader_parameter/aspect = 0.54
-shader_parameter/radius = 1.07
+shader_parameter/aspect = 1.0
+shader_parameter/radius = 1.565
 shader_parameter/alpha = 1.0
-shader_parameter/crop = 0.943
+shader_parameter/crop = 1.223
 shader_parameter/crop_color = Color(0, 0, 0, 1)
-shader_parameter/crop_feathering = 0.1
+shader_parameter/crop_feathering = 0.35
 shader_parameter/channel_offset = 3.25988e-09
 shader_parameter/noise_strength = 20.0
 
@@ -74,17 +78,19 @@ data = {
 "cells": PackedInt32Array(7, 65524, 9, 7, 65525, 9, 7, 65526, 9, 7, 65527, 9, 7, 65528, 9, 7, 65529, 9, 7, 65530, 9, 7, 65531, 9, 7, 65532, 9, 7, 65533, 9, 7, 65534, 9, 7, 65535, 9, 7, 0, 9, 7, 1, 9, 7, 2, 9, 7, 3, 9, 7, 4, 9, 7, 5, 9, 7, 6, 9, 7, 7, 9, 7, 8, 1, 65523, 8, 9, 65524, 8, 9, 65525, 8, 9, 65526, 8, 9, 65527, 8, 9, 65528, 8, 9, 65529, 8, 9, 65530, 8, 9, 65531, 8, 9, 65532, 8, 9, 65533, 8, 9, 65534, 8, 9, 65535, 8, 9, 0, 8, 9, 1, 8, 9, 2, 8, 9, 3, 8, 9, 4, 8, 9, 5, 8, 9, 6, 8, 9, 65522, 65524, 9, 65523, 65524, 9, 65524, 65524, 9, 65525, 65524, 9, 65526, 65524, 9, 65527, 65524, 9, 65528, 65524, 9, 65529, 65524, 9, 65530, 65524, 9, 65531, 65524, 9, 65532, 65524, 9, 65533, 65524, 9, 65534, 65524, 9, 65535, 65524, 9, 0, 65524, 9, 1, 65524, 9, 2, 65524, 9, 3, 65524, 9, 4, 65524, 9, 5, 65524, 9, 6, 65524, 9, 65521, 65524, 9, 65521, 65525, 9, 65521, 65526, 9, 65521, 65527, 9, 65521, 65528, 9, 65521, 65529, 9, 65521, 65530, 9, 65521, 65531, 9, 65521, 65532, 9, 65521, 65533, 9, 65521, 65534, 9, 65521, 65535, 9, 65521, 8, 9, 65521, 7, 9, 65521, 6, 9, 65521, 5, 9, 65521, 4, 9, 65521, 3, 9, 65521, 2, 9, 65521, 1, 9, 65521, 0, 9, 65522, 8, 9, 65522, 65534, 8, 65523, 65534, 8, 65524, 65534, 8, 65525, 65534, 8, 65526, 65534, 8, 65527, 65534, 8, 6, 65533, 1, 5, 65533, 8, 4, 65533, 8, 3, 65533, 8, 2, 65533, 8, 1, 65533, 8, 3, 65525, 8, 2, 65525, 8, 2, 65526, 8, 2, 65527, 8, 2, 65528, 8, 2, 65529, 8, 2, 65530, 8, 65523, 65529, 10, 65524, 65529, 10, 65524, 65528, 10, 65525, 65528, 10, 65525, 65527, 10, 65524, 65527, 10, 65523, 65527, 10, 65523, 65528, 10, 65525, 3, 10, 65524, 3, 10, 65524, 4, 10, 65524, 5, 10, 65525, 4, 10, 5, 65528, 10, 5, 65529, 10, 5, 6, 10, 5, 5, 10, 4, 5, 10, 4, 6, 10, 6, 10, 0, 65535, 9, 0, 3, 10, 0, 4, 10, 0, 5, 10, 0, 6, 11, 0, 1, 10, 0, 0, 10, 0, 65535, 10, 0, 4, 11, 0, 7, 10, 1, 6, 7, 1, 6, 6, 1, 6, 4, 1, 6, 3, 1, 6, 2, 1, 6, 1, 1, 6, 65535, 1, 6, 65534, 1)
 }
 
-[node name="Walls" type="Node3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 
-[node name="GridMap" type="GridMap" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh_library = ExtResource("3_08a8x")
-cell_size = Vector3(1, 1, 1)
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_v6ofk")
+
+[node name="ExplosiveBarrel" parent="Floor" instance=ExtResource("3_rnnmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15309, 3.08659, -0.0769923)
+
+[node name="Crate" parent="Floor" instance=ExtResource("4_cn2ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -2)
 
 [node name="Player" parent="." instance=ExtResource("4_hfar3")]
-transform = Transform3D(0.84, 0, 0, 0, 0.84, 0, 0, 0, 0.84, 0.246977, 0.505125, 3.58767)
-speed = 5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246977, 1.00513, 3.58767)
 
 [node name="Camera" type="Node3D" parent="."]
 

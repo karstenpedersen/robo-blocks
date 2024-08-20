@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnff2n1atxjti"]
+[gd_scene load_steps=12 format=3 uid="uid://dnff2n1atxjti"]
 
+[ext_resource type="PackedScene" uid="uid://c8gudn1mbi4gn" path="res://src/blender/environment/barrel.tscn" id="1_fpbp7"]
 [ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="1_loyvi"]
 [ext_resource type="Script" path="res://src/components/health_component.gd" id="2_kgs1i"]
 [ext_resource type="Script" path="res://src/components/spawner_component.gd" id="3_4v71t"]
@@ -29,7 +30,11 @@ shape = SubResource("CylinderShape3D_07m4x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00554359, 0, 0.00284266)
+visible = false
 mesh = SubResource("CylinderMesh_ujoyc")
+
+[node name="Barrel" parent="." instance=ExtResource("1_fpbp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("actor")]
 collision_layer = 4
