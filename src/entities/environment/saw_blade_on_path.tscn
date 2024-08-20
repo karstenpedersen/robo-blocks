@@ -19,6 +19,7 @@ transform = Transform3D(-0.386512, 0.617582, -0.684982, 0, 0.742702, 0.669623, 0
 [node name="SawBlade" parent="PathFollowComponent" instance=ExtResource("1_4uupu")]
 
 [node name="InnerPolygon" type="CSGPolygon3D" parent="."]
+visible = false
 polygon = PackedVector2Array()
 mode = 2
 path_node = NodePath("..")
@@ -35,6 +36,7 @@ script = ExtResource("3_7cdko")
 
 [node name="BorderPolygon" type="CSGPolygon3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11, 0)
+visible = false
 polygon = PackedVector2Array()
 mode = 2
 path_node = NodePath("..")

@@ -12,12 +12,12 @@ var collisions: Dictionary = {}
 
 
 func _ready() -> void:
+	super()
 	index = 0
 	parent = self
 
 
 func parent_add_module(module: DraggableModule, point: SnapPoint):
-	print("ADD MODULE TO PARENT: ", module, ", ", point)
 	var collision = CollisionShape3D.new()
 	var shape = BoxShape3D.new() # Size defaults to Vector3(1, 1, 1)
 	collision.shape = shape

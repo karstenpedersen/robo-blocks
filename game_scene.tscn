@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://po1iywbu0wj6"]
+[gd_scene load_steps=32 format=3 uid="uid://po1iywbu0wj6"]
 
 [ext_resource type="Script" path="res://src/systems/drag-and-drop/drag_manager.gd" id="1_46k61"]
 [ext_resource type="PackedScene" uid="uid://cejqx5xhwcx8f" path="res://src/systems/game_manager/game_manager.tscn" id="1_baag6"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://wjmeakyobu3n" path="res://src/entities/modules/block_module/block_module.tscn" id="14_80x3u"]
 [ext_resource type="PackedScene" uid="uid://dnff2n1atxjti" path="res://src/entities/environment/explosive_barrel.tscn" id="15_nth2c"]
 [ext_resource type="PackedScene" uid="uid://dqwuljxh28n6" path="res://src/entities/environment/saw_blade_on_path.tscn" id="16_cfan3"]
-[ext_resource type="PackedScene" uid="uid://qnckd1chc6fm" path="res://src/blender/block_parts/cannon_block.tscn" id="17_cmbui"]
 [ext_resource type="PackedScene" uid="uid://jj2pb0s8gy2j" path="res://src/entities/environment/crate.tscn" id="18_g7m7d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f7t0k"]
@@ -166,6 +165,18 @@ mesh = SubResource("BoxMesh_uvl0v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88776, 0.042613, 20.7827)
 shape = SubResource("ConcavePolygonShape3D_uqfov")
 
+[node name="StaticBody3D2" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.1349, -2.03327, 41.5674)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88776, 0.042613, 20.7827)
+mesh = SubResource("BoxMesh_uvl0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88776, 0.042613, 20.7827)
+shape = SubResource("ConcavePolygonShape3D_uqfov")
+
 [node name="Walls" type="GridMap" parent="Environment" groups=["wall"]]
 mesh_library = ExtResource("2_iyr1k")
 cell_size = Vector3(1, 1, 1)
@@ -188,11 +199,11 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="Objects" type="Node3D" parent="."]
 
 [node name="SpinnerEnemy" parent="Objects" node_paths=PackedStringArray("target") instance=ExtResource("8_xlyjl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7881, -0.805111, 37.4028)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7881, -0.0919613, 37.4028)
 target = NodePath("../PlayerModule")
 
 [node name="SpinnerEnemy2" parent="Objects" node_paths=PackedStringArray("target") instance=ExtResource("8_xlyjl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.4124, -0.805111, 60.4866)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.4124, -0.210478, 60.4866)
 target = NodePath("../PlayerModule")
 
 [node name="PlayerModule" parent="Objects" instance=ExtResource("7_3pskc")]
@@ -250,12 +261,6 @@ curve = SubResource("Curve3D_7iva5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.3219, 0.517642, 31.5402)
 curve = SubResource("Curve3D_geyft")
 
-[node name="CannonBlock" parent="Objects" instance=ExtResource("17_cmbui")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0502, 1.23018, 42.764)
-
-[node name="CannonBlock2" parent="Objects" instance=ExtResource("17_cmbui")]
-transform = Transform3D(0.107687, 0, -0.994185, 0, 1, 0, 0.994185, 0, 0.107687, 31.8953, 1.23018, 49.1243)
-
 [node name="BlockModule4" parent="Objects" instance=ExtResource("14_80x3u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.3581, 1.25537, 46.3033)
 
@@ -271,26 +276,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9899, 0.979043, 27.5682)
 [node name="Crate3" parent="Objects" instance=ExtResource("18_g7m7d")]
 transform = Transform3D(0.470365, 0, 0.882472, 0, 1, 0, -0.882472, 0, 0.470365, 23.3364, 0.979043, 33.0344)
 
-[node name="Crate5" parent="Objects" instance=ExtResource("18_g7m7d")]
-transform = Transform3D(0.470365, 0, 0.882472, 0, 1, 0, -0.882472, 0, 0.470365, 34.9983, 0.979043, 34.1606)
-
-[node name="Crate6" parent="Objects" instance=ExtResource("18_g7m7d")]
-transform = Transform3D(-0.38149, 0, 0.924373, 0, 1, 0, -0.924373, 0, -0.38149, 34.6917, 0.979042, 35.77)
-
-[node name="Crate7" parent="Objects" instance=ExtResource("18_g7m7d")]
-transform = Transform3D(0.470365, 0, 0.882472, 0, 1, 0, -0.882472, 0, 0.470365, 35.6002, 0.979042, 37.2369)
-
 [node name="Crate9" parent="Objects" instance=ExtResource("18_g7m7d")]
 transform = Transform3D(0.470365, 0, 0.882472, 0, 1, 0, -0.882472, 0, 0.470365, 37.4865, 0.979042, 33.2294)
-
-[node name="Crate8" parent="Objects" instance=ExtResource("18_g7m7d")]
-transform = Transform3D(-0.482579, 0, 0.875852, 0, 1, 0, -0.875852, 0, -0.482579, 37.3346, 0.979042, 35.051)
 
 [node name="Crate4" parent="Objects" instance=ExtResource("18_g7m7d")]
 transform = Transform3D(0.77598, 0, -0.630757, 0, 1, 0, 0.630757, 0, 0.77598, 18.2058, 0.979043, 38.5211)
 
 [node name="ExplosiveBarrel4" parent="Objects" instance=ExtResource("15_nth2c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7558, 1.12577, 36.2505)
+
+[node name="ExplosiveBarrel11" parent="Objects" instance=ExtResource("15_nth2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9522, 1.12577, 34.3039)
+
+[node name="ExplosiveBarrel12" parent="Objects" instance=ExtResource("15_nth2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.7704, 1.12577, 36.4372)
+
+[node name="ExplosiveBarrel13" parent="Objects" instance=ExtResource("15_nth2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3936, 1.12577, 27.6813)
 
 [node name="Turret2" parent="Objects" node_paths=PackedStringArray("target") instance=ExtResource("12_figdn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1451, 1.09827, 69.9394)
@@ -313,10 +315,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83.776, -0.754419, 56.1296)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89.2603, -0.831277, 46.7855)
 
 [node name="ExplosiveBarrel9" parent="Objects" instance=ExtResource("15_nth2c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.4484, -0.831278, 33.5173)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.4484, -0.266778, 33.5173)
 
 [node name="ExplosiveBarrel10" parent="Objects" instance=ExtResource("15_nth2c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.9885, -0.831278, 64.3194)
+transform = Transform3D(0.99995, 0.0100006, 0, -0.0100006, 0.99995, 0, 0, 0, 1, 62.9885, 0.291519, 64.3194)
 
 [node name="Crate10" parent="Objects" instance=ExtResource("18_g7m7d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.0903, -0.919945, 61.8585)
@@ -329,6 +331,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.7537, 0.224373, 62.3622)
 
 [node name="Crate13" parent="Objects" instance=ExtResource("18_g7m7d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.2124, -0.856665, 63.2131)
+
+[node name="CannonModule2" parent="Objects" instance=ExtResource("8_dl2gw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9814, 1.22503, 41.9165)
+
+[node name="CannonModule3" parent="Objects" instance=ExtResource("8_dl2gw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2568, 1.42632, 47.7062)
+
+[node name="CannonModule4" parent="Objects" instance=ExtResource("8_dl2gw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4169, 2.22456, 10.3606)
+
+[node name="CannonModule5" parent="Objects" instance=ExtResource("8_dl2gw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4909, 1.58966, 8.17428)
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6.55496, 2.75044, -4.08853)
