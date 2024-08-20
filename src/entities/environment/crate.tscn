@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://jj2pb0s8gy2j"]
+
+[ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="1_p7xql"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="2_ljysd"]
+[ext_resource type="Script" path="res://src/components/free_when_eliminated.gd" id="3_0eifm"]
+[ext_resource type="Texture2D" uid="uid://cmwbx6xc6d74r" path="res://icon.svg" id="4_m0er8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cx6um"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gt3ng"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syre4"]
+albedo_texture = ExtResource("4_m0er8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_iulgm"]
+
+[node name="Crate" type="RigidBody3D"]
+mass = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cx6um")
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="HurtboxComponent" type="Area3D" parent="Components"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_p7xql")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/HurtboxComponent"]
+shape = SubResource("BoxShape3D_gt3ng")
+
+[node name="HealthComponent" type="Node" parent="Components"]
+script = ExtResource("2_ljysd")
+max_health = 3
+
+[node name="FreeWhenEliminated" type="Node" parent="Components" node_paths=PackedStringArray("actor", "health_component")]
+script = ExtResource("3_0eifm")
+actor = NodePath("../..")
+health_component = NodePath("../HealthComponent")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+material_override = SubResource("StandardMaterial3D_syre4")
+mesh = SubResource("BoxMesh_iulgm")

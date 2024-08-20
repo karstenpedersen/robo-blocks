@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://mjod0f0p03yv"]
+
+[ext_resource type="Script" path="res://src/entities/enemies/enemy.gd" id="1_56g3d"]
+[ext_resource type="Script" path="res://src/components/detect_group_component.gd" id="2_qml86"]
+[ext_resource type="Script" path="res://src/components/targeting_turret_component.gd" id="3_7ogkn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtk30"]
+albedo_color = Color(0.958288, 0.0201636, 0.236962, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0xxnr"]
+material = SubResource("StandardMaterial3D_qtk30")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yj1ci"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3friv"]
+radius = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxyi2"]
+albedo_color = Color(0.90738, 0, 0.117513, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f65tg"]
+material = SubResource("StandardMaterial3D_lxyi2")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
+[node name="Enemy" type="RigidBody3D" groups=["enemies"]]
+script = ExtResource("1_56g3d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_0xxnr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_yj1ci")
+
+[node name="DetectPlayer" type="Area3D" parent="."]
+script = ExtResource("2_qml86")
+group = &"player"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectPlayer"]
+shape = SubResource("SphereShape3D_3friv")
+
+[node name="FrontCone" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1)
+mesh = SubResource("CylinderMesh_f65tg")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="IdleTimer" type="Timer" parent="."]
+
+[node name="WanderTimer" type="Timer" parent="."]
+
+[node name="TargetingTurret" type="Node3D" parent="."]
+script = ExtResource("3_7ogkn")
+
+[connection signal="group_entered" from="DetectPlayer" to="." method="_on_detect_player_group_entered"]
+[connection signal="group_exited" from="DetectPlayer" to="." method="_on_detect_player_group_exited"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

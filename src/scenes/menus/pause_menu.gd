@@ -17,6 +17,7 @@ func _on_restart_run_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_quit_to_main_menu_pressed():
+	Scores.current_score = 0
 	get_tree().change_scene_to_file("res://src/scenes/menus/main_menu.tscn")
 
 

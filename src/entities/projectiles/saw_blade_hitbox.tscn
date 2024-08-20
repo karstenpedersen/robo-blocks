@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://342lb7b2s84t"]
+
+[ext_resource type="Script" path="res://src/entities/projectiles/saw_blade_hitbox.gd" id="1_4y8gx"]
+[ext_resource type="Script" path="res://src/components/hitbox_component.gd" id="1_7g024"]
+[ext_resource type="Script" path="res://src/components/life_time_component.gd" id="2_61j2b"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uymgy"]
+height = 0.5
+radius = 1.0
+
+[node name="SawBladeHitbox" type="Node3D"]
+script = ExtResource("1_4y8gx")
+
+[node name="HitboxComponent" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_7g024")
+damage = 2
+knockback_force = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+shape = SubResource("CylinderShape3D_uymgy")
+
+[node name="LifeTimeComponent" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+script = ExtResource("2_61j2b")
+
+[connection signal="timeout" from="LifeTimeComponent" to="." method="_on_life_time_component_timeout"]

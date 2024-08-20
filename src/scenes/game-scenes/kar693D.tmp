@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwmoew3o64qdg"]
+
+[ext_resource type="PackedScene" uid="uid://b02p50rtw5iii" path="res://src/systems/drag-and-drop/draggable.tscn" id="1_hrgwe"]
+[ext_resource type="Script" path="res://src/systems/drag-and-drop/drag_manager.gd" id="2_u365p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5ggp"]
+albedo_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vbpwl"]
+material = SubResource("StandardMaterial3D_h5ggp")
+size = Vector2(50, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e3o4f"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6h7u"]
+albedo_color = Color(0.359069, 0.359069, 0.359069, 1)
+
+[node name="KarstenTestScene" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_vbpwl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e3o4f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.990232, 0.0131266, -0.138813, 0.139432, -0.0932235, 0.985834, 0, -0.995559, -0.0941431, 0, 6.39536, 0)
+
+[node name="Draggable2" parent="." instance=ExtResource("1_hrgwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911172, 5)
+
+[node name="Draggable" parent="." instance=ExtResource("1_hrgwe")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+
+[node name="DragManager" type="Node3D" parent="Camera3D"]
+script = ExtResource("2_u365p")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.2949)
+size = Vector3(5, 1, 1)
+material = SubResource("StandardMaterial3D_d6h7u")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4.85255)
+size = Vector3(5, 1, 1)
+material = SubResource("StandardMaterial3D_d6h7u")

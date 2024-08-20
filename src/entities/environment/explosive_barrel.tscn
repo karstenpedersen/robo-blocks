@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://dnff2n1atxjti"]
+
+[ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="1_loyvi"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="2_kgs1i"]
+[ext_resource type="Script" path="res://src/components/spawner_component.gd" id="3_4v71t"]
+[ext_resource type="PackedScene" uid="uid://kp16lkxhrw00" path="res://src/entities/projectiles/explosion.tscn" id="4_80de8"]
+[ext_resource type="Script" path="res://src/components/free_when_eliminated.gd" id="5_6vusu"]
+[ext_resource type="Script" path="res://src/components/knockback_component.gd" id="6_ygtqv"]
+[ext_resource type="Script" path="res://src/components/link_hurtbox_health_component.gd" id="7_vvjcn"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_07m4x"]
+height = 1.0
+radius = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ujoyc"]
+top_radius = 0.4
+bottom_radius = 0.4
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r4gb0"]
+height = 1.0
+radius = 0.4
+
+[node name="ExplosiveBarrel" type="RigidBody3D"]
+mass = 2.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_07m4x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00554359, 0, 0.00284266)
+mesh = SubResource("CylinderMesh_ujoyc")
+
+[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("actor")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_loyvi")
+actor = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+shape = SubResource("CylinderShape3D_r4gb0")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_kgs1i")
+
+[node name="SpawnerComponent" type="Node3D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_4v71t")
+actor = NodePath("..")
+scene = ExtResource("4_80de8")
+
+[node name="FreeWhenEliminated" type="Node" parent="." node_paths=PackedStringArray("actor", "health_component", "spawner_components")]
+script = ExtResource("5_6vusu")
+actor = NodePath("..")
+health_component = NodePath("../HealthComponent")
+spawner_components = [NodePath("../SpawnerComponent")]
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("6_ygtqv")
+actor = NodePath("..")
+
+[node name="LinkHurtboxHealthComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "health_component", "hurtbox_component", "knockback_component")]
+script = ExtResource("7_vvjcn")
+actor = NodePath("..")
+health_component = NodePath("../HealthComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+knockback_component = NodePath("../KnockbackComponent")

@@ -1,6 +1,10 @@
 extends Node
 
 var camera: Camera3D
+var scene_node: Node3D
+
+signal player_died # sad
+
 #var is_paused = false
 #var pause_list = []
 
