@@ -49,9 +49,8 @@ skeleton = NodePath("../MeshInstance3D")
 
 [node name="WanderTimer" type="Timer" parent="."]
 
-[node name="TargetingTurret" type="Node3D" parent="." node_paths=PackedStringArray("actor")]
+[node name="TargetingTurret" type="Node3D" parent="."]
 script = ExtResource("3_7ogkn")
-actor = NodePath("..")
 
 [connection signal="group_entered" from="DetectPlayer" to="." method="_on_detect_player_group_entered"]
 [connection signal="group_exited" from="DetectPlayer" to="." method="_on_detect_player_group_exited"]

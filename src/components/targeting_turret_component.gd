@@ -14,6 +14,12 @@ enum TurretMode {
 
 var mode = TurretMode.IDLE
 
+func set_target(t: Node3D):
+	target = t
+
+func set_actor(a: Node3D):
+	actor = a
+
 func set_mode_targeting():
 	mode = TurretMode.TARGETING
 
@@ -25,9 +31,6 @@ func set_mode_spin_clockwise():
 
 func set_mode_spin_counterclockwise():
 	mode = TurretMode.SPIN_COUNTERCLOCKWISE
-	
-func set_target(t: Node3D):
-	target = t
 
 # Returns abseloute angle diff between target and turret
 func get_angle_diff():

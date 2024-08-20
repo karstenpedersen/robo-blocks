@@ -19,13 +19,13 @@ enum EnemyMode {
 
 var mode: EnemyMode
 var turret: TargetingTurret
-#@onready var turret = $TargetingTurret
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	lock_rotation = true
 	turret = $TargetingTurret
 	turret.set_target(target)
+	turret.set_actor(self)
 	set_mode(EnemyMode.IDLE)
 
 
@@ -50,8 +50,6 @@ func movement(delta):
 			if distance > follow_distance and angle_diff < follow_angle_threshold:
 				apply_force(transform.basis.z.normalized() * accel * delta)
 
-		
-
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var velocity = state.get_linear_velocity()
 	
@@ -65,11 +63,9 @@ func _on_detect_player_group_entered(player: Node3D) -> void:
 	print("Detected player entered")
 	set_mode(EnemyMode.FOLLOW_TARGET)
 
-
 func _on_detect_player_group_exited(player: Node3D) -> void:
 	print("Detected player exited")
 	set_mode(EnemyMode.IDLE)
-
 
 func _on_idle_timer_timeout() -> void:
 	if mode == EnemyMode.IDLE:
