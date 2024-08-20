@@ -7,7 +7,7 @@ enum EnemyMode {
 }
 
 @export var forward_accel = 4000
-@export var strafe_accel = 500
+@export var strafe_accel = 4000
 @export var max_speed = 4
 
 # Distance at which the enemy tries to keep the player
@@ -44,28 +44,22 @@ func movement(delta):
 		EnemyMode.WANDER:
 			apply_force(transform.basis.z.normalized() * forward_accel * delta)
 		EnemyMode.FOLLOW_TARGET:
-			#var direction = position.direction_to(target.position)
-			#var target_angle = atan2(direction.x, direction.z)
-			#rotation.y = rotate_toward(rotation.y, target_angle, rotation_speed * delta)
-
 			var distance = position.distance_to(target.position)
 			var angle_diff = turret.get_angle_diff()
 			var distance_diff = abs(distance - follow_distance)
-			if angle_diff < follow_angle_threshold and distance < follow_distance + follow_distance_tolerance:
-				apply_force(transform.basis.x.normalized() * forward_accel * delta)
 			if angle_diff < follow_angle_threshold:
+				# Turret is pointing at player
 				if distance_diff > follow_distance_tolerance:
-					print("dont strafe")
+					# Adjust distance to player
 					if distance > follow_distance:
+						# Follow player
 						apply_force(transform.basis.z.normalized() * forward_accel * delta)
 					elif distance < follow_distance:
+						# Move away from player
 						apply_force(-transform.basis.z.normalized() * forward_accel * delta)
 				else:
-					print("strafe")
+					# Strafe around player
 					apply_force(transform.basis.x.normalized() * strafe_accel * delta)
-					
-				
-				
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var velocity = state.get_linear_velocity()
