@@ -2,11 +2,9 @@ extends Control
 
 @onready var main = $"../"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	$CenterContainer/VBoxContainer/NewRun.grab_focus()
 
-	
+func get_focus():
+	$CenterContainer/VBoxContainer/NewRun.grab_focus()
 
 
 func _on_new_run_pressed() -> void:

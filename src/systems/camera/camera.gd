@@ -35,8 +35,10 @@ func _process(delta):
 	
 	# Default is follow target position.
 	# For resetting camera to player when cursor goes out of screen.
-	new_position = target.position + Vector3(0, camera_height, 0)
-	
+	if is_instance_valid(target):
+		new_position = target.position + Vector3(0, camera_height, 0)
+	else:
+		camera_mode = CameraMode.NONE
 	
 	match camera_mode:
 		CameraMode.FOLLOW_TARGET_AND_CURSOR:			
