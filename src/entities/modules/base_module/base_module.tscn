@@ -18,6 +18,7 @@ script = ExtResource("1_iavab")
 
 [node name="HealthComponent" type="Node" parent="Components"]
 script = ExtResource("2_yfns1")
+max_health = 10
 
 [node name="HurtboxComponent" type="Area3D" parent="Components" node_paths=PackedStringArray("actor")]
 collision_layer = 4

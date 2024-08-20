@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6dwpoi0xevlr"]
+[gd_scene load_steps=18 format=3 uid="uid://cid7cvncxjwxh"]
 
 [ext_resource type="Script" path="res://src/entities/enemies/spinner_enemy.gd" id="1_1o17m"]
 [ext_resource type="Script" path="res://src/components/detect_group_component.gd" id="2_ig76l"]
@@ -134,3 +134,4 @@ shape = SubResource("BoxShape3D_enm8j")
 [connection signal="group_exited" from="DetectPlayer" to="." method="_on_detect_player_group_exited"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
+[connection signal="eliminated" from="HealthComponent" to="." method="_on_health_component_eliminated"]

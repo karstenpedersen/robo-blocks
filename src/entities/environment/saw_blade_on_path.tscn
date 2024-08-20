@@ -10,9 +10,8 @@ albedo_color = Color(0.0338533, 0.0338533, 0.0338533, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26ceo"]
 albedo_color = Color(0.28485, 0.28485, 0.28485, 1)
 
-[node name="SawBladeOnPath" type="Path3D" node_paths=PackedStringArray("path_follow")]
+[node name="SawBladeOnPath" type="Path3D"]
 script = ExtResource("1_3x6q3")
-path_follow = NodePath("PathFollowComponent")
 
 [node name="PathFollowComponent" type="PathFollow3D" parent="."]
 transform = Transform3D(-0.386512, 0.617582, -0.684982, 0, 0.742702, 0.669623, 0.922284, 0.258817, -0.287063, 3.38154, 1.1249, -1.39593)

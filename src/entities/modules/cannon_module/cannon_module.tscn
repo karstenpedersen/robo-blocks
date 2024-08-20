@@ -11,6 +11,9 @@
 
 [node name="CannonModule" instance=ExtResource("1_838dj")]
 
+[node name="HealthComponent" parent="Components" index="0"]
+max_health = 5
+
 [node name="HurtboxComponent" parent="Components" index="2"]
 collision_mask = 4
 

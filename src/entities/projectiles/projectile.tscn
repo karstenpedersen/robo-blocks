@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0qe7jtkjvfu1"]
+[gd_scene load_steps=9 format=3 uid="uid://0qe7jtkjvfu1"]
 
 [ext_resource type="Script" path="res://src/entities/projectiles/projectile.gd" id="1_6twje"]
 [ext_resource type="Script" path="res://src/components/move_straight_component.gd" id="2_5dagq"]
@@ -15,6 +15,9 @@ albedo_color = Color(0.541965, 0.480078, 0.129517, 1)
 material = SubResource("StandardMaterial3D_wydgg")
 radius = 0.25
 height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8cvwb"]
+radius = 0.247247
 
 [node name="Projectile" type="Node3D"]
 script = ExtResource("1_6twje")
@@ -41,5 +44,13 @@ script = ExtResource("4_nsp37")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_m6uqu")
 
+[node name="LOL" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LOL"]
+shape = SubResource("SphereShape3D_8cvwb")
+
 [connection signal="hit_hurtbox" from="Components/HitboxComponent" to="." method="_on_hitbox_component_hit_hurtbox"]
 [connection signal="timeout" from="Components/LifeTimeComponent" to="." method="_on_life_time_component_timeout"]
+[connection signal="area_entered" from="LOL" to="." method="_on_lol_area_entered"]

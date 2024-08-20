@@ -105,3 +105,7 @@ func set_mode(m: EnemyMode):
 	#elif m == EnemyMode.FOLLOW_TARGET:
 		#turret.set_mode_targeting()
 	mode = m
+
+
+func _on_health_component_eliminated() -> void:
+	queue_free()
