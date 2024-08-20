@@ -10,6 +10,7 @@ albedo_color = Color(0.0901961, 0.568627, 1, 1)
 
 [node name="PlayerModule" groups=["player"] instance=ExtResource("1_wxp1y")]
 script = ExtResource("2_ccv3i")
+speed = 4
 rotation_speed = 3
 color_material = SubResource("StandardMaterial3D_jxvyx")
 

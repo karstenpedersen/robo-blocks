@@ -1,0 +1,87 @@
+[gd_scene load_steps=17 format=3 uid="uid://bqy8sp2uhykvh"]
+
+[ext_resource type="Script" path="res://src/entities/enemies/turret.gd" id="1_crhuq"]
+[ext_resource type="Script" path="res://src/components/detect_group_component.gd" id="2_rnxm7"]
+[ext_resource type="Script" path="res://src/components/targeting_turret_component.gd" id="3_5edd2"]
+[ext_resource type="Script" path="res://src/components/spawner_component.gd" id="6_u4xh3"]
+[ext_resource type="PackedScene" uid="uid://0qe7jtkjvfu1" path="res://src/entities/projectiles/projectile.tscn" id="7_c5fee"]
+[ext_resource type="Script" path="res://src/components/timer_component.gd" id="8_quc6b"]
+[ext_resource type="Script" path="res://src/components/spawner_timer_component.gd" id="9_i0185"]
+[ext_resource type="PackedScene" uid="uid://clodtu8fyjjs7" path="res://src/blender/block_parts/generic_block.tscn" id="9_qde5g"]
+[ext_resource type="Script" path="res://src/components/link_hurtbox_health_component.gd" id="10_txt6j"]
+[ext_resource type="PackedScene" uid="uid://dyvmkchhfeih6" path="res://src/entities/enemies/turret_weapon.tscn" id="10_xgsrf"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="11_smmj7"]
+[ext_resource type="Script" path="res://src/components/knockback_component.gd" id="12_gt0tl"]
+[ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="13_it0iq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3friv"]
+radius = 15.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_enm8j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckbup"]
+
+[node name="Turret" type="StaticBody3D" groups=["enemies"]]
+script = ExtResource("1_crhuq")
+
+[node name="DetectPlayer" type="Area3D" parent="."]
+script = ExtResource("2_rnxm7")
+group = &"player"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectPlayer"]
+shape = SubResource("SphereShape3D_3friv")
+
+[node name="IdleTimer" type="Timer" parent="."]
+
+[node name="WanderTimer" type="Timer" parent="."]
+
+[node name="TimerComponent" type="Timer" parent="."]
+autostart = true
+script = ExtResource("8_quc6b")
+cooldowns = Array[float]([0.8])
+
+[node name="SpawnerTimerComponent" type="Node" parent="." node_paths=PackedStringArray("timer_component", "spawner_components")]
+script = ExtResource("9_i0185")
+timer_component = NodePath("../TimerComponent")
+spawner_components = [NodePath("../TurretWeapon/SpawnerComponent")]
+
+[node name="LinkHurtboxHealthComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "health_component", "hurtbox_component")]
+script = ExtResource("10_txt6j")
+actor = NodePath("..")
+health_component = NodePath("../HealthComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("11_smmj7")
+
+[node name="KnockbackComponent" type="Node" parent="."]
+script = ExtResource("12_gt0tl")
+
+[node name="HurtboxComponent" type="Area3D" parent="."]
+script = ExtResource("13_it0iq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+shape = SubResource("BoxShape3D_enm8j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ckbup")
+
+[node name="TurretWeapon" parent="." instance=ExtResource("10_xgsrf")]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 3.55271e-15, 0.539401, 0)
+
+[node name="SpawnerComponent" type="Node3D" parent="TurretWeapon" node_paths=PackedStringArray("actor")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 0.073599, -5.96046e-08)
+script = ExtResource("6_u4xh3")
+actor = NodePath("../..")
+scene = ExtResource("7_c5fee")
+
+[node name="TurretBlock" parent="." instance=ExtResource("9_qde5g")]
+
+[node name="TargetingTurret" type="Node3D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_5edd2")
+actor = NodePath("..")
+
+[connection signal="group_entered" from="DetectPlayer" to="." method="_on_detect_player_group_entered"]
+[connection signal="group_exited" from="DetectPlayer" to="." method="_on_detect_player_group_exited"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

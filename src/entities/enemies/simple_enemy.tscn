@@ -1,0 +1,97 @@
+[gd_scene load_steps=17 format=3 uid="uid://b5cyhtuhwa32i"]
+
+[ext_resource type="Script" path="res://src/entities/enemies/enemy.gd" id="1_cpboj"]
+[ext_resource type="Script" path="res://src/components/detect_group_component.gd" id="2_uhtkr"]
+[ext_resource type="Script" path="res://src/components/targeting_turret_component.gd" id="3_ptfve"]
+[ext_resource type="PackedScene" uid="uid://b8x51ivnnio5q" path="res://src/blender/block_parts/enemy_block.tscn" id="4_xdl0p"]
+[ext_resource type="PackedScene" uid="uid://qnckd1chc6fm" path="res://src/blender/block_parts/cannon_block.tscn" id="6_82ffq"]
+[ext_resource type="Script" path="res://src/components/spawner_component.gd" id="7_7gvte"]
+[ext_resource type="PackedScene" uid="uid://0qe7jtkjvfu1" path="res://src/entities/projectiles/projectile.tscn" id="8_ylp4q"]
+[ext_resource type="Script" path="res://src/components/timer_component.gd" id="9_3vrof"]
+[ext_resource type="Script" path="res://src/components/spawner_timer_component.gd" id="10_e6lcc"]
+[ext_resource type="Script" path="res://src/components/link_hurtbox_health_component.gd" id="11_ogdnt"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="12_47d4v"]
+[ext_resource type="Script" path="res://src/components/knockback_component.gd" id="13_wrwhb"]
+[ext_resource type="Script" path="res://src/components/hurtbox_component.gd" id="14_ifw2h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3friv"]
+radius = 15.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_enm8j"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckbup"]
+size = Vector3(1, 1, 2)
+
+[node name="SimpleEnemy" type="RigidBody3D" groups=["enemies"]]
+mass = 4.0
+script = ExtResource("1_cpboj")
+follow_distance = 10
+
+[node name="DetectPlayer" type="Area3D" parent="."]
+script = ExtResource("2_uhtkr")
+group = &"player"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectPlayer"]
+shape = SubResource("SphereShape3D_3friv")
+
+[node name="IdleTimer" type="Timer" parent="."]
+
+[node name="WanderTimer" type="Timer" parent="."]
+
+[node name="TargetingTurret" type="Node3D" parent="."]
+script = ExtResource("3_ptfve")
+turn_speed = 1.5
+
+[node name="EnemyBlock" parent="." instance=ExtResource("4_xdl0p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CannonBlock" parent="." instance=ExtResource("6_82ffq")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1.19209e-07, 0, 1)
+
+[node name="SpawnerComponent" type="Node3D" parent="CannonBlock" node_paths=PackedStringArray("actor")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 0, 0)
+script = ExtResource("7_7gvte")
+actor = NodePath("../..")
+scene = ExtResource("8_ylp4q")
+
+[node name="TimerComponent" type="Timer" parent="."]
+autostart = true
+script = ExtResource("9_3vrof")
+cooldowns = Array[float]([0.8])
+
+[node name="SpawnerTimerComponent" type="Node" parent="." node_paths=PackedStringArray("timer_component", "spawner_components")]
+script = ExtResource("10_e6lcc")
+timer_component = NodePath("../TimerComponent")
+spawner_components = [NodePath("../CannonBlock/SpawnerComponent")]
+
+[node name="LinkHurtboxHealthComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "health_component", "hurtbox_component", "knockback_component")]
+script = ExtResource("11_ogdnt")
+actor = NodePath("..")
+health_component = NodePath("../HealthComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+knockback_component = NodePath("../KnockbackComponent")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("12_47d4v")
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("13_wrwhb")
+actor = NodePath("..")
+
+[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("14_ifw2h")
+actor = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+shape = SubResource("BoxShape3D_enm8j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+shape = SubResource("BoxShape3D_ckbup")
+
+[connection signal="group_entered" from="DetectPlayer" to="." method="_on_detect_player_group_entered"]
+[connection signal="group_exited" from="DetectPlayer" to="." method="_on_detect_player_group_exited"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
