@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbra5u1j5tm6w"]
+
+[ext_resource type="Texture2D" uid="uid://cck7kp8a67my" path="res://src/blender/textures/gmtkconcreteslabs.png" id="1_vicoi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tssp"]
+resource_name = "FloorMaterial"
+cull_mode = 2
+albedo_texture = ExtResource("1_vicoi")
+roughness = 0.87
+texture_filter = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xbpwg"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"name": "FloorMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_biwrj"]
+resource_name = "gmtk 2024 floor tiles_Plane_001"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray(4, 64, 4, 0, 4, 64, 250, 127, 255, 127, 4, 0, 255, 127, 250, 127),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"material": SubResource("StandardMaterial3D_2tssp"),
+"name": "FloorMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 84, 213, 255, 255, 0, 0, 255, 255, 84, 213, 0, 0, 0, 0, 0, 0, 84, 213, 255, 255, 0, 0, 0, 0, 84, 213, 84, 213, 170, 42, 84, 213, 170, 42, 84, 213, 170, 42, 84, 213, 170, 42)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xbpwg")
+
+[node name="Floor2" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_biwrj")
+skeleton = NodePath("")

@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=4 uid="uid://c6avrdfkf1kl3"]
+
+[ext_resource type="Texture2D" uid="uid://cck7kp8a67my" path="res://src/blender/textures/gmtkconcreteslabs.png" id="1_vfgha"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tqon"]
+resource_name = "FloorMaterial"
+cull_mode = 2
+albedo_texture = ExtResource("1_vfgha")
+roughness = 0.5
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kn57k"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEAAgAEAAYAAgAAAAQABwABAAMABwAFAAEA"),
+"name": "FloorMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xxh4u"]
+resource_name = "gmtk 2024 environment 2_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("+3/8/wQA9v8HAPz/+38CgAcAAoAEQAgA/j/8/wFA9v/+f/x//j8CgP5/AgAAgAgABAD8fwRA/P8EAPx/BEACgARAAoAEAAIAAUD8fwFA/H8BQPx/AUACAACAAoABQAIA"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAMAAAAGAAkACAAVAAoACAATABUAFAARABcAFAAOABEADQAEAA8ADQACAAQABwAMABIABwABAAwAFgAFAAsAFgAQAAUA"),
+"material": SubResource("StandardMaterial3D_3tqon"),
+"name": "FloorMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAA//9U1QAAAAD//wCAAAD//////78AAP////8AgAAA/////1TVAAAAAAAA/78AAAAAAABU1QAAAAAAAP//AAD//wAA/78AAP//AAD//wAA//8AAFTV//8AAP//VNX//wAA//8AgP//AAD///+/////////AID///////9U1f////////+///8AAAAAVNX//wAAAAD/////AAAAAP+//////wAA////////AABU1f////8AAP+//3/+/1RVVVX/f////3/+//9///9U1aoq/3/+/1RVVVX/f/7//3/+//9//v9U1aoqVFVUVf9/////fwAA/3///1TVqir/fwAAVFVVVf9//v//fwAA/3/+/1TVqir/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kn57k")
+
+[node name="Wall" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_xxh4u")
+skeleton = NodePath("")

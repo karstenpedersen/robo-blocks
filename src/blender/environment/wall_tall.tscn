@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=4 uid="uid://bw50fdkja25tv"]
+
+[ext_resource type="Texture2D" uid="uid://cck7kp8a67my" path="res://src/blender/textures/gmtkconcreteslabs.png" id="1_a1jio"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tqon"]
+resource_name = "FloorMaterial"
+cull_mode = 2
+albedo_texture = ExtResource("1_a1jio")
+roughness = 0.5
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vhtln"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 2, 1),
+"format": 34896613377,
+"index_count": 66,
+"index_data": PackedByteArray("BgACAAAABgABAAIAAQAEAAIAAQALAAQACwADAAQACwAJAAMACQAAAAMACQAGAAAAAQAJAAsAAQAGAAkABAAAAAIABAADAAAABQABAAYABQAHAAEABwALAAEABwAKAAsACgAJAAsACgAIAAkACAAGAAkACAAFAAYABwAIAAoABwAFAAgA"),
+"name": "FloorMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD/////AAAAAP9/AAAAAAAA//8AAAAA////////AAD/////AAAAAAAAAAD//wAAAAD/f///AAAAAAAAAAAAAP//AAD//wAA////f///AAD//wAAAAAAAP///38AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8vw3x"]
+resource_name = "gmtk 2024 environment 2_Cube_010"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 2, 1),
+"attribute_data": PackedByteArray("+38CgAcAAoAEQAgA/j/8//4/AoABQPb//n/8f/5/AgD+PwKA/n8CAACACAAEQAKABEACgAQAAgABQAIAAIACgAFAAgD7f/z/BAD2/wcA/P/7f/z/+38CgAQA9v8HAPz/BwACgP4//P8BQPb//n/8fwQA/H8EQPz/BAD8fwQA/H8EQAKABED8/wQAAgAEAPx/AUD8fwFA/H8BQPx/AUD8fwFA/H8BQAIAAUD8fwFAAgA="),
+"format": 34896613399,
+"index_count": 66,
+"index_data": PackedByteArray("FAAIAAAAFAADAAgABgAOAAkABgAoAA4AKgANABAAKgAjAA0AIQABAAsAIQAXAAEABQAfACcABQAWAB8ADwACAAoADwAMAAIAEQAEABUAEQAZAAQAGwApAAcAGwAlACkAJgAiACsAJgAeACIAHQAYACAAHQATABgAGgAcACQAGgASABwA"),
+"material": SubResource("StandardMaterial3D_3tqon"),
+"name": "FloorMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 44,
+"vertex_data": PackedByteArray("AAD//////78AAP////8AgAAA/////1TVAAD/fwAA/78AAP9/AAD/vwAA/38AAFTVAAD/fwAA//8AAP9/AAD//wAA//8AAP+/AAD//wAA//8AAP//AABU1f///////wCA////////VNX/////////v/////8AAP///////wAAVNX/////AAD/vwAAAAD///+/AAAAAP//VNUAAAAA//8AgAAA/3////+/AAD/f////78AAP9///9U1QAA/3///wCAAAD/f///AIAAAAAAAAD/vwAAAAAAAFTVAAAAAAAA/////wAA//9U1f//AAD//wCA//8AAP///7////9///9U1f///3///wCA////f///AID///9/////v////3////+///8AAAAAVNX//wAAAAD/////AAAAAP+/////fwAAVNX///9/AAD//////38AAP//////fwAA/7////9/AAD/v/9//v//f///VNWqKv9//v//f/7/VFVVVf9//v//f/7//3/+//9//v9U1aoq/3///1TVqir/fwAA/3/+/1TVqir/fwAA/3/+/1RVVVX/f////3/+//9//v9UVVVV/3////9/////f/7/VFVVVf9//v9UVVRV/3////9/AABUVVRV/3////9/////fwAA/38AAFRVVVX/f/7//38AAFRVVVX/f/7//3/+//9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vhtln")
+
+[node name="WallTall" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_8vw3x")
+skeleton = NodePath("")

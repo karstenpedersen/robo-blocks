@@ -20,7 +20,7 @@ parent = NodePath("../..")
 shape = SubResource("SphereShape3D_n7cql")
 
 [connection signal="drag_ended" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_ended"]
+[connection signal="drag_mounted" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_mounted"]
 [connection signal="drag_moved" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_moved"]
 [connection signal="drag_rotated" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_rotated"]
 [connection signal="drag_started" from="Components/DraggableComponent" to="." method="_on_draggable_component_drag_started"]
-[connection signal="mounted" from="Components/DraggableComponent" to="." method="_on_draggable_component_mounted"]
