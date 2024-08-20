@@ -27,9 +27,6 @@ script = ExtResource("3_xwkyb")
 timer_component = NodePath("../TimerComponent")
 spawner_components = [NodePath("../../Visuals/SpawnerComponent")]
 
-[node name="Collision" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="SpawnerComponent" type="Node3D" parent="Visuals" index="0" node_paths=PackedStringArray("actor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.729427)
 script = ExtResource("3_qg62a")

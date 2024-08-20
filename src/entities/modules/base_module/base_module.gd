@@ -8,6 +8,7 @@ signal mounted(module: BaseModule, parent: HeadModule)
 signal unmounted(module: BaseModule, parent: HeadModule)
 
 @export var stats: ModuleStats
+@export var color_components: Array[ColorComponent]
 
 # Components
 @onready var health_component: HealthComponent = $Components/HealthComponent
@@ -24,13 +25,7 @@ var connection_point: Node3D:
 		if len(neighbours) == 0:
 			return null
 		return neighbours[0]["point"]
-
-
-func _process(delta: float) -> void:
-	if parent and connection_point and index != 0:
-		global_transform = connection_point.global_transform
-		#position = connection_point.global_position
-		#rotation = connection_point.global_rotation
+var y_rotation_offset = 0
 
 
 func create_module_connection(module: BaseModule, point: SnapPoint):
@@ -45,7 +40,7 @@ func destroy_module_connection(module: BaseModule):
 
 func _add_neighbour_module(module: BaseModule, point: SnapPoint):
 	if index == -1:
-		mount(module)
+		mount(module, point)
 	elif module.index + 1 < index:
 		index = module.index + 1
 	
@@ -119,15 +114,18 @@ func is_unmounted() -> bool:
 	return index == -1
 
 
-func mount(module: BaseModule):
-	freeze_rigidbody()
+func mount(module: BaseModule, point: SnapPoint):
+	disable_rigidbody()
 	parent = module.parent
+	parent.parent_add_module(self, point)
 	mounted.emit(self, module.parent)
 	index = module.index + 1
+	for color_component in color_components:
+		color_component.set_color(parent.color_material)
 
 
 func unmount():
-	unfreeze_rigidbody()
+	enable_rigidbody()
 	index = -1
 	for neighbour in neighbours:
 		neighbour["module"]._remove_neighbour_module(self)
@@ -135,6 +133,8 @@ func unmount():
 	neighbours.clear()
 	unmounted.emit(self, parent)
 	parent = null
+	for color_component in color_components:
+		color_component.clear_color()
 
 
 func _on_health_component_eliminated() -> void:

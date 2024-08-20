@@ -50,16 +50,10 @@ func _input(event):
 		current.drag_rotate(-90)
 		return
 	
-	if event.is_action_pressed("drag"):
-		print("Press action: ", event.is_action_pressed("drag"), \
-				", current: ", current, \
-				", ray_result: ", ray_result)
-	
 	if current and event.is_action_released("drag"):
 		current.drag_end()
 		dragging = false
 		current = null
-		print("RELEASE")
 		return
 	
 	if !current and ray_result and event.is_action_pressed("drag"):

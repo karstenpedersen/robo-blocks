@@ -15,6 +15,9 @@ actor = NodePath("../..")
 spawner_component = NodePath("../../Visuals/SpawnerComponent")
 min_moved_distance = 25.0
 
+[node name="Collision" parent="." index="1"]
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
+
 [node name="SpawnerComponent" type="Node3D" parent="Visuals" index="0" node_paths=PackedStringArray("actor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.489598, -1.07861)
 script = ExtResource("5_ehmlg")

@@ -23,8 +23,8 @@ Scores="*res://src/systems/singletons/scores.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [global_group]
 

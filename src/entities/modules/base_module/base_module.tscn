@@ -31,7 +31,6 @@ script = ExtResource("4_sexcm")
 actor = NodePath("../..")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
 shape = SubResource("BoxShape3D_p48wg")
 
 [node name="Visuals" type="Node3D" parent="."]

@@ -4,7 +4,7 @@ class_name DraggableComponent
 signal drag_started(node)
 signal drag_ended(node)
 signal drag_moved(node)
-signal drag_rotated(node)
+signal drag_rotated(node: DraggableComponent, amount: float)
 signal mounted(module, point)
 
 @export var parent: Node3D
@@ -20,15 +20,18 @@ var snap_point: SnapPoint:
 		if len(snap_points) == 0:
 			return null
 		return snap_points[0]
+var y_rotation_offset = 0
 
 
 func _ready() -> void:
-	target_position = parent.position
+	target_position = parent.global_position
+	target_rotation = parent.global_rotation
 
 
 func drag_start(pos: Vector3):
 	# Reset rotation
-	target_rotation = get_reset_rotation()
+	target_position = parent.global_position
+	target_rotation = Vector3(0, parent.global_rotation.y, 0)
 	dragging = true
 	drag_started.emit(self)
 
@@ -45,6 +48,8 @@ func drag_move(pos: Vector3):
 	if snap_point:
 		if pos.distance_to(target_position) <= snap_distance:
 			target_position = snap_point.global_position
+			target_rotation = snap_point.global_rotation
+			target_rotation.y += y_rotation_offset
 		else:
 			snap_points.clear()
 	else:
@@ -52,9 +57,10 @@ func drag_move(pos: Vector3):
 	drag_moved.emit(self)
 
 
-func drag_rotate(angle: float):
-	target_rotation = Vector3(0, target_rotation.y + angle, 0)
-	drag_rotated.emit(self)
+func drag_rotate(amount: float):
+	y_rotation_offset += amount
+	target_rotation = Vector3(0, target_rotation.y + amount, 0)
+	drag_rotated.emit(self, amount)
 
 
 func get_reset_rotation() -> Vector3:
