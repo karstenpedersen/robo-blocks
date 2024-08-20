@@ -15,7 +15,7 @@ height = 3.0
 radius = 0.4
 
 [node name="SnapPoint" type="Area3D" groups=["snap_point"]]
-collision_layer = 0
+collision_layer = 256
 collision_mask = 2
 script = ExtResource("1_d6isf")
 

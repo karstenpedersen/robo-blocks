@@ -12,11 +12,12 @@ func _process(delta: float) -> void:
 	if parent and connection_point and index != 0:
 		#global_transform = connection_point.global_transform
 		#rotation_degrees.y += y_rotation_offset
-		var y_rotation_offset = draggable_component.target_rotation.y - \
-				connection_point.rotation_degrees.y
-		position = connection_point.global_position
-		rotation = connection_point.global_rotation
-		rotation_degrees.y += y_rotation_offset
+		#var y_rotation_offset = draggable_component.target_rotation.y - \
+		#		connection_point.rotation_degrees.y
+		#position = connection_point.global_position
+		#rotation = connection_point.global_rotation
+		transform = connection_point.global_transform
+		#rotation_degrees.y += y_rotation_offset
 
 
 func _on_draggable_component_drag_started(node: DraggableComponent) -> void:
@@ -42,14 +43,14 @@ func _on_draggable_component_drag_ended(node: Variant) -> void:
 
 
 func _on_draggable_component_drag_rotated(node: DraggableComponent, amount: float) -> void:
-	#rotation_tween = get_tree().create_tween().bind_node(self)
-	#rotation_tween.tween_property(self, "rotation_degrees", node.target_rotation, 0.1)
-	rotation_degrees.y = node.target_rotation.y
+	pass
 
 
 func _on_draggable_component_drag_moved(node: DraggableComponent) -> void:
 	position = node.target_position
+	rotation = node.target_rotation
 
 
-func _on_draggable_component_mounted(module: BaseModule, point: SnapPoint) -> void:
+func _on_draggable_component_drag_mounted(module: BaseModule, point: SnapPoint) -> void:
+	print("CONNECT")
 	create_module_connection(module, point)
