@@ -1,6 +1,8 @@
 # GMTK 2024
 
-https://itch.io/jam/gmtk-2024
+Game made for GMTK Game Jam 2024.
+
+![image](https://github.com/user-attachments/assets/fc363d24-4e76-44f0-bc58-771b3fd9070a)
 
 ## File Structure
 
